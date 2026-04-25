@@ -44,3 +44,4 @@ extras = st.multiselect("Was ist alles vorhanden?",
 
 ["Parkplatz", "Keller", "Estrich", "Balkon", "Garten"]) 
 print("Another thing")
+print("This is a demo")
