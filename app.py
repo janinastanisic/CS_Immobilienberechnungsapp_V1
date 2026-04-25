@@ -313,3 +313,9 @@ if __name__ == "__main__":
     print(f"\nJahre: {sorted(df['Jahr'].dropna().unique())}")
     print(f"\nZimmerkategorien: {sorted(df['Zimmerkategorie'].unique())}")
     print(f"\nPreis-Statistik (Median):\n{df['Median_Preis'].describe()}")
+
+    # 1. Pakete installieren
+pip install -r requirements.txt
+
+# 2. Datenbank initialisieren (lädt von API)
+python data_loader.py
