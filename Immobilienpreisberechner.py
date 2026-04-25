@@ -2,7 +2,7 @@ import streamlit as st
 
  
 
-st.title("Immobilienpreisberechner 🏠") 
+st.title("Test 🏠") 
 
 st.write("Hallo! Hier berechnen wir einen fairen Preis für deine Immobilie.") 
 
@@ -43,5 +43,4 @@ alter = st.slider("Wie alt ist deine Immobilie? (Jahre)", 0, 200, 20)
 extras = st.multiselect("Was ist alles vorhanden?",  
 
 ["Parkplatz", "Keller", "Estrich", "Balkon", "Garten"]) 
-print("Another thing")
-print("This is a demo")
+
