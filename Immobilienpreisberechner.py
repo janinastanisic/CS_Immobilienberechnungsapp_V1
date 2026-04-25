@@ -43,3 +43,4 @@ alter = st.slider("Wie alt ist deine Immobilie? (Jahre)", 0, 200, 20)
 extras = st.multiselect("Was ist alles vorhanden?",  
 
 ["Parkplatz", "Keller", "Estrich", "Balkon", "Garten"]) 
+print("Another thing")
