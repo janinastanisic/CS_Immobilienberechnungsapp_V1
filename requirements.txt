@@ -1,3 +1,5 @@
 streamlit
 pandas
-random
+plotly
+folium
+streamlit-folium

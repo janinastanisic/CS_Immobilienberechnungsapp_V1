@@ -19,7 +19,7 @@ st.set_page_config(
 # ─────────────────────────────────────────────
 # BASISPREISE PRO QUARTIER (CHF pro m²)
 # ─────────────────────────────────────────────
-df=get_daten
+df= get_daten()
 #Daten werden einmalig geladen (aus Feature Dataset.py)
 BASISPREIS_PRO_QUARTIER = (
     df.groupby("Quartier")["Preis_pro_m2"]
