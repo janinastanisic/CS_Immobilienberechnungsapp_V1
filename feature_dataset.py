@@ -19,7 +19,7 @@ def daten_laden(): #Definition der Funktion daten_laden
     print(list(df.columns))  # ← NEU: zeigt die echten Spaltennamen im Log
 
     df = df.rename(columns={
-        "StichtagdatJahr":     "Jahr",
+        "Stichtagdatjahr":     "Jahr",
         "RaumLang":            "Quartier",
         "AnzZimmerLevel2Lang_noDM":  "Zimmer",
         "HAPreisWohnflaeche":  "Preis_pro_m2",
