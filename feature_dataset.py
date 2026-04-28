@@ -3,6 +3,7 @@ import pandas as pd #Werkzeugpaket fuer Tabellen-Daten
 import sqlite3 #dadurch kann man eine lokale Datenbank-datei erstellen
 import os #um zu pruefen ob eine Datei bereits existiert --> noch nicht ganz verstanden
 
+
 CSV_URL = "https://data.stadt-zuerich.ch/dataset/bau_hae_preis_stockwerkeigentum_zimmerzahl_stadtquartier_od5155/download/BAU515OD5155.csv" 
 #Diese Variable speichert den Link zu unserem Datenset
 DB_PATH = "immobilien.db"
