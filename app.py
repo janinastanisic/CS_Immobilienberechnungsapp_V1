@@ -8,7 +8,7 @@ import plotly.graph_objects as go
 import plotly.express as px
 import folium
 from streamlit_folium import st_folium
-from Feature Dataset import get_daten #importiert get_daten vom Dataset Feature
+from feature_dataset import get_daten #importiert get_daten vom Dataset Feature
 
 # Seitenkonfiguration
 st.set_page_config(
