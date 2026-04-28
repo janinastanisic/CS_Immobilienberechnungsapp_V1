@@ -47,7 +47,7 @@ def daten_laden(): #Definition der Funktion daten_laden
 
 
  #Funktion 2: 
-def speichere_in_datenbank(df) #Defintion der neuen Funktion, df als Parameter
+def speichere_in_datenbank(df): #Defintion der neuen Funktion, df als Parameter
     conn = sqlite3.connect(DB_PATH)
     #conn = connection --> oeffnet eine Verbindung zur Datenbankdatei immobilien.db
     df.to_sql("immobilienpreise", conn, if_exists="replace", index=False)
@@ -74,7 +74,7 @@ def get_daten():
     if os.path.exists(DB_PATH):
         return lade_aus_datenbank()
     else:
-        return lade_daten()
+        return daten_laden()
     # os.path.exists(DB_PATH) gibt True zurueck wenn die Datei immobilien.db bereits existiert, 
     #sonst False. Die Logik: beim allerersten Start existiert die Datenbank noch nicht
     #--> wir laden das CSV und speichern es. Ab dem zweiten Start existiert die Datei 
