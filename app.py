@@ -523,3 +523,5 @@ if st.session_state.ergebnis:
     original_list = [i for i in range(10)]
 
     even_list = return_even(original_list)
+
+    st.write(even_list)
