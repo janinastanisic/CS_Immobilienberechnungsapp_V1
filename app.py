@@ -8,6 +8,7 @@ import plotly.graph_objects as go
 import plotly.express as px
 import folium
 from streamlit_folium import st_folium
+from Feature Dataset import get_daten #importiert get_daten vom Dataset Feature
 
 # Seitenkonfiguration
 st.set_page_config(
@@ -18,32 +19,16 @@ st.set_page_config(
 # ─────────────────────────────────────────────
 # BASISPREISE PRO QUARTIER (CHF pro m²)
 # ─────────────────────────────────────────────
-BASISPREIS_PRO_QUARTIER = {
-    "Affoltern":             9500,
-    "Albisrieden":           9800,
-    "Altstetten":           10200,
-    "City":                 18000,
-    "Enge":                 16500,
-    "Escher Wyss":          13000,
-    "Fluntern":             15000,
-    "Gewerbeschule":        12000,
-    "Hard":                 11500,
-    "Hirslanden":           16000,
-    "Hirzenbach":            9200,
-    "Hochschulen":          14500,
-    "Hoengg":               11000,
-    "Hottingen":            15500,
-    "Langstrasse":          11800,
-    "Leimbach":              9000,
-    "Lindenhuegel":         13500,
-    "Oerlikon":             11200,
-    "Rathaus":              17000,
-    "Schwamendingen-Mitte":  9100,
-    "Seebach":               9600,
-    "Wollishofen":          13800,
-    "Wipkingen":            12500,
-    "Witikon":              13200,
-}
+df=get_daten
+#Daten werden einmalig geladen (aus Feature Dataset.py)
+BASISPREIS_PRO_QUARTIER = (
+    df.groupby("Quartier")["Preis_pro_m2"]
+    .mean()
+    .round()
+    .astype(int)
+    .to_dict()
+)
+
 
 # ─────────────────────────────────────────────
 # KOORDINATEN DER QUARTIERE (Mittelpunkte)
