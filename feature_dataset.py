@@ -15,6 +15,9 @@ def daten_laden(): #Definition der Funktion daten_laden
     #unsere CSV Datei wird vom link geladen und in einen Dataframe (tabelle) verwandelt. 
     #diese Tabelle wird in df (fuer Dataframe) gespeichert
 
+    
+    print(list(df.columns))  # ← NEU: zeigt die echten Spaltennamen im Log
+
     df = df.rename(columns={
         "StichtagDatJahr":     "Jahr",
         "RaumLang":            "Quartier",
