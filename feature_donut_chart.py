@@ -5,6 +5,7 @@
 # Jeder Faktor ist ein Multiplikator: 1.0 = kein Einfluss,
 # z.B. 1.05 = +5% auf den Preis, 0.95 = -5% auf den Preis
 
+
 def erstelle_donut_chart(faktoren):
     """
     Zeigt den relativen Einfluss jedes Faktors
@@ -34,9 +35,11 @@ def erstelle_donut_chart(faktoren):
             faktor_anteile[name] = round(abweichung, 1)
             basis_anteil -= abweichung
 
+
     labels = ["Lage (Quartier)"] + list(faktor_anteile.keys())
     werte  = [round(max(basis_anteil, 50), 1)] + list(faktor_anteile.values())
     farben = ["#378ADD", "#1D9E75", "#EF9F27", "#D85A30", "#7F77DD", "#5DCAA5"]
+
 
     fig = go.Figure(go.Pie(
         labels    = labels,
@@ -47,18 +50,20 @@ def erstelle_donut_chart(faktoren):
         hovertemplate = "<b>%{label}</b><br>Einfluss: %{value:.1f}%<extra></extra>",
     ))
 
+
     fig.update_layout(
-        title       = "Zusammensetzung des Preises --> Einfluss der Faktoren",
-        showlegend  = False,
-        plot_bgcolor  = "white",
-        paper_bgcolor = "white",
-        margin = dict(t=60, b=20, l=20, r=20),
-        annotations = [dict(
-            text      = "Einfluss",
-            x=0.5, y=0.5,
-            font_size = 14,
-            showarrow = False,
-            font_color= "#6c757d"
+        title       = "Zusammensetzung des Preises --> Einfluss der Faktoren", # Titel über dem Chart
+        showlegend  = False, # keine Legende, da die Labels direkt im Chart angezeigt werden
+        plot_bgcolor  = "white", # Hintergrundfarbe des Chart-Bereichs 
+        paper_bgcolor = "white", # Hintergrundfarbe der gesamten Grafik / Figure
+        margin = dict(t=60, b=20, l=20, r=20), # etwas mehr Platz oben für den Titel (Abstände in Pixeln, top bottom left right)
+        annotations = [dict( 
+            text      = "Einfluss", # Text in der Mitte des Donuts
+            x=0.5, y=0.5, # Text in der Mitte des Donuts
+            font_size = 14, # etwas kleinerer Text in der Mitte
+            showarrow = False, # kein Pfeil in der Mitte, nur text
+            font_color= "#6c757d" # grau für den Text in der Mitte
         )]
     )
+    # Figure zurückgeben → wird in Streamlit mit st.plotly_chart(fig) angezeigt
     return fig
