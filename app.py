@@ -105,10 +105,10 @@ AUSSTATTUNG_LABELS = {
 
 
 # ─────────────────────────────────────────────
-# BAUJAHR-FAKTOR
+# BAUJAHR-FAKTOR: 
 # ─────────────────────────────────────────────
 def faktor_baujahr(baujahr):
-    alter = 2026 - baujahr
+    alter = 2026 - baujahr #Alter der Immobilie wird berechnet. Das Alter wird in Kategorien eingeteil. Bsp. wenn Immobilie jünger als 5 Jahre ist, wird der Preis um 10% erhöht.
     if alter <= 5:    return 1.10
     elif alter <= 15: return 1.05
     elif alter <= 30: return 1.00
@@ -117,20 +117,20 @@ def faktor_baujahr(baujahr):
 
 
 # ─────────────────────────────────────────────
-# BERECHNUNGSFUNKTION
+# BERECHNUNGSFUNKTION: Die Funktion berechne_preis wird definiert
 # ─────────────────────────────────────────────
 def berechne_preis(quartier, zimmerzahl, wohnflaeche, baujahr,
-                   stockwerk, zustand, ausstattung):
-    basispreis  = BASISPREIS_PRO_QUARTIER.get(quartier, 11000)
-    f_zimmer    = FAKTOR_ZIMMER.get(zimmerzahl, 1.00)
-    f_zustand   = FAKTOR_ZUSTAND.get(zustand, 1.00)
-    f_stockwerk = FAKTOR_STOCKWERK.get(stockwerk, 1.00)
-    f_baujahr   = faktor_baujahr(baujahr)
+                   stockwerk, zustand, ausstattung): #Definition einer Funktion mit Eingabewerten
+    basispreis  = BASISPREIS_PRO_QUARTIER.get(quartier, 11000) #holt den Wert, der bei quartier als Input angegeben wurde und sucht dessen Basispreis. Falls der Wert nicht gefunden wurde, wird 11000 als Standardwert verwendet.
+    f_zimmer    = FAKTOR_ZIMMER.get(zimmerzahl, 1.00) #holt den Wert, der bei zimmerzahl als Input angegeben wurde und nimmt den Korrekturfaktor. Falls der Wert nicht gefunden wurde, wird 1.00 als Standardwert verwendet.
+    f_zustand   = FAKTOR_ZUSTAND.get(zustand, 1.00) #holt den Wert, der bei zustand als Input angegeben wurde und nimmt den Korrekturfaktor. Falls der Wert nicht gefunden wurde, wird 1.00 als Standardwert verwendet.
+    f_stockwerk = FAKTOR_STOCKWERK.get(stockwerk, 1.00) #holt den Wert, der bei stockwerk als Input angegeben wurde und nimmt den Korrekturfaktor. Falls der Wert nicht gefunden wurde, wird 1.00 als Standardwert verwendet.
+    f_baujahr   = faktor_baujahr(baujahr) #holt den Wert, der bei baujahr als Input angegeben wurde und nimmt den Korrekturfaktor.
 
-    f_ausstattung = 1.00
-    for merkmal, wert in ausstattung.items():
-        if wert:
-            f_ausstattung += AUSSTATTUNG_FAKTOREN.get(merkmal, 0)
+    f_ausstattung = 1.00 #Startet bei 1.00. 
+    for merkmal, wert in ausstattung.items(): #Iteriert mit einer for Schleife durch alle Ausstattungsmerkmale durch
+        if wert: #Nur wenn eine Checkbox aktiviert ist (deren Wert = True) wird der nächste Schritt durchgeführt
+            f_ausstattung += AUSSTATTUNG_FAKTOREN.get(merkmal, 0) #Holt den Faktor für das Ausstattungsmerkmal aus dem obigen Dictionary und addiert ihn zu 1.00
 
     preis_pro_m2 = (basispreis * f_zimmer * f_zustand
                     * f_stockwerk * f_baujahr * f_ausstattung)
