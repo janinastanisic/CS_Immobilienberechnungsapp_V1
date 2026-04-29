@@ -28,12 +28,14 @@ def erstelle_donut_chart(faktoren):
     basis_anteil = 100.0
 
     # Anteil jedes Faktors berechnen (Abweichung von 1.0 in Prozent)
+    # Beispiel: Baujahr = 0.95 → abs((0.95 - 1.0) * 100) = 5%
+
     faktor_anteile = {}
     for name, wert in faktor_map.items():
-        abweichung = abs((wert - 1.0) * 100)
-        if abweichung > 0.1:  # nur relevante Faktoren anzeigen
+        abweichung = abs((wert - 1.0) * 100) #
+        if abweichung > 0.1:  # nur relevante Faktoren anzeigen, die mehr als 0.1% Einfluss haben
             faktor_anteile[name] = round(abweichung, 1)
-            basis_anteil -= abweichung
+            basis_anteil -= abweichung 
 
 
     labels = ["Lage (Quartier)"] + list(faktor_anteile.keys()) # Lage als erster Faktor, da sie den Baispreis bestimmt, danach die anderen Faktoren
@@ -69,3 +71,8 @@ def erstelle_donut_chart(faktoren):
     return fig
 
 # Zeile 40 noch nicht zufrieden, da der Basisanteil ein bisschen zu dominant sein könnte, wenn viele Faktoren Einfluss haben. Daher setze ich den Basisanteil auf mindestens 50%, damit er immer sichtbar bleibt, auch wenn viele Faktoren Einfluss haben. So bleibt die Visualisierung ausgewogen und der Basispreis ist immer erkennbar, auch wenn viele Faktoren den Preis beeinflussen.
+
+# ACHTUNG: abs() entfernt das Vorzeichen – der Chart zeigt nur die GRÖSSE
+# des Einflusses, nicht ob er den Preis erhöht oder senkt.
+# Baujahr 1970 (Multiplikator 0.95) erscheint als "5%" – gleich wie
+# ein preiserhöhender Faktor mit 1.05.
