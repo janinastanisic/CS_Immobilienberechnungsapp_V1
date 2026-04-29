@@ -133,10 +133,10 @@ def berechne_preis(quartier, zimmerzahl, wohnflaeche, baujahr,
             f_ausstattung += AUSSTATTUNG_FAKTOREN.get(merkmal, 0) #Holt den Faktor für das Ausstattungsmerkmal aus dem obigen Dictionary und addiert ihn zu 1.00
 
     preis_pro_m2 = (basispreis * f_zimmer * f_zustand
-                    * f_stockwerk * f_baujahr * f_ausstattung)
-    gesamtpreis  = preis_pro_m2 * wohnflaeche
+                    * f_stockwerk * f_baujahr * f_ausstattung) #Berechnet den Preis pro Quadratmeter inklusive allen Korrekturfaktoren
+    gesamtpreis  = preis_pro_m2 * wohnflaeche #Berechnet den Gesamtpreis indem der Preis pro Quadratmeter mit der wohnflaeche als Input Multipliziert wird
 
-    faktoren = {
+    faktoren = { #speichert die berechneten Faktoren als Dictionary ab
         "Basispreis (Quartier)": basispreis,
         "Zimmerzahl":            f_zimmer,
         "Zustand":               f_zustand,
@@ -145,7 +145,7 @@ def berechne_preis(quartier, zimmerzahl, wohnflaeche, baujahr,
         "Ausstattung":           f_ausstattung,
     }
 
-    return round(preis_pro_m2), round(gesamtpreis), faktoren
+    return round(preis_pro_m2), round(gesamtpreis), faktoren #gibt den gerundeten Preis pro m2, den gerundeten Gesamtpreis und das Dictionary der Faktoren zurück
 
 
 # ─────────────────────────────────────────────
