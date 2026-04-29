@@ -51,7 +51,7 @@ QUARTIER_KOORDINATEN = {
     "Hottingen":            (47.3700, 8.5617),
     "Langstrasse":          (47.3783, 8.5233),
     "Leimbach":             (47.3333, 8.5100),
-    "Lindenhuegel":         (47.3683, 8.5217),
+    "Lindenhof":            (47.3683, 8.5217),
     "Oerlikon":             (47.4083, 8.5433),
     "Rathaus":              (47.3717, 8.5433),
     "Schwamendingen-Mitte": (47.4083, 8.5650),
