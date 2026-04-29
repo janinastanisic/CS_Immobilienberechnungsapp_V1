@@ -1,7 +1,9 @@
 # 
 # CHART 1: DONUT  Zusammensetzung des Preises
 # feature_donut_chart
-
+# Zeigt wie stark jeder Faktor den geschätzten Preis beeinflusst.
+# Jeder Faktor ist ein Multiplikator: 1.0 = kein Einfluss,
+# z.B. 1.05 = +5% auf den Preis, 0.95 = -5% auf den Preis
 
 def erstelle_donut_chart(faktoren):
     """
