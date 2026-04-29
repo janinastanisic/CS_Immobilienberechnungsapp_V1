@@ -6,8 +6,14 @@ import os #um zu pruefen ob eine Datei bereits existiert --> noch nicht ganz ver
 
 CSV_URL = "https://data.stadt-zuerich.ch/dataset/bau_hae_preis_stockwerkeigentum_zimmerzahl_stadtquartier_od5155/download/BAU515OD5155.csv" 
 #Diese Variable speichert den Link zu unserem Datenset
-DB_PATH = "immobilien.db"
-#Dateiname unserer lokalen Datenbank
+DB_PATH = "immobilien.db" #erster durchlauf: ins internet, CSV laden und in immobilien.db speichern
+#zweiter Durchlauf: immobilien.db wird direkt gelesen
+#immobilien.db = Dateiname unserer lokalen Datenbank
+#erstellt beim ersten Durchlauf des codes die datei automatisch --> speichert Daten aus dem CSV
+#Ohne unsere Datenbank muesste die App jedes Mal das CSV neu vom Internet laden
+# --> so wird es gespeichert
+#Das ist die Idee von dem code in diesem feature, siehe Funktion 4:  get_daten()
+
 
 #Funktion 1#:
 def daten_laden(): #Definition der Funktion daten_laden
