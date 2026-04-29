@@ -1,6 +1,6 @@
-# ─────────────────────────────────────────────
-# CHART 1: DONUT – Zusammensetzung des Preises
-# ─────────────────────────────────────────────feature_donut_chart
+# 
+# CHART 1: DONUT  Zusammensetzung des Preises
+# feature_donut_chart
 
 
 def erstelle_donut_chart(faktoren):
@@ -46,7 +46,7 @@ def erstelle_donut_chart(faktoren):
     ))
 
     fig.update_layout(
-        title       = "Zusammensetzung des Preises – Einfluss der Faktoren",
+        title       = "Zusammensetzung des Preises --> Einfluss der Faktoren",
         showlegend  = False,
         plot_bgcolor  = "white",
         paper_bgcolor = "white",
