@@ -36,18 +36,18 @@ def erstelle_donut_chart(faktoren):
             basis_anteil -= abweichung
 
 
-    labels = ["Lage (Quartier)"] + list(faktor_anteile.keys())
-    werte  = [round(max(basis_anteil, 50), 1)] + list(faktor_anteile.values())
-    farben = ["#378ADD", "#1D9E75", "#EF9F27", "#D85A30", "#7F77DD", "#5DCAA5"]
+    labels = ["Lage (Quartier)"] + list(faktor_anteile.keys()) # Lage als erster Faktor, da sie den Baispreis bestimmt, danach die anderen Faktoren
+    werte  = [round(max(basis_anteil, 50), 1)] + list(faktor_anteile.values()) # Basisanteil auf mindestens 50% setzen, damit er sichtbar bleibt, auch wenn viele Faktoren Einfluss haben
+    farben = ["#378ADD", "#1D9E75", "#EF9F27", "#D85A30", "#7F77DD", "#5DCAA5"] #Farbpalette für die Segmente
 
 
-    fig = go.Figure(go.Pie(
-        labels    = labels,
-        values    = werte,
-        hole      = 0.6,
+    fig = go.Figure(go.Pie( # Pie für Kreisdiagramm, mit hole=0.6 wird es zum Donut-Chart
+        labels    = labels, # Beschriftungen für die Segmente (Faktoren)
+        values    = werte, # Werte als Prozentanteile für die Darstellung im Donut-Chart
+        hole      = 0.6, # 0.6 = 60% Loch in der Mitte → Donut-Chart
         marker    = dict(colors=farben[:len(labels)]),
-        textinfo  = "label+percent",
-        hovertemplate = "<b>%{label}</b><br>Einfluss: %{value:.1f}%<extra></extra>",
+        textinfo  = "label+percent", 
+        hovertemplate = "<b>%{label}</b><br>Einfluss: %{value:.1f}%<extra></extra>", # benutzerdefinierte Hover-Info: zeigt den Faktor und seinen Einfluss in Prozent, ohne zusätzlichen Text (extra)
     ))
 
 
@@ -67,3 +67,5 @@ def erstelle_donut_chart(faktoren):
     )
     # Figure zurückgeben → wird in Streamlit mit st.plotly_chart(fig) angezeigt
     return fig
+
+# Zeile 40 noch nicht zufrieden, da der Basisanteil ein bisschen zu dominant sein könnte, wenn viele Faktoren Einfluss haben. Daher setze ich den Basisanteil auf mindestens 50%, damit er immer sichtbar bleibt, auch wenn viele Faktoren Einfluss haben. So bleibt die Visualisierung ausgewogen und der Basispreis ist immer erkennbar, auch wenn viele Faktoren den Preis beeinflussen.
