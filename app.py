@@ -32,7 +32,7 @@ BASISPREIS_PRO_QUARTIER = (
 
 # ─────────────────────────────────────────────
 # KOORDINATEN DER QUARTIERE (Mittelpunkte)
-# Für die Heatmap auf der Karte
+# Für die Heatmap auf der Karte !!!!! wird noch geändert
 # ─────────────────────────────────────────────
 QUARTIER_KOORDINATEN = {
     "Affoltern":            (47.4233, 8.5117),
@@ -62,12 +62,12 @@ QUARTIER_KOORDINATEN = {
 }
 
 # ─────────────────────────────────────────────
-# KORREKTURFAKTOREN
+# KORREKTURFAKTOREN:Der Faktor wird mit dem Basispreis mulitpliziert und passt den Preis prozentual an. Bsp. Faktor 0.92 = Preis wird um 8% reduziert. Die Faktoren basieren auf Schätzwerten.
 # ─────────────────────────────────────────────
 FAKTOR_ZIMMER = {
     "1": 0.92, "1.5": 0.95, "2": 0.97, "2.5": 0.99,
     "3": 1.00, "3.5": 1.01, "4": 1.02, "4.5": 1.03, "5+": 1.04,
-}
+} 
 
 FAKTOR_ZUSTAND = {
     "Neuwertig / Neubau":    1.10,
@@ -92,7 +92,7 @@ AUSSTATTUNG_FAKTOREN = {
     "hat_keller":    0.01,
     "hat_seesicht":  0.08,
     "hat_minergie":  0.03,
-}
+} #Jede zusätzliche Ausstattung addiert einen Prozentsatz zum Preis: Bsp. Faktor 0.03 = +3%. Der Prozentsatz basiert auf Schätzwerten.
 
 AUSSTATTUNG_LABELS = {
     "hat_balkon":    "Balkon / Terrasse",
@@ -101,14 +101,14 @@ AUSSTATTUNG_LABELS = {
     "hat_keller":    "Keller / Estrich",
     "hat_seesicht":  "Seesicht",
     "hat_minergie":  "Minergie",
-}
+} #Übersetzung von Bezeichnungen in Texte, welche in der App ersichtlich sind
 
 
 # ─────────────────────────────────────────────
 # BAUJAHR-FAKTOR
 # ─────────────────────────────────────────────
 def faktor_baujahr(baujahr):
-    alter = 2024 - baujahr
+    alter = 2026 - baujahr
     if alter <= 5:    return 1.10
     elif alter <= 15: return 1.05
     elif alter <= 30: return 1.00
@@ -394,7 +394,7 @@ with col2:
 st.subheader("Gebaeude")
 col3, col4 = st.columns(2)
 with col3:
-    baujahr = st.slider("Baujahr", min_value=1900, max_value=2024, value=1990)
+    baujahr = st.slider("Baujahr", min_value=1900, max_value=2026, value=1990)
 with col4:
     stockwerk = st.selectbox(
         "Stockwerk",
