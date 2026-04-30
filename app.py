@@ -393,9 +393,9 @@ with col2: #Definiert, was in der rechten Spalte angezeigt wird
 # ── 3. GEBAEUDE ──
 st.subheader("Gebaeude") #Erstellt einen Untertitel in Streamlit
 col3, col4 = st.columns(2) #Die Seite wird in zwei gleich breite Spalten aufgeteilt. col3 links und col4 rechts.
-with col3:
-    baujahr = st.slider("Baujahr", min_value=1900, max_value=2026, value=1990)
-with col4:
+with col3: #Definiert die linke Seite
+    baujahr = st.slider("Baujahr", min_value=1900, max_value=2026, value=1990) #Erstellt einen Schieberegler in Streamlit mit dem Beschriftungstext, dem Mindestwert, dem Maximalwert und dem Standardwert
+with col4: #Definiert die rechte Seite
     stockwerk = st.selectbox(
         "Stockwerk",
         options=[
