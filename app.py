@@ -367,32 +367,32 @@ def erstelle_heatmap_karte(ausgewaehltes_quartier=None):
 # STREAMLIT APP
 # =============================================================
 
-st.title("Immobilien-Preisschaetzer Zürich")
-st.write("Gib die Eigenschaften deiner Immobilie ein - wir berechnen den geschätzten Marktwert.")
-st.markdown("---")
+st.title("Immobilien-Preisschaetzer Zürich") #Erstellt den Titel in Streamlit
+st.write("Gib die Eigenschaften deiner Immobilie ein - wir berechnen den geschätzten Marktwert.") #Erstellt den Beschreibungstext in Streamlit
+st.markdown("---") #Erstellt eine horizontale Trennlinie in Streamlit
 
 # ── 1. LAGE ──
-st.subheader("Lage")
-QUARTIERE = ["— Bitte waehlen —"] + sorted(BASISPREIS_PRO_QUARTIER.keys())
-quartier  = st.selectbox("In welchem Stadtquartier liegt die Immobilie?", options=QUARTIERE)
+st.subheader("Lage") #Erstellt einen Untertitel in Streamlit
+QUARTIERE = ["— Bitte waehlen —"] + sorted(BASISPREIS_PRO_QUARTIER.keys()) #Zwei Listen werden erstellt und miteinander verbunden. Die erste besteht aus dem Platzhalter: Bitte waehlen. Die zweite Liste besteht aus allen Schlüsseln (Quartiernamen) des Dictionaries, welche alphabetisch sortiert werden.
+quartier  = st.selectbox("In welchem Stadtquartier liegt die Immobilie?", options=QUARTIERE) #Ein Dropdown Menü wird in Streamlit erstellt mit einem Beschriftungstext. Das Dropdown Menu beinhaltet eine Liste aller Optionen, die in der vorherigen Zeile definiert wurde. 
 
 # ── 2. GROESSE ──
-st.subheader("Groesse")
-col1, col2 = st.columns(2)
-with col1:
-    zimmerzahl = st.selectbox(
-        "Anzahl Zimmer",
-        options=["1", "1.5", "2", "2.5", "3", "3.5", "4", "4.5", "5+"],
-        index=4
+st.subheader("Groesse") #Erstellt einen Untertitel in Streamlit
+col1, col2 = st.columns(2) #Die Seite wird in zwei gleich breite Spalten aufgeteilt. col1 links und col2 rechts.
+with col1: #Definiert, was in der linken Spalte angezeigt wird
+    zimmerzahl = st.selectbox( #Erstellt ein Dropdown Menü und speichert den Eingabewert unter zimmerzahl ab
+        "Anzahl Zimmer", #Definiert den Text über dem Dropdown Menu
+        options=["1", "1.5", "2", "2.5", "3", "3.5", "4", "4.5", "5+"], #Beschreibt die Liste aller auswählbaren Optionen
+        index=0 #Definiert den Standardwert bei Index 0 --> 1 Zimmer
     )
-with col2:
-    wohnflaeche = st.number_input(
-        "Wohnflaeche (m2)", min_value=20, max_value=500, value=80, step=5
+with col2: #Definiert, was in der rechten Spalte angezeigt wird
+    wohnflaeche = st.number_input( #Erstellt ein Eingabefeld und speichert den Eingabewert unter wohnflaeche
+        "Wohnflaeche (m2)", min_value=10, max_value=500, value=10, step=5 #Definiert die kleinste erlaubte Zahl, die grösste erlaubte Zahl, den Standardwert und die Steps (wenn man auf + klickt, springt die Zahl um diesen Wert)
     )
 
 # ── 3. GEBAEUDE ──
-st.subheader("Gebaeude")
-col3, col4 = st.columns(2)
+st.subheader("Gebaeude") #Erstellt einen Untertitel in Streamlit
+col3, col4 = st.columns(2) #Die Seite wird in zwei gleich breite Spalten aufgeteilt. col3 links und col4 rechts.
 with col3:
     baujahr = st.slider("Baujahr", min_value=1900, max_value=2026, value=1990)
 with col4:
