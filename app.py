@@ -9,7 +9,7 @@ import plotly.express as px #???? raus nehmen, nutzen wir nicht???? Bibliothek f
 import folium #importiert interaktive Landkarten
 from streamlit_folium import st_folium #Bindeglied, damit die Karte in Streamlit angezeigt werden kann
 from feature_dataset import get_daten #importiert get_daten vom Dataset Feature
-
+from feature_Koordinaten import get_koordinaten
 # Seitenkonfiguration von Streamlit: Titel setzen und mittig zentrieren
 st.set_page_config(
     page_title="Immobilien-Preisschätzer Zürich",
@@ -32,34 +32,18 @@ BASISPREIS_PRO_QUARTIER = (
 
 # ─────────────────────────────────────────────
 # KOORDINATEN DER QUARTIERE (Mittelpunkte)
-# Für die Heatmap auf der Karte !!!!! wird noch geändert
+# Fuer die Heatmap auf der Karte !!!!! wurde mit feature_Koordinaten angepasst
 # ─────────────────────────────────────────────
+
+df_geo = get_koordinaten()  # Koordinaten – neu
+
+# Dictionary bauen fuer die Heatmap-Funktion
+# Gleiche Struktur wie das alte hardcodierte Dictionary
 QUARTIER_KOORDINATEN = {
-    "Affoltern":            (47.4233, 8.5117),
-    "Albisrieden":          (47.3733, 8.4900),
-    "Altstetten":           (47.3867, 8.4833),
-    "City":                 (47.3744, 8.5410),
-    "Enge":                 (47.3617, 8.5300),
-    "Escher Wyss":          (47.3883, 8.5167),
-    "Fluntern":             (47.3833, 8.5617),
-    "Gewerbeschule":        (47.3783, 8.5367),
-    "Hard":                 (47.3817, 8.5067),
-    "Hirslanden":           (47.3617, 8.5733),
-    "Hirzenbach":           (47.4000, 8.5817),
-    "Hochschulen":          (47.3767, 8.5483),
-    "Hoengg":               (47.4000, 8.4933),
-    "Hottingen":            (47.3700, 8.5617),
-    "Langstrasse":          (47.3783, 8.5233),
-    "Leimbach":             (47.3333, 8.5100),
-    "Lindenhof":            (47.3683, 8.5217),
-    "Oerlikon":             (47.4083, 8.5433),
-    "Rathaus":              (47.3717, 8.5433),
-    "Schwamendingen-Mitte": (47.4083, 8.5650),
-    "Seebach":              (47.4250, 8.5367),
-    "Wollishofen":          (47.3433, 8.5283),
-    "Wipkingen":            (47.3933, 8.5267),
-    "Witikon":              (47.3567, 8.5917),
+    zeile["Quartier"]: (zeile["Lat"], zeile["Lon"])
+    for _, zeile in df_geo.iterrows()
 }
+
 
 # ─────────────────────────────────────────────
 # KORREKTURFAKTOREN:Der Faktor wird mit dem Basispreis mulitpliziert und passt den Preis prozentual an. Bsp. Faktor 0.92 = Preis wird um 8% reduziert. Die Faktoren basieren auf Schätzwerten.
