@@ -12,18 +12,22 @@ DB_PATH = "immobilien.db"
 #eine Datenbank macht unserer code uebersichtlicher und vereinfachert hoffentlich unser coding
 
 
-#/Funktion 1: gleich wie beim feature_dataset --> daten/Koordinaten werden hier vom Internet geladen
-
+#/Funktion 1: 
+#gleich wie beim feature_dataset --> daten/Koordinaten werden hier vom Internet geladen
+#die Funktion berechnet den Mittelpunkt (Centroid) von jedem Quartier
 def lade_koordinaten():
-    antwort = requests.get(GEO_URL)
-    daten = antwort.json()
-    zeilen = []
+    antwort = requests.get(GEO_URL) #besser fragen
+    daten = antwort.json() # besser fragen
+    zeilen = [] #Leere Liste definiert
 
+#Mit der for clause koennen wir den Mittelpunkt berechnen. 
+#Wir berechnen den Durchschnitt alles Laengen- und Breitengraden
+#Dieser Mittelpunkt wird auch "Centroid" genannt (geographischer Mittelpunkt eines Quartiers)
     for feature in daten["features"]:
         name = feature["properties"]["qname"]
         koordinaten = feature["geometry"]["coordinates"][0]
-        alle_lon = [punkt[0] for punkt in koordinaten]
-        alle_lat = [punkt[1] for punkt in koordinaten]
+        alle_lon = [punkt[0] for punkt in koordinaten] #Laengengrade
+        alle_lat = [punkt[1] for punkt in koordinaten] #Breitengrade
         mittelpunkt_lat = sum(alle_lat) / len(alle_lat)
         mittelpunkt_lon = sum(alle_lon) / len(alle_lon)
         zeilen.append({
@@ -32,18 +36,21 @@ def lade_koordinaten():
             "Lon":      round(mittelpunkt_lon, 4)
         })
 
-    df_geo = pd.DataFrame(zeilen)
-    speichere_koordinaten_in_datenbank(df_geo)
+    df_geo = pd.DataFrame(zeilen) #verwandlung in ein dataframe
+    speichere_koordinaten_in_datenbank(df_geo) #siehe naechste Funktion 
     return df_geo
 
 
-#/Funktion 2: 
+#/Funktion 2: #gehoert sozusagen zu Funktion 1 (siehe Zeile 40) macht es meiner Meinung nach ein wenig uebersichtlicher
 
 def speichere_koordinaten_in_datenbank(df_geo):
-    conn = sqlite3.connect(DB_PATH)
+    conn = sqlite3.connect(DB_PATH) 
     df_geo.to_sql("quartier_koordinaten", conn, if_exists="replace", index=False)
     conn.close()
-
+  #Schreibt kompletten DataFrame als Tabelle in die Datenbank. 
+    #"quartier_koordinaten" ist der name dieser Tabelle
+    #if_exits="replace" bedeutt: Falls die tabelle schon existiert, ueberschrieben
+    #index=false verhindert dass panda eine unnoetige Nummerierungsspalte mitspeichert
 
 #/Funktion 3: 
 
@@ -58,7 +65,7 @@ def lade_koordinaten_aus_datenbank():
     return df_geo
 
 
-#/Funktion 4: 
+#/Funktion 4: Hauptfunktion: benutzt lokale DB falls vorhanden, sonst wird sie vom Internet geladen
 def get_koordinaten():
     conn = sqlite3.connect(DB_PATH)
     tabelle_existiert = pd.read_sql("""
@@ -67,6 +74,7 @@ def get_koordinaten():
         WHERE type='table' AND name='quartier_koordinaten'
     """, conn)
     conn.close()
+    #prueft ob die Tabelle schon existiert
 
     if len(tabelle_existiert) > 0:
         return lade_koordinaten_aus_datenbank()
