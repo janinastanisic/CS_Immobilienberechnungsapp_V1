@@ -4,7 +4,7 @@ import sqlite3
 import os
 import requests #brauchen wir neu hier wil es um GeoJSON Daten geht !!!hinzufuegen zu requirements.txt!!!
 
-GEO_URL = "https://www.ogd.stadt-zuerich.ch/wfs/geoportal/Statistische_Quartiere?service=WFS&version=1.1.0&request=GetFeature&outputFormat=GeoJSON&typename=adm_statistische_quartiere_map"
+GEO_URL = "https://www.stadt-zuerich.ch/geodaten/download/Statistische_Quartiere?format=10009" 
 #link zum Datensatz der Stadt Zuerich
 
 DB_PATH = "immobilien.db" 
@@ -16,30 +16,13 @@ DB_PATH = "immobilien.db"
 #gleich wie beim feature_dataset --> daten/Koordinaten werden hier vom Internet geladen
 #die Funktion berechnet den Mittelpunkt (Centroid) von jedem Quartier
 def lade_koordinaten():
-    antwort = requests.get(GEO_URL) #besser fragen
-    daten = antwort.json() # besser fragen
-    zeilen = [] #Leere Liste definiert
+    df_geo=pd.read_csv(GEO_URL) #laedt den CSV
+    print(df_geo.columns.tolist())
+    speichere_koordinaten_in_datenbank(df_geo)
+    return (df_geo)
 
-#Mit der for clause koennen wir den Mittelpunkt berechnen. 
-#Wir berechnen den Durchschnitt alles Laengen- und Breitengraden
-#Dieser Mittelpunkt wird auch "Centroid" genannt (geographischer Mittelpunkt eines Quartiers)
-    for feature in daten["features"]:
-        name = feature["properties"]["qname"]
-        koordinaten = feature["geometry"]["coordinates"][0]
-        alle_lon = [punkt[0] for punkt in koordinaten] #Laengengrade
-        alle_lat = [punkt[1] for punkt in koordinaten] #Breitengrade
-        mittelpunkt_lat = sum(alle_lat) / len(alle_lat)
-        mittelpunkt_lon = sum(alle_lon) / len(alle_lon)
-        zeilen.append({
-            "Quartier": name,
-            "Lat":      round(mittelpunkt_lat, 4),
-            "Lon":      round(mittelpunkt_lon, 4)
-        })
 
-    df_geo = pd.DataFrame(zeilen) #verwandlung in ein dataframe
-    speichere_koordinaten_in_datenbank(df_geo) #siehe naechste Funktion 
-    return df_geo
-
+  
 
 #/Funktion 2: #gehoert sozusagen zu Funktion 1 (siehe Zeile 40) macht es meiner Meinung nach ein wenig uebersichtlicher
 
