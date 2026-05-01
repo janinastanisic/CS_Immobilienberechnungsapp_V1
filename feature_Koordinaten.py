@@ -4,7 +4,7 @@ import sqlite3
 import os
 import requests #brauchen wir neu hier wil es um GeoJSON Daten geht !!!hinzufuegen zu requirements.txt!!!
 
-GEO_URL = "https://data.stadt-zuerich.ch/dataset/geo_statistische_quartiere/resource/c19b5ce2-492b-4f8f-b0a2-265f5ff6c2a1"
+GEO_URL = "https://www.ogd.stadt-zuerich.ch/wfs/geoportal/Statistische_Quartiere?service=WFS&version=1.1.0&request=GetFeature&outputFormat=GeoJSON&typename=adm_statistische_quartiere_map"
 #link zum Datensatz der Stadt Zuerich
 
 DB_PATH = "immobilien.db" 
