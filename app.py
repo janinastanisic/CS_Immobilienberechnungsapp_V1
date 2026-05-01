@@ -10,6 +10,8 @@ import folium #importiert interaktive Landkarten
 from streamlit_folium import st_folium #Bindeglied, damit die Karte in Streamlit angezeigt werden kann
 from feature_dataset import get_daten #importiert get_daten vom Dataset Feature
 from feature_Koordinaten import get_koordinaten
+from feature_heatmap_chart import erstelle_heatmap_karte
+
 # Seitenkonfiguration von Streamlit: Titel setzen und mittig zentrieren
 st.set_page_config(
     page_title="Immobilien-Preisschätzer Zürich",
