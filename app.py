@@ -242,15 +242,7 @@ def erstelle_gauge_chart(preis_pro_m2, quartier):
 
 
 # ─────────────────────────────────────────────
-# CHART 3: HEATMAP – Karte Zürich
-# ─────────────────────────────────────────────
 
-karte = erstelle_heatmap_karte(
-    ausgewaehltes_quartier  = e["quartier"],
-    quartier_koordinaten    = QUARTIER_KOORDINATEN,
-    basispreis_pro_quartier = BASISPREIS_PRO_QUARTIER
-)
-st_folium(karte, use_container_width=True, height=450)
 # =============================================================
 # STREAMLIT APP
 # =============================================================
