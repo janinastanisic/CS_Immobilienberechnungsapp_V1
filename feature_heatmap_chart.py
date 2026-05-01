@@ -1,4 +1,4 @@
-feature_heatmap_chart
+#feature_heatmap_chart
 
 # ─────────────────────────────────────────────
 # CHART 3: HEATMAP – Karte Zürich
