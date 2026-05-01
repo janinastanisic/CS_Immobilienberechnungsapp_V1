@@ -37,14 +37,7 @@ BASISPREIS_PRO_QUARTIER = (
 # Fuer die Heatmap auf der Karte !!!!! wurde mit feature_Koordinaten angepasst
 # ─────────────────────────────────────────────
 
-df_geo = get_koordinaten()  # Koordinaten – neu
-
-# Dictionary bauen fuer die Heatmap-Funktion
-# Gleiche Struktur wie das alte hardcodierte Dictionary
-QUARTIER_KOORDINATEN = {
-    zeile["Quartier"]: (zeile["Lat"], zeile["Lon"])
-    for _, zeile in df_geo.iterrows()
-}
+QUARTIER_KOORDINATEN = get_koordinaten()
 
 
 # ─────────────────────────────────────────────

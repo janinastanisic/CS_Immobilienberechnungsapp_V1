@@ -4,8 +4,7 @@
 # CHART 3: HEATMAP – Karte Zürich
 # ─────────────────────────────────────────────
 import folium
-import pandas as pd
-import sqlite3
+
 def erstelle_heatmap_karte(ausgewaehltes_quartier, quartier_koordinaten, basispreis_pro_quartier):
     """
     Erstellt eine interaktive Karte von Zürich mit
