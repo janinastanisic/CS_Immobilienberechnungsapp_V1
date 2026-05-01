@@ -1,6 +1,6 @@
 
-st.title("Immobilien-Preisschaetzer Zürich") #Erstellt den Titel in Streamlit
-st.write("Gib die Eigenschaften deiner Immobilie ein - wir berechnen den geschätzten Marktwert.") #Erstellt den Beschreibungstext in Streamlit
+st.title("Wohnungs-Preisschätzer Zürich") #Erstellt den Titel in Streamlit
+st.write("Gib die Eigenschaften deiner Wohnung ein - wir berechnen den geschätzten Marktwert.") #Erstellt den Beschreibungstext in Streamlit
 st.markdown("---") #Erstellt eine horizontale Trennlinie in Streamlit
 
 # ── 1. LAGE ──
