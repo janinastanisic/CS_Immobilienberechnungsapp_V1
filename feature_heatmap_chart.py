@@ -3,7 +3,10 @@ feature_heatmap_chart
 # ─────────────────────────────────────────────
 # CHART 3: HEATMAP – Karte Zürich
 # ─────────────────────────────────────────────
-def erstelle_heatmap_karte(ausgewaehltes_quartier=None):
+import folium
+import pandas as pd
+import sqlite3
+def erstelle_heatmap_karte(ausgewaehltes_quartier, QUARTIER_KOORDINATEN, BASISPREIS_PRO_QUARTIER):
     """
     Erstellt eine interaktive Karte von Zürich mit
     farbigen Kreisen pro Quartier (grün = günstig, rot = teuer).
@@ -48,7 +51,7 @@ def erstelle_heatmap_karte(ausgewaehltes_quartier=None):
         ist_ausgewaehlt = (quartier == ausgewaehltes_quartier)
         rand_farbe  = "#1a1a2e" if ist_ausgewaehlt else "#ffffff"
         rand_breite = 3 if ist_ausgewaehlt else 1
-        radius      = 600 if ist_ausgewaehlt else 450
+        radius      = 600 if ist_ausgewaehlt else 450 #rausnehmen?
 
         # Kreis mit Tooltip
         folium.CircleMarker(
