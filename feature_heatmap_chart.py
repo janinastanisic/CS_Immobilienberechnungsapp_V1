@@ -6,7 +6,7 @@
 import folium
 import pandas as pd
 import sqlite3
-def erstelle_heatmap_karte(ausgewaehltes_quartier, QUARTIER_KOORDINATEN, BASISPREIS_PRO_QUARTIER):
+def erstelle_heatmap_karte(ausgewaehltes_quartier, quartier_koordinaten, basispreis_pro_quartier):
     """
     Erstellt eine interaktive Karte von Zürich mit
     farbigen Kreisen pro Quartier (grün = günstig, rot = teuer).
@@ -20,7 +20,7 @@ def erstelle_heatmap_karte(ausgewaehltes_quartier, QUARTIER_KOORDINATEN, BASISPR
     )
 
     # Preisskala für Farbgebung berechnen
-    alle_preise = list(BASISPREIS_PRO_QUARTIER.values())
+    alle_preise = list(basispreis_pro_quartier.values())
     min_p = min(alle_preise)
     max_p = max(alle_preise)
 
@@ -43,8 +43,8 @@ def erstelle_heatmap_karte(ausgewaehltes_quartier, QUARTIER_KOORDINATEN, BASISPR
         return f"#{r:02x}{g:02x}{b:02x}"
 
     # Kreise für jedes Quartier zeichnen
-    for quartier, (lat, lon) in QUARTIER_KOORDINATEN.items():
-        preis = BASISPREIS_PRO_QUARTIER.get(quartier, 11000)
+    for quartier, (lat, lon) in quartier_koordinaten.items():
+        preis = basispreis_pro_quartier.get(quartier, 11000)
         farbe = preis_zu_farbe(preis)
 
         # Ausgewähltes Quartier speziell hervorheben
