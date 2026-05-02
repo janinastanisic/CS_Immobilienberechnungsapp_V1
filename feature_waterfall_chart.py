@@ -1,3 +1,5 @@
+import plotly.graph_objects as go
+
 # ─────────────────────────────────────────────────────────────
 # CHART 1b: WATERFALL – Zusammensetzung des Preises
 # erhöht (grün) oder senkt (rot) – mit korrektem Vorzeichen.
