@@ -11,7 +11,7 @@ from streamlit_folium import st_folium #Bindeglied, damit die Karte in Streamlit
 from feature_dataset import get_daten #importiert get_daten vom Dataset Feature
 from feature_Koordinaten import get_koordinaten
 from feature_heatmap_chart import erstelle_heatmap_karte
-
+from feature_machine_learning import trainiere_knn_modell, ml_basispreis_schaetzen
 # Seitenkonfiguration von Streamlit: Titel setzen und mittig zentrieren
 st.set_page_config(
     page_title="Immobilien-Preisschätzer Zürich",
@@ -31,6 +31,8 @@ BASISPREIS_PRO_QUARTIER = (
     .to_dict()
 )
 
+#ML-Modell wird beim start einmalig trainiert
+knn_modell, knn_le, _, _, _ = trainiere_knn_modell(df)
 
 # ─────────────────────────────────────────────
 # KOORDINATEN DER QUARTIERE (Mittelpunkte)
@@ -100,7 +102,8 @@ def faktor_baujahr(baujahr):
 # ─────────────────────────────────────────────
 def berechne_preis(quartier, zimmerzahl, wohnflaeche, baujahr,
                    stockwerk, zustand, ausstattung): #Definition einer Funktion mit Eingabewerten
-    basispreis  = BASISPREIS_PRO_QUARTIER.get(quartier, 11000) #holt den Wert, der bei quartier als Input angegeben wurde und sucht dessen Basispreis. Falls der Wert nicht gefunden wurde, wird 11000 als Standardwert verwendet.
+    ml_preis = ml_basispreis_schaetzen(knn_modell, knn_le, quartier, zimmerzahl, jahr=2026)
+    basispreis = ml_preis if ml_preis is not None else BASISPREIS_PRO_QUARTIER.get(quartier, 11000) 
     f_zimmer    = FAKTOR_ZIMMER.get(zimmerzahl, 1.00) #holt den Wert, der bei zimmerzahl als Input angegeben wurde und nimmt den Korrekturfaktor. Falls der Wert nicht gefunden wurde, wird 1.00 als Standardwert verwendet.
     f_zustand   = FAKTOR_ZUSTAND.get(zustand, 1.00) #holt den Wert, der bei zustand als Input angegeben wurde und nimmt den Korrekturfaktor. Falls der Wert nicht gefunden wurde, wird 1.00 als Standardwert verwendet.
     f_stockwerk = FAKTOR_STOCKWERK.get(stockwerk, 1.00) #holt den Wert, der bei stockwerk als Input angegeben wurde und nimmt den Korrekturfaktor. Falls der Wert nicht gefunden wurde, wird 1.00 als Standardwert verwendet.
