@@ -12,6 +12,7 @@ from feature_dataset import get_daten #importiert get_daten vom Dataset Feature
 from feature_Koordinaten import get_koordinaten
 from feature_heatmap_chart import erstelle_heatmap_karte
 from feature_machine_learning import trainiere_knn_modell, ml_basispreis_schaetzen
+from feature_waterfall_chart import erstelle_waterfall_chart 
 # Seitenkonfiguration von Streamlit: Titel setzen und mittig zentrieren
 st.set_page_config(
     page_title="Immobilien-Preisschätzer Zürich",
@@ -367,6 +368,12 @@ if st.session_state.ergebnis:
     st.caption("Prozentualer Einfluss der einzelnen Merkmale auf den Endpreis.")
     fig_donut = erstelle_donut_chart(e["faktoren"])
     st.plotly_chart(fig_donut, width="stretch")
+
+    # Chart 3: Waterfall
+    st.markdown("### Preiszusammensetzung – Schritt für Schritt")
+    st.caption("Wie sich der Endpreis aus dem Basispreis und den einzelnen Faktoren aufbaut.")
+    fig_waterfall = erstelle_waterfall_chart(e["faktoren"], e["preis_pro_m2"])
+    st.plotly_chart(fig_waterfall, width="stretch")
 
     # Chart 2: Gauge
     st.markdown("### Preis im Marktvergleich")
