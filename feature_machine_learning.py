@@ -20,7 +20,7 @@ def _zimmer_zu_zahl(zimmer_str):
         return float(s)
     except ValueError:
         return 3.0
-
+#wandelt die Zimmerzahl in einen float um, weil das Modell nur mit Zahlen arbeiten kann
 
 def trainiere_knn_modell(df):
     
@@ -41,14 +41,14 @@ def trainiere_knn_modell(df):
      #   mae_chf       – mittlerer absoluter Fehler in CHF/m²
      #   cv_ergebnisse – dict {k: mae} aller getesteten k-Werte
     
-    daten = df.copy().dropna(subset=["Preis_pro_m2", "Jahr", "Quartier", "Zimmer"])
+    daten = df.copy().dropna(subset=["Preis_pro_m2", "Jahr", "Quartier", "Zimmer"]) #kopiert die Daten von df und entfernt alle Zeile, wo werte fehlen
 
     le = LabelEncoder()
     daten["Quartier_enc"] = le.fit_transform(daten["Quartier"])
     daten["Zimmer_num"] = daten["Zimmer"].apply(_zimmer_zu_zahl)
 
-    X = daten[["Quartier_enc", "Zimmer_num", "Jahr"]].values
-    y = daten["Preis_pro_m2"].values
+    X = daten[["Quartier_enc", "Zimmer_num", "Jahr"]].values #Das sind die Eingabe Merkmale
+    y = daten["Preis_pro_m2"].values #Das ist der Preis, den das Modell lernen soll
 
     bestes_k = 3
     bester_mae = float("inf")
