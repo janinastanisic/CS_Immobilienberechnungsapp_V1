@@ -29,13 +29,13 @@ def daten_laden(): #Definition der Funktion daten_laden
         "RaumLang":            "Quartier",
         "AnzZimmerLevel2Lang_noDM":  "Zimmer",
         "HAPreisWohnflaeche":  "Preis_pro_m2",
-        "HAMedianPreis":       "Medianpreis",
+   
        
     })
     #Benennt die Spaltennamen vom CSV um --> einfacher fuer uns um unseren code zu lesen
     #Vorschlag von Claude - koennen wir auch noch aendern
 
-    spalten= ["Jahr", "Quartier", "Zimmer", "Preis_pro_m2", "Medianpreis", "Anzahl_Verkaeufe"]
+    spalten= ["Jahr", "Quartier", "Zimmer", "Preis_pro_m2""]
     df=df[spalten]
     #Fokus nur auf fuer uns relevante Spalten, die anderen von unserem Datenset werden so aussortiert (koennen wir gerne auch noch anpassen)
     #So werden nur diese Spalten in unserem DataFrame uebernommen
@@ -44,7 +44,7 @@ def daten_laden(): #Definition der Funktion daten_laden
 
     df["Jahr"]=df["Jahr"].astype(int)
     df["Preis_pro_m2"] = df["Preis_pro_m2"].astype(float)
-    df["Medianpreis"] = df["Medianpreis"].astype(float)
+
     #Anpassung gewisser Datentypen, weil CSV anscheinend oft alles als String laden
     #Anpassung noetig fuer die Rechnungen 
 
