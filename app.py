@@ -134,7 +134,7 @@ def berechne_preis(quartier, zimmerzahl, wohnflaeche, baujahr,
 
 
 # ─────────────────────────────────────────────
-# CHART 2: GAUGE – Preis im Marktvergleich
+# CHART 1: GAUGE – Preis im Marktvergleich
 # ─────────────────────────────────────────────
 def erstelle_gauge_chart(preis_pro_m2, quartier):
     """

@@ -30,7 +30,7 @@ def daten_laden(): #Definition der Funktion daten_laden
         "AnzZimmerLevel2Lang_noDM":  "Zimmer",
         "HAPreisWohnflaeche":  "Preis_pro_m2",
         "HAMedianPreis":       "Medianpreis",
-        "AnzHA":               "Anzahl_Verkaeufe"
+       
     })
     #Benennt die Spaltennamen vom CSV um --> einfacher fuer uns um unseren code zu lesen
     #Vorschlag von Claude - koennen wir auch noch aendern
@@ -46,7 +46,7 @@ def daten_laden(): #Definition der Funktion daten_laden
     df["Preis_pro_m2"] = df["Preis_pro_m2"].astype(float)
     df["Medianpreis"] = df["Medianpreis"].astype(float)
     #Anpassung gewisser Datentypen, weil CSV anscheinend oft alles als String laden
-    #Anpassung noetig fuer die Rechnungen
+    #Anpassung noetig fuer die Rechnungen 
 
     speichere_in_datenbank(df)
     return(df)
