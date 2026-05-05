@@ -1,5 +1,6 @@
 # Mittelpunkt-Koordinaten der Züricher Quartiere
-# Quelle: Stadt Zuerich Geodaten (statische Referenzdaten)
+# Quelle: https://www.stadt-zuerich.ch/geodaten/download/Statistische_Quartiere?format=10008
+#LV59 in WGS84-Koordinaten Umrechner: https://zurzach.ag/liegenschaften/lv95-in-wgs84-koordinaten-fuer-google-maps-oder-openstreetmap-umrechnen-und-konvertieren/
 #Wir benutzen hardcodierte Daten weil der CSV link nicht funktioniert da die Stadt Zuerich hoechstwahrscheinlich den Zugriff blockiert hat
 #Wir haben probiert die Daten herunterzuladen und manuell abzuspeichern, aber die Daten haben keine Lat/Lon Spalten sondern nur geometry mit POLYGON Koordinaten 
 
