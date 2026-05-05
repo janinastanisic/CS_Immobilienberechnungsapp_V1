@@ -1,6 +1,7 @@
-import plotly.graph_objects as go # import lädt eine externe Bibliothek (hier Plotly-Bibliothek) in den Code. Plotly is eine Bib die Erstellung von Diagrammen, insbesondere hier für das Wasserfall-Diagramm.
-                                  # Plotly ist eine leistungsstarke Bibliothek zur Erstellung interaktiver Diagramme in Python. Hier verwenden wir sie, um ein Wasserfall-Diagramm zu erstellen, das die Zusammensetzung des Preises zeigt.
-                                  # go ist der Spitzname für plotly.graph_objects, eine Unterbibliothek von Plotly, die es ermöglicht, komplexe Diagramme zu erstellen. Wir verwenden go.Waterfall, um das Wasserfall-Diagramm zu erstellen.
+import plotly.graph_objects as go 
+# import lädt eine externe Bibliothek (hier Plotly-Bibliothek) in den Code. Plotly is eine Bib die Erstellung von Diagrammen, insbesondere hier für das Wasserfall-Diagramm.
+# Plotly ist eine leistungsstarke Bibliothek zur Erstellung interaktiver Diagramme in Python. Hier verwenden wir sie, um ein Wasserfall-Diagramm zu erstellen, das die Zusammensetzung des Preises zeigt.
+# go ist der Spitzname für plotly.graph_objects, eine Unterbibliothek von Plotly, die es ermöglicht, komplexe Diagramme zu erstellen. Wir verwenden go.Waterfall, um das Wasserfall-Diagramm zu erstellen.
 
 # ─────────────────────────────────────────────────────────────
 # CHART 1b: WATERFALL – Zusammensetzung des Preises
@@ -12,6 +13,7 @@ import plotly.graph_objects as go # import lädt eine externe Bibliothek (hier P
 # Parameter 2. preis_pro_m2 (int), eine ganze Zahl (kein Komma).
 
 def erstelle_waterfall_chart(faktoren, preis_pro_m2):       
+    
     # Docstring unten beschreibt die Funktion, ihre Parameter und was sie tut. 
     # Es ist eine gute Praxis, Funktionen mit einem Docstring zu dokumentieren, damit andere Coder verstehen, was die Funktion macht und wie man sie verwenden soll.
     """                                                                    
@@ -23,6 +25,7 @@ def erstelle_waterfall_chart(faktoren, preis_pro_m2):
         faktoren    (dict): Multiplikatoren aus berechne_preis()
         preis_pro_m2 (int): Endpreis pro m² aus berechne_preis()
     """
+
 
     basispreis = faktoren["Basispreis (Quartier)"]  # Der Basispreis repräsentiert CHF/m² des Quartiers
     # Es wird auf das dictionary "faktoren" zugegriffen und den Wert zum Key "Basispreis (Quartier)" rausgeholt. 
@@ -38,43 +41,56 @@ def erstelle_waterfall_chart(faktoren, preis_pro_m2):
         "Ausstattung": faktoren["Ausstattung"],
     }
 
+
     # --> CHF-Beitrag jedes Faktors berechnen
-    # Logik: Wie viel CHF/m² kommt durch diesen Faktor dazu oder weg?
+    # Logik: Wie viel CHF/m2 kommt durch diesen Faktor dazu oder weg?
     # Basispreis wird schrittweise mit jedem Faktor multipliziert.
     # Der Unterschied zum vorherigen Schritt = Beitrag dieses Faktors.
-    #
+
     # zum Beispiel:
     #   Basispreis:          12'000.-
-    #   × Zimmer (1.02):     12'240.-  --> +240 CHF/m²
-    #   × Zustand (1.10):    13'464.-  --> +1'224 CHF/m²
-    #   × Baujahr (0.95):    12'791.-  --> -673 CHF/m²
+    #   × Zimmer (1.02):     12'240.-  --> +240 CHF/m2
+    #   × Zustand (1.10):    13'464.-  --> +1'224 CHF/m2
+    #   × Baujahr (0.95):    12'791.-  --> -673 CHF/m2
+
 
     # leere Listen für die Daten des Diagramms vorbereiten bevor Loop beginnt
     namen  = []   # x-Achse: Bezeichnungen
     werte  = []   # y-Achse: CHF-Beitrag pro Faktor
     farben = []   # grün = positiv, rot = negativ
 
+
     laufender_preis = basispreis  # startet beim Basispreis
-    # laufender_preis änder sich durch alle Multiplikatoren
+    # laufender_preis ändert sich durch alle Multiplikatoren
 
-    for name, faktor in faktor_map.items():     # Loop-Header, dieser startet die Iteraion
-        neuer_preis = laufender_preis * faktor          # Preis nach diesem Faktor
-        beitrag = round(neuer_preis - laufender_preis)  # Differenz = Einfluss in CHF
 
-        if abs(beitrag) > 10:  # Faktoren unter CHF 10 Einfluss ignorieren
-            namen.append(name)
-            werte.append(beitrag)
+    for name, faktor in faktor_map.items():     # Loop-Header, dieser startet die Iteration
+        # alles drinn wird wiederholt für jeden Faktor (Zimmerzahl, Zustand, Stockwerk,Baujahr, Ausstattung)
+        
+        neuer_preis = laufender_preis * faktor          # Preis nach diesem Faktor: laufender Preis x Multiplikator
+        beitrag = round(neuer_preis - laufender_preis)  # Differenz zwischen vorher/nacher = Einfluss in CHF/m2
+
+        if abs(beitrag) > 10:  
+            # abs = Absolutwert, ignoriert Vorzeichen 
+            # Faktoren unter CHF 10 Einfluss ignorieren
+
+            namen.append(name)          # Fügt den Name des Faktors zur Liste hinzu (z.B. "Zimmerzahl" etc.)
+            werte.append(beitrag)       # Fügt den CHF-Beitrag zur Liste hinzu (z.B. +240 oder -673)
+            
             # Grün wenn Faktor Preis erhöht, Rot wenn er ihn senkt
             farben.append("#1D9E75" if beitrag >= 0 else "#D85A30")
-            laufender_preis = neuer_preis  # nächster Faktor startet vom neuen Preis
+        
+        laufender_preis = neuer_preis  # nächster Faktor startet vom neuen Preis
+        # Wichtig: ausserhalb des if --> wird immer aktualisiert, nicht nur wenn Beitrag > 10
 
-    # Basispreis und Endpreis als Rahmen dazufügen
+
+    # Basispreis und Endpreis als Rahmen hinzufügen, damit der Chart von Anfang bis Ende die Preisveränderungen zeigt.
     # "inside" = Balken im Waterfall-Chart (relative Änderung)
     # "total"  = absoluter Wert (Basispreis und Endpreis)
     alle_namen  = ["Lage (Quartier)"] + namen           + ["Endpreis"]
     alle_werte  = [basispreis]        + werte           + [preis_pro_m2]
     alle_typen  = ["absolute"]        + ["relative"] * len(namen) + ["total"]
-    alle_farben = ["#378ADD"]         + farben          + ["#2563eb"]
+    alle_farben = ["#6AAAE9"]         + farben          + ["#0e48c6"]
 
     # Waterfall-Chart erstellen
     fig = go.Figure(go.Waterfall(
