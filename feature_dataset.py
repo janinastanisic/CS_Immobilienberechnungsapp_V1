@@ -35,7 +35,7 @@ def daten_laden(): #Definition der Funktion daten_laden
     #Benennt die Spaltennamen vom CSV um --> einfacher fuer uns um unseren code zu lesen
     #Vorschlag von Claude - koennen wir auch noch aendern
 
-    spalten= ["Jahr", "Quartier", "Zimmer", "Preis_pro_m2""]
+    spalten= ["Jahr", "Quartier", "Zimmer", "Preis_pro_m2"]
     df=df[spalten]
     #Fokus nur auf fuer uns relevante Spalten, die anderen von unserem Datenset werden so aussortiert (koennen wir gerne auch noch anpassen)
     #So werden nur diese Spalten in unserem DataFrame uebernommen
