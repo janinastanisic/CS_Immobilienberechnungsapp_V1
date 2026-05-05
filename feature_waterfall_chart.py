@@ -55,8 +55,9 @@ def erstelle_waterfall_chart(faktoren, preis_pro_m2):
     farben = []   # grün = positiv, rot = negativ
 
     laufender_preis = basispreis  # startet beim Basispreis
+    # laufender_preis änder sich durch alle Multiplikatoren
 
-    for name, faktor in faktor_map.items():
+    for name, faktor in faktor_map.items():     # Loop-Header, dieser startet die Iteraion
         neuer_preis = laufender_preis * faktor          # Preis nach diesem Faktor
         beitrag = round(neuer_preis - laufender_preis)  # Differenz = Einfluss in CHF
 
