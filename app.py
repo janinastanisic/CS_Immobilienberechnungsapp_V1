@@ -192,7 +192,7 @@ def erstelle_gauge_chart(preis_pro_m2, quartier):
 # STREAMLIT APP
 # =============================================================
 
-st.title("Immobilien-Preisschaetzer Zürich") #Erstellt den Titel in Streamlit
+st.title("Immobilien-Preisschätzer Zürich") #Erstellt den Titel in Streamlit
 st.write("Gib die Eigenschaften deiner Immobilie ein - wir berechnen den geschätzten Marktwert.") #Erstellt den Beschreibungstext in Streamlit
 st.markdown("---") #Erstellt eine horizontale Trennlinie in Streamlit
 
@@ -212,11 +212,11 @@ with col1: #Definiert, was in der linken Spalte angezeigt wird
     )
 with col2: #Definiert, was in der rechten Spalte angezeigt wird
     wohnflaeche = st.number_input( #Erstellt ein Eingabefeld und speichert den Eingabewert unter wohnflaeche
-        "Wohnflaeche (m2)", min_value=10, max_value=500, value=10, step=5 #Definiert die kleinste erlaubte Zahl, die grösste erlaubte Zahl, den Standardwert und die Steps (wenn man auf + klickt, springt die Zahl um diesen Wert)
+        "Wohnfläche (m2)", min_value=10, max_value=500, value=10, step=5 #Definiert die kleinste erlaubte Zahl, die grösste erlaubte Zahl, den Standardwert und die Steps (wenn man auf + klickt, springt die Zahl um diesen Wert)
     )
 
 # ── 3. GEBAEUDE ──
-st.subheader("Gebaeude") #Erstellt einen Untertitel in Streamlit
+st.subheader("Gebäude") #Erstellt einen Untertitel in Streamlit
 col3, col4 = st.columns(2) #Die Seite wird in zwei gleich breite Spalten aufgeteilt. col3 links und col4 rechts.
 with col3: #Definiert die linke Seite
     baujahr = st.slider("Baujahr", min_value=1900, max_value=2026, value=1990) #Erstellt einen Schieberegler in Streamlit mit dem Beschriftungstext, dem Mindestwert, dem Maximalwert und dem Standardwert und speichert den Eingabewert unter baujahr
@@ -234,7 +234,7 @@ with col4: #Definiert die rechte Seite
 st.subheader("Zustand") #Erstellt einen Untertitel in Streamlit
 zustand = st.radio( #Erstellt buttons, von denen der User eine Option wählen kann
     "Wie ist der aktuelle Renovationsstand?", #Definiert den Text über den Buttons
-    options=["Neuwertig / Neubau", "Gut gepflegt", "Renovationsbeduerftig"], #Definiert die Liste aller auswählbaren Optionen
+    options=["Neuwertig / Neubau", "Gut gepflegt", "Renovationsbedürftig"], #Definiert die Liste aller auswählbaren Optionen
     index=1, #Setzt Gut gepflegt als Standardwert
     horizontal=True #Formatiert die Buttons horizontal, also nebeneinander
 )
