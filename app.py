@@ -37,7 +37,6 @@ knn_modell, knn_le, _, _, _ = trainiere_knn_modell(df)
 
 # ─────────────────────────────────────────────
 # KOORDINATEN DER QUARTIERE (Mittelpunkte)
-
 # ─────────────────────────────────────────────
 
 QUARTIER_KOORDINATEN = get_koordinaten()
