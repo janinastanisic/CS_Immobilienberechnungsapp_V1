@@ -25,7 +25,7 @@ def erstelle_gauge_chart(preis_pro_m2, quartier):
             "suffix": " CHF/m2"
         },
         number = {"suffix": " CHF/m²", "font": {"size": 28}},
-        title  = {"text": f"Preis im Vergleich zum Stadtquartier-Durchschnitt Zürich",
+        title  = {"text": "Preis im Vergleich zum Stadtquartier-Durchschnitt Zürich",
                   "font": {"size": 14}},
         gauge  = {
             "axis": {
