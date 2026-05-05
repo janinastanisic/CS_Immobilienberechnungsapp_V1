@@ -1,16 +1,37 @@
-import plotly.graph_objects as go 
-# import lädt eine externe Bibliothek (hier Plotly-Bibliothek) in den Code. Plotly is eine Bib die Erstellung von Diagrammen, insbesondere hier für das Wasserfall-Diagramm.
-# Plotly ist eine leistungsstarke Bibliothek zur Erstellung interaktiver Diagramme in Python. Hier verwenden wir sie, um ein Wasserfall-Diagramm zu erstellen, das die Zusammensetzung des Preises zeigt.
-# go ist der Spitzname für plotly.graph_objects, eine Unterbibliothek von Plotly, die es ermöglicht, komplexe Diagramme zu erstellen. Wir verwenden go.Waterfall, um das Wasserfall-Diagramm zu erstellen.
-
 # ─────────────────────────────────────────────────────────────
 # CHART 1b: WATERFALL – Zusammensetzung des Preises
 # erhöht (grün) oder senkt (rot) – mit korrektem Vorzeichen.
 # ─────────────────────────────────────────────────────────────
 
-# Funktion definieren mit def erstelle_waterfall_chart(faktoren, preis_pro_m2), die ein Wasserfall-Diagramm erstellt. Sie nimmt zwei Parameter:
-# Parameter 1. faktoren (dict), dictionary, eine Sammlung von Key Value Paaren und 
-# Parameter 2. preis_pro_m2 (int), eine ganze Zahl (kein Komma).
+
+# ─────────────────────────────────────────────────────────────
+# ZUSAMMENFASSUNG
+
+# Diese Funktion erstellt einen interaktiven Waterfall-Chart mit Plotly.
+# Sie zeigt wie sich der Immobilienpreis (CHF/m²) aus einzelnen Faktoren
+# zusammensetzt – von der Lage als Startpunkt bis zum Endpreis.
+
+# Ablauf:
+# 1. Basispreis (Lage) als Startpunkt setzen
+# 2. Jeden Faktor (Zimmerzahl, Zustand, etc.) einzeln durchgehen
+# 3. CHF-Beitrag pro Faktor berechnen (vorher vs. nachher)
+# 4. Balken grün = preiserhöhend, rot = preissenkend
+# 5. Fertigen Chart zurückgeben für Streamlit
+
+# Design und Visualisierung wurden mit Unterstützung von Claude AI (Anthropic)
+# umgesetzt, da professionelles Chart-Design unsere aktuellen
+# Fähigkeiten übersteigt.
+# ─────────────────────────────────────────────────────────────
+
+
+import plotly.graph_objects as go 
+    # import lädt eine externe Bibliothek (hier Plotly-Bibliothek) in den Code. Plotly is eine Bib die Erstellung von Diagrammen, insbesondere hier für das Wasserfall-Diagramm.
+    # Plotly ist eine leistungsstarke Bibliothek zur Erstellung interaktiver Diagramme in Python. Hier verwenden wir sie, um ein Wasserfall-Diagramm zu erstellen, das die Zusammensetzung des Preises zeigt.
+    # go ist der Spitzname für plotly.graph_objects, eine Unterbibliothek von Plotly, die es ermöglicht, komplexe Diagramme zu erstellen. Wir verwenden go.Waterfall, um das Wasserfall-Diagramm zu erstellen.
+
+    # Funktion definieren mit def erstelle_waterfall_chart(faktoren, preis_pro_m2), die ein Wasserfall-Diagramm erstellt. Sie nimmt zwei Parameter:
+    # Parameter 1. faktoren (dict), dictionary, eine Sammlung von Key Value Paaren und 
+    # Parameter 2. preis_pro_m2 (int), eine ganze Zahl (kein Komma).
 
 def erstelle_waterfall_chart(faktoren, preis_pro_m2):       
     
@@ -28,8 +49,8 @@ def erstelle_waterfall_chart(faktoren, preis_pro_m2):
 
 
     basispreis = faktoren["Basispreis (Quartier)"]  # Der Basispreis repräsentiert CHF/m² des Quartiers
-    # Es wird auf das dictionary "faktoren" zugegriffen und den Wert zum Key "Basispreis (Quartier)" rausgeholt. 
-    # Dieser Wert hängt nur von der Lage ab – noch ohne Korrekturen wie Zimmerzahl oder Zustand.
+        # Es wird auf das dictionary "faktoren" zugegriffen und den Wert zum Key "Basispreis (Quartier)" rausgeholt. 
+        # Dieser Wert hängt nur von der Lage ab – noch ohne Korrekturen wie Zimmerzahl oder Zustand.
     
     # 5 Faktoren, aus dem grossen dictionary rausgenommen und in ein kleineres dictionary namens faktor_map gepackt.
     # Kurz gesagt, faktoren = alles, und faktor_map = nur die 5 Multiplikatoren, die den Preis beeinflussen.
@@ -61,7 +82,7 @@ def erstelle_waterfall_chart(faktoren, preis_pro_m2):
 
 
     laufender_preis = basispreis  # startet beim Basispreis
-    # laufender_preis ändert sich durch alle Multiplikatoren
+        # laufender_preis ändert sich durch alle Multiplikatoren
 
 
     for name, faktor in faktor_map.items():     # Loop-Header, dieser startet die Iteration
@@ -81,7 +102,7 @@ def erstelle_waterfall_chart(faktoren, preis_pro_m2):
             farben.append("#1D9E75" if beitrag >= 0 else "#D85A30")
         
         laufender_preis = neuer_preis  # nächster Faktor startet vom neuen Preis
-        # Wichtig: ausserhalb des if --> wird immer aktualisiert, nicht nur wenn Beitrag > 10
+            # Wichtig: ausserhalb des if --> wird immer aktualisiert, nicht nur wenn Beitrag > 10
 
 
     # Basispreis und Endpreis als Rahmen hinzufügen, damit der Chart von Anfang bis Ende die Preisveränderungen zeigt.
@@ -89,7 +110,7 @@ def erstelle_waterfall_chart(faktoren, preis_pro_m2):
     # "total"  = absoluter Wert (Basispreis und Endpreis)
     alle_namen  = ["Lage (Quartier)"] + namen           + ["Endpreis"]
     alle_werte  = [basispreis]        + werte           + [preis_pro_m2]
-    alle_typen  = ["absolute"]        + ["relative"] * len(namen) + ["total"]
+    alle_typen  = ["absolute"]        + ["relative"] * len(namen) + ["total"] # Claude AI hat uns hier geholfen: Plotly spezifische Strings, damit die Balken korrekt dargestellt werden. "absolute" für den Basispreis, "relative" für die Faktoren, "total" für den Endpreis.
     alle_farben = ["#6AAAE9"]         + farben          + ["#0e48c6"]
 
     # Waterfall-Chart erstellen
