@@ -1,17 +1,19 @@
-#Gauge 
-
 # ─────────────────────────────────────────────
 # CHART 2: GAUGE – Preis im Marktvergleich
 # ─────────────────────────────────────────────
 
+# Die Funktion nimmt zwei Parameter entgegen:
+# preis_pro_m2: der berechnete Preis aus unserem ML-Modell
+# quartier: der vom Nutzer gewählte Stadtquartier-Name
+# Sie gibt am Ende eine Plotly-Figur zurück (als Gauge Chart)
 def erstelle_gauge_chart(preis_pro_m2, quartier):
     """
     Zeigt ob der geschätzte Preis für das gewählte
     Quartier günstig, durchschnittlich oder teuer ist.
     """
-    basispreis  = BASISPREIS_PRO_QUARTIER.get(quartier, 11000)
-    min_preis   = min(BASISPREIS_PRO_QUARTIER.values())   # günstigstes Quartier
-    max_preis   = max(BASISPREIS_PRO_QUARTIER.values())   # teuerstes Quartier
+    basispreis  = BASISPREIS_PRO_QUARTIER.get(quartier, 11000) # 11000 CHF/m2 ist der Standard-Wert, damit das Programm nicht abstürzt, falls es das Quartier nicht in der Liste findet.
+    min_preis   = min(BASISPREIS_PRO_QUARTIER.values())   # günstigstes Quartier im Dictionary suchen
+    max_preis   = max(BASISPREIS_PRO_QUARTIER.values())   # teuerstes Quartier im dictionary suchen
 
     fig = go.Figure(go.Indicator(
         mode  = "gauge+number+delta",
@@ -20,10 +22,10 @@ def erstelle_gauge_chart(preis_pro_m2, quartier):
             "reference": basispreis,
             "increasing": {"color": "#16a34a"},
             "decreasing": {"color": "#dc2626"},
-            "suffix": " CHF/m²"
+            "suffix": " CHF/m2"
         },
         number = {"suffix": " CHF/m²", "font": {"size": 28}},
-        title  = {"text": f"Preis im Vergleich zum Quartier-Durchschnitt ({quartier})",
+        title  = {"text": f"Preis im Vergleich zum Stadtquartier-Durchschnitt Zürich",
                   "font": {"size": 14}},
         gauge  = {
             "axis": {
