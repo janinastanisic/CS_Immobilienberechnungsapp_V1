@@ -230,7 +230,7 @@ if st.session_state.ergebnis:
         f"Der grüne Strich zeigt den Basispreis für {e['quartier']}. "
         "Die farbigen Zonen zeigen günstig (grün), mittel (gelb) und teuer (rot) im Vergleich zu allen Zürcher Quartieren."
     )
-    fig_gauge = erstelle_gauge_chart(e["preis_pro_m2"], e["quartier"])
+    fig_gauge = erstelle_gauge_chart(e["preis_pro_m2"], e["quartier"], e["ml_basispreis"])
     st.plotly_chart(fig_gauge, width="stretch")
 
     # Chart 3: Heatmap
