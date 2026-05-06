@@ -1,3 +1,5 @@
+import plotly.graph_objects as go
+
 # ─────────────────────────────────────────────
 # CHART 2: GAUGE – Preis im Marktvergleich
 # ─────────────────────────────────────────────
