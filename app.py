@@ -117,7 +117,7 @@ if "ergebnis" not in st.session_state:
     st.session_state.ergebnis = None
 
 if berechnen: #Sofern der Button Marktwert berechnen geklickt wurde, ist diese if-Bedingung true
-    if quartier == "— Bitte waehlen —":
+    if quartier == "— Bitte wählen —":
         st.error("Bitte wähle ein Stadtquartier aus.") #Erstellt eine Fehlermeldung mit dem Text Bitte wähle ein Stadtquartier aus, wenn bei quartier nichts angewählt wurde
     else:
         ausstattung = {
