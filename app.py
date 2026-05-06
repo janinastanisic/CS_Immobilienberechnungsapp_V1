@@ -194,6 +194,7 @@ if berechnen: #Sofern der Button Marktwert berechnen geklickt wurde, ist diese i
             "gesamtpreis":  gesamtpreis,
             "faktoren":     faktoren,
             "quartier":     quartier,
+            "ml_basispreis": faktoren["Basispreis (Quartier)"],
         }
 
 # Ergebnis anzeigen – bleibt sichtbar solange session_state gefüllt ist: Sofern Ergebnisse im Session state abgespeichert wurden, wird eine Kurzform für session state definiert
