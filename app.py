@@ -118,7 +118,7 @@ if "ergebnis" not in st.session_state:
 
 if berechnen: #Sofern der Button Marktwert berechnen geklickt wurde, ist diese if-Bedingung true
     if quartier == "— Bitte waehlen —":
-        st.error("Bitte waehle ein Stadtquartier aus.") #Erstellt eine Fehlermeldung mit dem Text Bitte waehle ein Stadtquartier aus, wenn bei quartier nichts angewählt wurde
+        st.error("Bitte wähle ein Stadtquartier aus.") #Erstellt eine Fehlermeldung mit dem Text Bitte wähle ein Stadtquartier aus, wenn bei quartier nichts angewählt wurde
     else:
         ausstattung = {
             "hat_balkon":    hat_balkon,
@@ -148,11 +148,11 @@ if berechnen: #Sofern der Button Marktwert berechnen geklickt wurde, ist diese i
 if st.session_state.ergebnis:
     e = st.session_state.ergebnis
 
-    st.markdown("### Geschaetzter Marktwert") #Erstellt einen mittelgrossen Titel in Streamlit
+    st.markdown("### Geschätzter Marktwert") #Erstellt einen mittelgrossen Titel in Streamlit
     col_r1, col_r2 = st.columns(2) #Die Seite wird in zwei gleich breite Spalten aufgeteilt. col_r1 links und col_r2 rechts
     with col_r1: #Definiert die linke Seite
         st.metric( #Formatiert die nächsten Zeilen als Kennzahlen (Kleiner Text + Grosse Zahl)
-            label="Geschaetzter Kaufpreis", #Kleiner Text
+            label="Geschätzter Kaufpreis", #Kleiner Text
             value=f"CHF {e['gesamtpreis']:,.0f}".replace(",", "'") #Grosse Zahl, die berechnet wurde. Zahl wird mit Hochkommas als Tausendertrennzeichen dargestellt
         )
     with col_r2: #Definiert die rechte Seite
