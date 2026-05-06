@@ -59,7 +59,7 @@ QUARTIERE = ["— Bitte waehlen —"] + sorted(BASISPREIS_PRO_QUARTIER.keys()) #
 quartier  = st.selectbox("In welchem Stadtquartier liegt die Immobilie?", options=QUARTIERE) #Ein Dropdown Menü wird in Streamlit erstellt mit einem Beschriftungstext. Das Dropdown Menu beinhaltet eine Liste aller Optionen, die in der vorherigen Zeile definiert wurde. 
 
 # ── 2. GROESSE ──
-st.subheader("Groesse") #Erstellt einen Untertitel in Streamlit
+st.subheader("Grösse") #Erstellt einen Untertitel in Streamlit
 col1, col2 = st.columns(2) #Die Seite wird in zwei gleich breite Spalten aufgeteilt. col1 links und col2 rechts.
 with col1: #Definiert, was in der linken Spalte angezeigt wird
     zimmerzahl = st.selectbox( #Erstellt ein Dropdown Menü und speichert den Eingabewert unter zimmerzahl ab
@@ -102,7 +102,7 @@ col5, col6 = st.columns(2) #Die Seite wird in zwei gleich breite Spalten aufgete
 with col5: #Definiert die linke Seite
     hat_balkon    = st.checkbox("Balkon / Terrasse") #Erstellt Checkboxen, welche den Wert als True speichert, wenn die Checkbox aktiviert wurde und als False, wenn sie nicht aktiviert wurde. Die Standardwerte sind False
     hat_parkplatz = st.checkbox("Parkplatz / Garage")
-    hat_lift      = st.checkbox("Lift im Gebaeude")
+    hat_lift      = st.checkbox("Lift im Gebäude")
 with col6:
     hat_keller   = st.checkbox("Keller / Estrich")
     hat_seesicht = st.checkbox("Seesicht / Aussicht")
