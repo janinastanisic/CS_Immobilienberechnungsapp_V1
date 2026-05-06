@@ -6,7 +6,7 @@
 # preis_pro_m2: der berechnete Preis aus unserem ML-Modell
 # quartier: der vom Nutzer gewählte Stadtquartier-Name
 # Sie gibt am Ende eine Plotly-Figur zurück (als Gauge Chart)
-def erstelle_gauge_chart(preis_pro_m2, quartier, ml_basispreis):
+def erstelle_gauge_chart(preis_pro_m2, quartier, ml_basispreis, BASISPREIS_PRO_QUARTIER):
     """
     Zeigt ob der geschätzte Preis für das gewählte
     Quartier günstig, durchschnittlich oder teuer ist.
