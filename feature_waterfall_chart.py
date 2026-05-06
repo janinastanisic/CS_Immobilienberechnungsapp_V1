@@ -114,7 +114,7 @@ def erstelle_waterfall_chart(faktoren, preis_pro_m2):
     alle_typen  = ["absolute"]        + ["relative"] * len(namen) + ["total"] # Claude AI hat uns hier geholfen: Plotly spezifische Strings, damit die Balken korrekt dargestellt werden. "absolute" für den Basispreis, "relative" für die Faktoren, "total" für den Endpreis.
     alle_farben = ["#6AAAE9"]         + farben          + ["#0e48c6"]
 
-    # Waterfall-Chart erstellen mit Hilfe von Claude AI (Anthropic)
+    # Waterfall-Chart erstellt mit Hilfe von Claude AI (Anthropic)
     # Professionelles Chart-Design, especially Plotly spezifische Strings übersteigen unsere aktuellen Fähigkeiten.
     fig = go.Figure(go.Waterfall(
         orientation = "v",                    # vertikale Balken

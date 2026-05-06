@@ -11,7 +11,7 @@ def erstelle_gauge_chart(preis_pro_m2, quartier, ml_basispreis):
     Zeigt ob der geschätzte Preis für das gewählte
     Quartier günstig, durchschnittlich oder teuer ist.
     """
-    basispreis  = ml_basispreis # 11000 CHF/m2 ist der Standard-Wert, damit das Programm nicht abstürzt, falls es das Quartier nicht in der Liste findet.
+    basispreis  = ml_basispreis                           # ML-Basispreis als Referenzlinie verwenden
     min_preis   = min(BASISPREIS_PRO_QUARTIER.values())   # günstigstes Quartier im Dictionary suchen
     max_preis   = max(BASISPREIS_PRO_QUARTIER.values())   # teuerstes Quartier im dictionary suchen
 
