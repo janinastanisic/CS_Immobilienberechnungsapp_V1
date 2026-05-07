@@ -56,7 +56,6 @@ def erstelle_waterfall_chart(faktoren, preis_pro_m2):
     # 5 Faktoren, aus dem grossen dictionary rausgenommen und in ein kleineres dictionary namens faktor_map gepackt.
     # Kurz gesagt, faktoren = alles, und faktor_map = nur die 5 Multiplikatoren, die den Preis beeinflussen.
     faktor_map = {
-        "Zimmerzahl":  faktoren["Zimmerzahl"],
         "Zustand":     faktoren["Zustand"],
         "Stockwerk":   faktoren["Stockwerk"],
         "Baujahr":     faktoren["Baujahr"],
