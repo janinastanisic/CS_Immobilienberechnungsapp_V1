@@ -55,12 +55,11 @@ AUSSTATTUNG_LABELS = {
 # BAUJAHR-FAKTOR: 
 # ─────────────────────────────────────────────
 def faktor_baujahr(baujahr):
-    alter = 2026 - baujahr #Alter der Immobilie wird berechnet. Das Alter wird in Kategorien eingeteil. Bsp. wenn Immobilie jünger als 5 Jahre ist, wird der Preis um 10% erhöht.
-    if alter <= 5:    return 1.10
-    elif alter <= 15: return 1.05
-    elif alter <= 30: return 1.00
-    elif alter <= 50: return 0.95
-    else:             return 0.90
+    alter = 2026 - baujahr #Alter der Immobilie wird berechnet
+    faktor = 1 - ((80 - alter) / 80) #Berechnet den Multiplikator direkt: Bsp. Alter 0 = Faktor 0.0, Alter 40 = Faktor 0.50, Alter 80 = Faktor 1.0
+    faktor = max(0.01, min(faktor, 1.0)) #Begrenzt den Faktor auf 0.01 bis 1.0, damit keine negativen oder über 1.0 liegenden Werte entstehen
+    return faktor
+#Die gewaehlte Formel basiert auf der Berechnung der Alterswertminderung gemaess Gutknecht (n.d.). Dabei wird eine Gesamtnutzungsdauer von 80 Jahren angenommen. 
 
 def lift_faktor_berechnen(stockwerk):
     #Berechnet den Lift-Faktor abhängig vom Stockwerk.
