@@ -2,39 +2,50 @@
 from feature_machine_learning import ml_basispreis_schaetzen
 
 # ─────────────────────────────────────────────
-# KORREKTURFAKTOREN:Der Faktor wird mit dem Basispreis mulitpliziert und passt den Preis prozentual an. Bsp. Faktor 0.92 = Preis wird um 8% reduziert. Die Faktoren basieren auf Schätzwerten.
+# KORREKTURFAKTOREN:Der Faktor wird mit dem Basispreis mulitpliziert und passt den Preis prozentual an. Bsp. Faktor 0.92 = Preis wird um 8% reduziert.
 # ─────────────────────────────────────────────
 
-FAKTOR_ZUSTAND = {
-    "Neuwertig / Neubau":    1.10,
-    "Gut gepflegt":          1.00,
-    "Renovationsbeduerftig": 0.85,
+FAKTOR_ZUSTAND = { 
+    "Neuwertig / Neubau":    1.125, 
+    "Gut gepflegt":          1.075,
+    "Renovationsbeduerftig": 1.00,
 }
+#Gemaess Frey (2026) fuehrt ein neuwertiger Zustand zu einer Wertsteigerung von 10 bis 15 %, waehrend fuer einen guten Zustand 
+#eine Wertsteigerung von 5 bis 10 % angegeben wird. Fuer die vorliegende Bewertung wurde jeweils der Mittelwert der in der 
+#Quelle genannten Spannbreiten als Korrekturfaktor verwendet, sodass 12,5 % fuer den neuwertigen sowie 7,5 % fuer den guten Zustand gewaelt wurden.
 
 FAKTOR_STOCKWERK = {
-    "Erdgeschoss":       0.95,
-    "1. Obergeschoss":   0.98,
-    "2. Obergeschoss":   1.00,
-    "3. Obergeschoss":   1.02,
-    "4. Obergeschoss":   1.04,
-    "5. OG oder hoeher": 1.06,
-    "Dachgeschoss":      1.08,
+    "Erdgeschoss":                   1.00,
+    "1. Obergeschoss":               1.022,
+    "2. Obergeschoss":               1.044,
+    "3. Obergeschoss":               1.066,
+    "4. Obergeschoss":               1.088,
+    "5. Obergeschoss":               1.11,
+    "6. Obergeschoss":               1.132,
+    "7. Obergeschoss":               1.154,
+    "8. Obergeschoss":               1.176,
+    "9. Obergeschoss":               1.198,
+    "10. Obergeschoss oder hoeher":  1.22,
 }
+#Gemaess Conroy et al. (1013, S.201) geht ein hoeheres Stockwerk mit einem Anstieg des Immobilienpreises von 2.2 Prozent einher. 
 
 AUSSTATTUNG_FAKTOREN = {
-    "hat_balkon":    0.03,
-    "hat_parkplatz": 0.04,
-    "hat_lift":      0.02,
-    "hat_keller":    0.01,
-    "hat_seesicht":  0.08,
-    "hat_minergie":  0.03,
-} #Jede zusätzliche Ausstattung addiert einen Prozentsatz zum Preis: Bsp. Faktor 0.03 = +3%. Der Prozentsatz basiert auf Schätzwerten.
+    "hat_balkon":    0.1385,
+    "hat_tiefgarage": 0.10,
+    "hat_lift":      0.022,
+    "hat_seesicht":  0.11,
+    "hat_minergie":  0.491,
+} #Jede zusätzliche Ausstattung addiert einen Prozentsatz zum Preis: Bsp. Faktor 0.03 = +3%.
+#Gemaess Chau et al. (2004, S. 256) fuehrt ein grosser Balkon mit guter Aussicht zu 24 Prozent hoeherem Kaufpreis und ein kleiner Balkon ohne Aussicht 
+#zu 3.7% hoeherem Kaufpreis. Fuer den gewaehlten Korrekturfaktor hat_balkon von 13.85 Prozent haben wir daraus den Mittelwert berechnet. 
+#Gemaess Deschermeier et al. (2023, S. 46) steigert eine Tiefgarage den Immobilienwert um durchschnittlich 10 Prozent.
+#Gemaess Niklowitz (2026) erhoeht eine Seesicht den Immobilienpreis um 11 Prozent.
+#Gemaess Kempf & Syz (2022, S. 170) hat die Stadt Zuerich eine Minergie Preispraemie von 4.91 Prozent.
 
 AUSSTATTUNG_LABELS = {
     "hat_balkon":    "Balkon / Terrasse",
-    "hat_parkplatz": "Parkplatz / Garage",
+    "hat_tiefgarage": "Tiefgarage",
     "hat_lift":      "Lift",
-    "hat_keller":    "Keller / Estrich",
     "hat_seesicht":  "Seesicht",
     "hat_minergie":  "Minergie",
 } #Übersetzung von Bezeichnungen in Texte, welche in der App ersichtlich sind

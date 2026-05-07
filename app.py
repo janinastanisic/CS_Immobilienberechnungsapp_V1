@@ -76,14 +76,16 @@ with col2: #Definiert, was in der rechten Spalte angezeigt wird
 st.subheader("Gebäude") #Erstellt einen Untertitel in Streamlit
 col3, col4 = st.columns(2) #Die Seite wird in zwei gleich breite Spalten aufgeteilt. col3 links und col4 rechts.
 with col3: #Definiert die linke Seite
-    baujahr = st.slider("Baujahr", min_value=1900, max_value=2026, value=1990) #Erstellt einen Schieberegler in Streamlit mit dem Beschriftungstext, dem Mindestwert, dem Maximalwert und dem Standardwert und speichert den Eingabewert unter baujahr
+    baujahr = st.slider("Baujahr", min_value=1900, max_value=2026, value=2026) #Erstellt einen Schieberegler in Streamlit mit dem Beschriftungstext, dem Mindestwert, dem Maximalwert und dem Standardwert und speichert den Eingabewert unter baujahr
 with col4: #Definiert die rechte Seite
     stockwerk = st.selectbox( #Erstellt ein Dropdown Menu und speichert den Eingabewert unter stockwerk ab
         "Stockwerk", #Definiert den Text über dem Dropdown Menü
         options=[ #Beschreibt die Liste aller auswählbaren Optionen, Erdgeschoss wird mit index 0 als Stadardwert gezeigt
             "Erdgeschoss", "1. Obergeschoss", "2. Obergeschoss",
             "3. Obergeschoss", "4. Obergeschoss",
-            "5. OG oder hoeher", "Dachgeschoss"
+            "5. Obergeschoss", "6. Obergeschoss",
+            "7. Obergeschoss", "8. Obergeschoss",
+            "9.Obergeschoss", "10. Obergeschoss oder hoeher"
         ]
     )
 
@@ -91,7 +93,7 @@ with col4: #Definiert die rechte Seite
 st.subheader("Zustand") #Erstellt einen Untertitel in Streamlit
 zustand = st.radio( #Erstellt buttons, von denen der User eine Option wählen kann
     "Wie ist der aktuelle Renovationsstand?", #Definiert den Text über den Buttons
-    options=["Neuwertig / Neubau", "Gut gepflegt", "Renovationsbedürftig"], #Definiert die Liste aller auswählbaren Optionen
+    options=["Neuwertig / Neubau", "Gut gepflegt", "Renovationsbeduerftig"], #Definiert die Liste aller auswählbaren Optionen
     index=1, #Setzt Gut gepflegt als Standardwert
     horizontal=True #Formatiert die Buttons horizontal, also nebeneinander
 )
@@ -101,10 +103,9 @@ st.subheader("Ausstattung") #Erstellt einen Untertitel in Streamlit
 col5, col6 = st.columns(2) #Die Seite wird in zwei gleich breite Spalten aufgeteilt. col5 links und col6 rechts
 with col5: #Definiert die linke Seite
     hat_balkon    = st.checkbox("Balkon / Terrasse") #Erstellt Checkboxen, welche den Wert als True speichert, wenn die Checkbox aktiviert wurde und als False, wenn sie nicht aktiviert wurde. Die Standardwerte sind False
-    hat_parkplatz = st.checkbox("Parkplatz / Garage")
+    hat_tiefgarage = st.checkbox("Tiefgarage")
     hat_lift      = st.checkbox("Lift im Gebäude")
 with col6:
-    hat_keller   = st.checkbox("Keller / Estrich")
     hat_seesicht = st.checkbox("Seesicht / Aussicht")
     hat_minergie = st.checkbox("Minergie-Standard") #Erstellt Checkboxen, welche den Wert als True speichert, wenn die Checkbox aktiviert wurde und als False, wenn sie nicht aktiviert wurde. Die Standardwerte sind False
 
@@ -122,9 +123,8 @@ if berechnen: #Sofern der Button Marktwert berechnen geklickt wurde, ist diese i
     else:
         ausstattung = {
             "hat_balkon":    hat_balkon,
-            "hat_parkplatz": hat_parkplatz,
+            "hat_tiefgarage": hat_tiefgarage,
             "hat_lift":      hat_lift,
-            "hat_keller":    hat_keller,
             "hat_seesicht":  hat_seesicht,
             "hat_minergie":  hat_minergie, #Wenn die obige if Bedingung nicht erfüllt ist, werden alle Ausstattungswerte, welche angegeben wurden, in einem Dictionary zusammengefasst
         }
