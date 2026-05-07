@@ -37,6 +37,7 @@ def daten_laden(): #Definition der Funktion daten_laden
 
     spalten= ["Jahr", "Quartier", "Zimmer", "Preis_pro_m2"]
     df=df[spalten]
+    print(df["Zimmer"].unique())
     #Fokus nur auf fuer uns relevante Spalten, die anderen von unserem Datenset werden so aussortiert (koennen wir gerne auch noch anpassen)
     #So werden nur diese Spalten in unserem DataFrame uebernommen
 
@@ -50,7 +51,7 @@ def daten_laden(): #Definition der Funktion daten_laden
 
     speichere_in_datenbank(df)
     return(df)
-
+   
     #ruft Funktion 2 auf und speichert so die Daten, return gibt den fertigen df zurueck
     #so muesste man eine saubere Tabelle zurueck bekommen
 
