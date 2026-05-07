@@ -8,7 +8,7 @@ from feature_machine_learning import ml_basispreis_schaetzen
 FAKTOR_ZUSTAND = { 
     "Neuwertig / Neubau":    1.125, 
     "Gut gepflegt":          1.075,
-    "Renovationsbeduerftig": 1.00,
+    "Renovationsbedürftig": 1.00,
 }
 #Gemaess Frey (2026) fuehrt ein neuwertiger Zustand zu einer Wertsteigerung von 10 bis 15 %, waehrend fuer einen guten Zustand 
 #eine Wertsteigerung von 5 bis 10 % angegeben wird. Fuer die vorliegende Bewertung wurde jeweils der Mittelwert der in der 
