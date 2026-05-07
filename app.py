@@ -93,7 +93,7 @@ with col4: #Definiert die rechte Seite
 st.subheader("Zustand") #Erstellt einen Untertitel in Streamlit
 zustand = st.radio( #Erstellt buttons, von denen der User eine Option wählen kann
     "Wie ist der aktuelle Renovationsstand?", #Definiert den Text über den Buttons
-    options=["Neuwertig / Neubau", "Gut gepflegt", "Renovationsbedürftig"], #Definiert die Liste aller auswählbaren Optionen
+    options=["Neuwertig / Neubau", "Gut gepflegt", "Renovationsbedürenrftig"], #Definiert die Liste aller auswählbaren Optionen
     index=1, #Setzt Gut gepflegt als Standardwert
     horizontal=True #Formatiert die Buttons horizontal, also nebeneinander
 )
