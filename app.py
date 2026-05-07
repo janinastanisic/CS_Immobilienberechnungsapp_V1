@@ -14,7 +14,7 @@ from feature_heatmap_chart import erstelle_heatmap_karte
 from feature_machine_learning import trainiere_knn_modell, ml_basispreis_schaetzen
 from feature_waterfall_chart import erstelle_waterfall_chart 
 from feature_gauge_chart import erstelle_gauge_chart
-from feature_berechnung import berechne_preis, FAKTOR_ZIMMER, FAKTOR_ZUSTAND, FAKTOR_STOCKWERK, AUSSTATTUNG_FAKTOREN, AUSSTATTUNG_LABELS
+from feature_berechnung import berechne_preis, FAKTOR_ZUSTAND, FAKTOR_STOCKWERK, AUSSTATTUNG_FAKTOREN, AUSSTATTUNG_LABELS
 # Seitenkonfiguration von Streamlit: Titel setzen und mittig zentrieren
 st.set_page_config(
     page_title="Immobilien-Preisschätzer Zürich",
