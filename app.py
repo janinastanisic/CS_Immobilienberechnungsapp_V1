@@ -49,7 +49,7 @@ QUARTIER_KOORDINATEN = get_koordinaten()
 # STREAMLIT APP
 # =============================================================
 
-st.title("Immobilien-Preisschätzer Zürich") #Erstellt den Titel in Streamlit
+st.title("Fairestate - Wohnungspreisschätzer der Stadt Zürich") #Erstellt den Titel in Streamlit
 st.write("Gib die Eigenschaften deiner Immobilie ein - wir berechnen den geschätzten Marktwert.") #Erstellt den Beschreibungstext in Streamlit
 st.markdown("---") #Erstellt eine horizontale Trennlinie in Streamlit
 
