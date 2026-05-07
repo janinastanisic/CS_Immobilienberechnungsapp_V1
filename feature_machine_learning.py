@@ -10,17 +10,18 @@ from sklearn.model_selection import cross_val_score
 from sklearn.preprocessing import LabelEncoder, StandardScaler
 from sklearn.pipeline import Pipeline
 
-
-def _zimmer_zu_zahl(zimmer_str):
-    """Wandelt einen Zimmerzahl-String in einen Float-Wert um."""
-    s = str(zimmer_str).strip().replace(",", ".").replace(" Zimmer", "")
-    if "+" in s:
+def _zimmer_zu_zahl(zimmer_str): #definition einer Funktion. Input ist einen Zimmer-Wert als string. Die Idee der Funktion ist es eine Zahl zurückzubekommen
+    s = str(zimmer_str).strip() #wandelt den Iinput in einen String um und entfernt alle Leerzeichen vorher und nacher " 3-Zimmer " --> "3-Zimmer"
+    if "6" in s:        # in unserem Datenset haben wir manchmal als Zimmeranzahl "6-Zimmer und mehr". Wegen dem "und mehr" können wir diesen Wert nicht normal umwandeln:
+        return 6.0      # deshalb wird diese Eingabe als erstes abgefangen und direkt in ein 6.0 umgewandelt --> aufgrund des "und mehr" müssen wir hier einen Sonderfall machen
+    s = s.replace("-Zimmer", "").replace(" Zimmer", "") #entfernt -Zimmer und Zimmer as dem Text des Datensets. "3-Zimmer", "3 Zimmer" --> "3"
+    if "+" in s: #falls ein plus corkommt, wie z.B: 5+ aus der Auswahl in unserer app, wird 5.0 zurückgegeben
         return 5.0
     try:
-        return float(s)
+        return float(s) #der oben "gereinigte" Text wird in einen float umgewandelt
     except ValueError:
-        return 3.0
-#wandelt die Zimmerzahl in einen float um, weil das Modell nur mit Zahlen arbeiten kann
+        return 3.0 #Standardwert falls die Zimmerzahl unbekannt ist. Wir nehmen 3 weil es der häufigste Wohnungstyp im Datenset ist
+    
 
 def trainiere_knn_modell(df):
     
