@@ -85,7 +85,7 @@ with col4: #Definiert die rechte Seite
             "3. Obergeschoss", "4. Obergeschoss",
             "5. Obergeschoss", "6. Obergeschoss",
             "7. Obergeschoss", "8. Obergeschoss",
-            "9.Obergeschoss", "10. Obergeschoss oder hoeher"
+            "9. Obergeschoss", "10. Obergeschoss oder hoeher"
         ]
     )
 

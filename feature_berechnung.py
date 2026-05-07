@@ -32,7 +32,7 @@ FAKTOR_STOCKWERK = {
 AUSSTATTUNG_FAKTOREN = {
     "hat_balkon":    0.1385,
     "hat_tiefgarage": 0.10,
-    "hat_lift":      0.022,
+    "hat_lift":      0.00,#wird nicht direkt verwendet, Faktor_Lift wird stockwerkabhaengig in berechne_preis() berechnet
     "hat_seesicht":  0.11,
     "hat_minergie":  0.491,
 } #Jede zusätzliche Ausstattung addiert einen Prozentsatz zum Preis: Bsp. Faktor 0.03 = +3%.
@@ -62,6 +62,23 @@ def faktor_baujahr(baujahr):
     elif alter <= 50: return 0.95
     else:             return 0.90
 
+def lift_faktor_berechnen(stockwerk):
+    #Berechnet den Lift-Faktor abhängig vom Stockwerk.
+    #Erdgeschoss: kein Effekt (Faktor 0)
+    #1.-2. OG: +1.59% 
+    #3.-5. OG: +4.58% 
+    #6.-10. OG: +8.10% Gemaess Dai et al. (2026, S. 21) erhoeht ein Lift im Gebaede den Wohnungspreis bei unteren Stockwerken um 1.59 Prozent, bei mittleren um 4.58% und bei hoehern um 8.10 Prozent.
+    if stockwerk == "Erdgeschoss":
+        return 0.00
+    elif stockwerk in ["1. Obergeschoss", "2. Obergeschoss"]:
+        return 0.0159
+    elif stockwerk in ["3. Obergeschoss", "4. Obergeschoss", "5. Obergeschoss"]:
+        return 0.0458
+    elif stockwerk in ["6. Obergeschoss", "7. Obergeschoss", "8. Obergeschoss",
+                       "9. Obergeschoss", "10. Obergeschoss oder hoeher"]:
+        return 0.0810
+    else:
+        return 0.00 #Fallback falls unbekanntes Stockwerk
 
 # ─────────────────────────────────────────────
 # BERECHNUNGSFUNKTION: Die Funktion berechne_preis wird definiert
@@ -77,8 +94,11 @@ def berechne_preis(quartier, zimmerzahl, wohnflaeche, baujahr,
     f_ausstattung = 1.00 #Startet bei 1.00. 
     for merkmal, wert in ausstattung.items(): #Iteriert mit einer for Schleife durch alle Ausstattungsmerkmale durch
         if wert: #Nur wenn eine Checkbox aktiviert ist (deren Wert = True) wird der nächste Schritt durchgeführt
-            f_ausstattung += AUSSTATTUNG_FAKTOREN.get(merkmal, 0) #Holt den Faktor für das Ausstattungsmerkmal aus dem obigen Dictionary und addiert ihn zu 1.00
-
+            if merkmal == "hat_lift": #Lift-Faktor ist abhängig vom Stockwerk
+                f_ausstattung += lift_faktor_berechnen(stockwerk) #Ruft die Hilfsfunktion auf und addiert den stockwerkabhängigen Lift-Faktor
+            else:
+                f_ausstattung += AUSSTATTUNG_FAKTOREN.get(merkmal, 0) #Holt den Faktor für das Ausstattungsmerkmal aus dem obigen Dictionary und addiert ihn zu 1.00
+    
     preis_pro_m2 = (basispreis * f_zustand
                     * f_stockwerk * f_baujahr * f_ausstattung) #Berechnet den Preis pro Quadratmeter, indem es unser durch das ML-modell kalulierter Basispreis mit allen Korrekturfaktoren multipliziert
     gesamtpreis  = preis_pro_m2 * wohnflaeche #Berechnet den Gesamtpreis indem der Preis pro Quadratmeter mit der wohnflaeche als Input Multipliziert wird
