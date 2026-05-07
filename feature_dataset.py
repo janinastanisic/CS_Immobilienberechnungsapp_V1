@@ -37,11 +37,11 @@ def daten_laden(): #Definition der Funktion daten_laden
 
     spalten= ["Jahr", "Quartier", "Zimmer", "Preis_pro_m2"]
     df=df[spalten]
-    
     #Fokus nur auf fuer uns relevante Spalten, die anderen von unserem Datenset werden so aussortiert (koennen wir gerne auch noch anpassen)
     #So werden nur diese Spalten in unserem DataFrame uebernommen
-
-    #!!!Unsicherheit:Wollen/muessen wir hier noch weitere bearbeitungen unseres df integrieren? Wie z.b fehlende Werte aussortieren?
+  
+    df = df[~df["Quartier"].str.contains("Kreis|Ganze Stadt", na=False)]
+    # Kreise und "Ganze Stadt" herausfiltern, nur Bezirke behalten --> Nur Bezirke ist präziser als Kreise weil z.B. Kreis 2 aus Leimbach, Wollishofen und Enge bestehen welche sich alle preislich sehr unterscheiden
 
     df["Jahr"]=df["Jahr"].astype(int)
     df["Preis_pro_m2"] = df["Preis_pro_m2"].astype(float)
