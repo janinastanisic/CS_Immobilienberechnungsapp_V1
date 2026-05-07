@@ -35,7 +35,7 @@ AUSSTATTUNG_FAKTOREN = {
     "hat_lift":      0.00,#wird nicht direkt verwendet, Faktor_Lift wird stockwerkabhaengig in berechne_preis() berechnet
     "hat_seesicht":  0.11,
     "hat_minergie":  0.491,
-} #Jede zusätzliche Ausstattung addiert einen Prozentsatz zum Preis: Bsp. Faktor 0.03 = +3%.
+} #Jede zusaetzliche Ausstattung addiert einen Prozentsatz zum Preis: Bsp. Faktor 0.03 = +3%.
 #Gemaess Chau et al. (2004, S. 256) fuehrt ein grosser Balkon mit guter Aussicht zu 24 Prozent hoeherem Kaufpreis und ein kleiner Balkon ohne Aussicht 
 #zu 3.7% hoeherem Kaufpreis. Fuer den gewaehlten Korrekturfaktor hat_balkon von 13.85 Prozent haben wir daraus den Mittelwert berechnet. 
 #Gemaess Deschermeier et al. (2023, S. 46) steigert eine Tiefgarage den Immobilienwert um durchschnittlich 10 Prozent.
@@ -48,8 +48,8 @@ AUSSTATTUNG_LABELS = {
     "hat_lift":      "Lift",
     "hat_seesicht":  "Seesicht",
     "hat_minergie":  "Minergie",
-} #Übersetzung von Bezeichnungen in Texte, welche in der App ersichtlich sind
-#überprüfe, ob diese in anderen features verwendet werden, sonst kann mann Austattung_labels löschen
+} #Uebersetzung von Bezeichnungen in Texte, welche in der App ersichtlich sind
+#ueberpruefe, ob diese in anderen features verwendet werden, sonst kann mann Austattung_labels löschen
 
 # ─────────────────────────────────────────────
 # BAUJAHR-FAKTOR: 
@@ -57,23 +57,23 @@ AUSSTATTUNG_LABELS = {
 def faktor_baujahr(baujahr):
     alter = 2026 - baujahr #Alter der Immobilie wird berechnet
     faktor = 1 - ((80 - alter) / 80) #Berechnet den Multiplikator direkt: Bsp. Alter 0 = Faktor 0.0, Alter 40 = Faktor 0.50, Alter 80 = Faktor 1.0
-    faktor = max(0.01, min(faktor, 1.0)) #Begrenzt den Faktor auf 0.01 bis 1.0, damit keine negativen oder über 1.0 liegenden Werte entstehen
+    faktor = max(0.01, min(faktor, 1.0)) #Begrenzt den Faktor auf 0.01 bis 1.0, damit keine negativen oder ueber 1.0 liegenden Werte entstehen
     return faktor
 #Die gewaehlte Formel basiert auf der Berechnung der Alterswertminderung gemaess Gutknecht (n.d.). Dabei wird eine Gesamtnutzungsdauer von 80 Jahren angenommen. 
 
 def lift_faktor_berechnen(stockwerk):
-    #Berechnet den Lift-Faktor abhängig vom Stockwerk.
+    #Berechnet den Lift-Faktor abhaengig vom Stockwerk.
     #Erdgeschoss: kein Effekt (Faktor 0)
     #1.-2. OG: +1.59% 
     #3.-5. OG: +4.58% 
     #6.-10. OG: +8.10% Gemaess Dai et al. (2026, S. 21) erhoeht ein Lift im Gebaede den Wohnungspreis bei unteren Stockwerken um 1.59 Prozent, bei mittleren um 4.58% und bei hoehern um 8.10 Prozent.
     if stockwerk == "Erdgeschoss": #Wenn das Stockwerk Erdgeschoss angegeben wurde, wird kein Faktor dazugerechnet.
         return 0.00
-    elif stockwerk in ["1. Obergeschoss", "2. Obergeschoss"]:#Prüft, ob der eingegebene Wert in der Liste 1. Obergeschoss, 2. Obergeschoss vorkommt. Wenn das True ist, nimmt es den Faktor 0.0159
+    elif stockwerk in ["1. Obergeschoss", "2. Obergeschoss"]:#Prueft, ob der eingegebene Wert in der Liste 1. Obergeschoss, 2. Obergeschoss vorkommt. Wenn das True ist, nimmt es den Faktor 0.0159
         return 0.0159
-    elif stockwerk in ["3. Obergeschoss", "4. Obergeschoss", "5. Obergeschoss"]: #Prüft, ob der eingegebene Wert in der List 3. Obergeschoss, 4. Obergeschoss, 5. Obergeschoss vorkommt. Wenn das True ist, nimmt es den Faktor 0.0458
+    elif stockwerk in ["3. Obergeschoss", "4. Obergeschoss", "5. Obergeschoss"]: #Prueft, ob der eingegebene Wert in der List 3. Obergeschoss, 4. Obergeschoss, 5. Obergeschoss vorkommt. Wenn das True ist, nimmt es den Faktor 0.0458
         return 0.0458
-    elif stockwerk in ["6. Obergeschoss", "7. Obergeschoss", "8. Obergeschoss", #Prüft, ob der eingegebene Wert in der List 6. Obergeschoss, 7. Obergeschoss, 8. Obergeschoss, 9. Obergeschoss, 10. Obergeschoss oder hoeher vorkommt. Wenn das True ist, nimmt es den Faktor 0.0810
+    elif stockwerk in ["6. Obergeschoss", "7. Obergeschoss", "8. Obergeschoss", #Prueft, ob der eingegebene Wert in der List 6. Obergeschoss, 7. Obergeschoss, 8. Obergeschoss, 9. Obergeschoss, 10. Obergeschoss oder hoeher vorkommt. Wenn das True ist, nimmt es den Faktor 0.0810
                        "9. Obergeschoss", "10. Obergeschoss oder hoeher"]:
         return 0.0810
     else:
@@ -84,7 +84,7 @@ def lift_faktor_berechnen(stockwerk):
 # ─────────────────────────────────────────────
 def berechne_preis(quartier, zimmerzahl, wohnflaeche, baujahr,
                    stockwerk, zustand, ausstattung,knn_modell, knn_le, BASISPREIS_PRO_QUARTIER): #Definition einer Funktion mit Eingabewerten
-    ml_preis = ml_basispreis_schaetzen(knn_modell, knn_le, quartier, zimmerzahl, jahr=2026) #berechnet den Basispreis: Jahr wird als 2026 gesetzt, da die Schätzung für den heutigen Preis ist
+    ml_preis = ml_basispreis_schaetzen(knn_modell, knn_le, quartier, zimmerzahl, jahr=2026) #berechnet den Basispreis: Jahr wird als 2026 gesetzt, da die Schaetzung fuer den heutigen Preis ist
     basispreis = ml_preis if ml_preis is not None else BASISPREIS_PRO_QUARTIER.get(quartier, 11000) #zb. 11k/m^2 und sonst den berechneten durchschnitt unserer Daten als Basispreis
     f_zustand   = FAKTOR_ZUSTAND.get(zustand, 1.00) #holt den Wert, der bei zustand als Input angegeben wurde und nimmt den Korrekturfaktor. Falls der Wert nicht gefunden wurde, wird 1.00 als Standardwert verwendet.
     f_stockwerk = FAKTOR_STOCKWERK.get(stockwerk, 1.00) #holt den Wert, der bei stockwerk als Input angegeben wurde und nimmt den Korrekturfaktor. Falls der Wert nicht gefunden wurde, wird 1.00 als Standardwert verwendet.
@@ -92,11 +92,11 @@ def berechne_preis(quartier, zimmerzahl, wohnflaeche, baujahr,
 
     f_ausstattung = 1.00 #Startet bei 1.00. 
     for merkmal, wert in ausstattung.items(): #Iteriert mit einer for Schleife durch alle Ausstattungsmerkmale durch
-        if wert: #Nur wenn eine Checkbox aktiviert ist (deren Wert = True) wird der nächste Schritt durchgeführt
-            if merkmal == "hat_lift": #Lift-Faktor ist abhängig vom Stockwerk
-                f_ausstattung += lift_faktor_berechnen(stockwerk) #Ruft die Hilfsfunktion auf und addiert den stockwerkabhängigen Lift-Faktor
+        if wert: #Nur wenn eine Checkbox aktiviert ist (deren Wert = True) wird der naechste Schritt durchgefuehrt
+            if merkmal == "hat_lift": #Lift-Faktor ist abhaengig vom Stockwerk
+                f_ausstattung += lift_faktor_berechnen(stockwerk) #Ruft die Hilfsfunktion auf und addiert den stockwerkabhaengigen Lift-Faktor
             else:
-                f_ausstattung += AUSSTATTUNG_FAKTOREN.get(merkmal, 0) #Holt den Faktor für das Ausstattungsmerkmal aus dem obigen Dictionary und addiert ihn zu 1.00
+                f_ausstattung += AUSSTATTUNG_FAKTOREN.get(merkmal, 0) #Holt den Faktor fuer das Ausstattungsmerkmal aus dem obigen Dictionary und addiert ihn zu 1.00
     
     preis_pro_m2 = (basispreis * f_zustand
                     * f_stockwerk * f_baujahr * f_ausstattung) #Berechnet den Preis pro Quadratmeter, indem es unser durch das ML-modell kalulierter Basispreis mit allen Korrekturfaktoren multipliziert
@@ -110,7 +110,7 @@ def berechne_preis(quartier, zimmerzahl, wohnflaeche, baujahr,
         "Ausstattung":           f_ausstattung,
     }
 
-    return round(preis_pro_m2), round(gesamtpreis), faktoren #gibt den gerundeten Preis pro m2, den gerundeten Gesamtpreis und das Dictionary der Faktoren zurück
+    return round(preis_pro_m2), round(gesamtpreis), faktoren #gibt den gerundeten Preis pro m2, den gerundeten Gesamtpreis und das Dictionary der Faktoren zurueck
 
 #=========================
 # Literaturverzeichnis
@@ -121,5 +121,5 @@ def berechne_preis(quartier, zimmerzahl, wohnflaeche, baujahr,
 #Dai, X., Yu, X., Ma, L., & Zheng, P. (2026). The Economic Benefit Evaluation of Elevator Retrofitting: An Empirical Analysis of Second-Hand Housing Price Premiums in Hangzhou’s Older Residential Compounds. Buildings, 16(1), 220. https://doi.org/10.3390/buildings16010220
 #Deschermeier, P., Henger, R., Oberst, C., & Institut der deutschen Wirtschaft Köln e. V. (2023). Bedarfe und Preise. In BPD Immobilienentwicklung GmbH, Institut Der Deutschen Wirtschaft Köln E. V.
 #Frey, S. (2026, February 4). The impact of property condition on sale price and time on market - Seb Frey, Silicon Valley + Bay Area REALTOR. Seb Frey, Silicon Valley + Bay Area REALTOR. https://sebfrey.com/the-impact-of-property-condition-on-sale-price-and-time-on-market/
-#Gutknecht, L. (n.d.). Altersabschlag beim Haus: Alterswertminderung von Immobilien berechnen. Wohnglück.de. https://wohnglueck.de/artikel/altersabschlag
+#Gutknecht, L. (n.d.). Altersabschlag beim Haus: Alterswertminderung von Immobilien berechnen. Wohnglueck.de. https://wohnglueck.de/artikel/altersabschlag
 #Kempf, C., & Syz, J. (2022). Why pay for sustainable housing? Decomposing the green premium of the residential property market in the Canton of Zurich, Switzerland. SN Business & Economics, 2(11). https://doi.org/10.1007/s43546-022-00346-8
