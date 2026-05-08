@@ -5,7 +5,6 @@
 
 import streamlit as st #importiert das Framework Streamlit, mit der Abkürzung st
 import plotly.graph_objects as go #importiert eine Bibliothek für interaktive Diagramme mit der low-level Variante go
-import plotly.express as px #???? raus nehmen, nutzen wir nicht???? Bibliothek für interaktive Diagramme, px als high-level Variante
 import folium #importiert interaktive Landkarten
 from streamlit_folium import st_folium #Bindeglied, damit die Karte in Streamlit angezeigt werden kann
 from feature_dataset import get_daten #importiert get_daten vom Dataset Feature
