@@ -42,15 +42,6 @@ AUSSTATTUNG_FAKTOREN = {
 #Gemaess Niklowitz (2026) erhoeht eine Seesicht den Immobilienpreis um 11 Prozent.
 #Gemaess Kempf & Syz (2022, S. 170) hat die Stadt Zuerich eine Minergie Preispraemie von 4.91 Prozent.
 
-AUSSTATTUNG_LABELS = {
-    "hat_balkon":    "Balkon / Terrasse",
-    "hat_tiefgarage": "Tiefgarage",
-    "hat_lift":      "Lift",
-    "hat_seesicht":  "Seesicht",
-    "hat_minergie":  "Minergie",
-} #Übersetzung von Bezeichnungen in Texte, welche in der App ersichtlich sind
-#überprüfe, ob diese in anderen features verwendet werden, sonst kann mann Austattung_labels löschen
-
 # ─────────────────────────────────────────────
 # BAUJAHR-FAKTOR: 
 # ─────────────────────────────────────────────
