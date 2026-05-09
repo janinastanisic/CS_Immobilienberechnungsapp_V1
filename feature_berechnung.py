@@ -11,10 +11,10 @@
 # 1. ML-Modell schätzt den Basispreis pro m² (nach Quartier,
 #    Zimmerzahl und Jahr)
 # 2. Korrekturfaktoren werden multipliziert:
-#    - Zustand      (Neuwertig / Gut gepflegt / Renovationsbedürftig)
-#    - Stockwerk    (+2.2% pro Etage gemäss Conroy et al.)
-#    - Baujahr      (1% Abschreibung pro Jahr, max. 40%)
-#    - Ausstattung  (Balkon, Tiefgarage, Lift, Seesicht, Minergie)
+#    - Zustand      
+#    - Stockwerk    
+#    - Baujahr      
+#    - Ausstattung  
 # 3. Gesamtpreis = Preis pro m² × Wohnfläche
 # 4. Rückgabe: Preis/m², Gesamtpreis, Faktoren-Dictionary
 

@@ -33,7 +33,7 @@ CS_Immobilienberechnungsapp_V1/
 ├── feature_berechnung.py         # Preisberechnung  
 ├── feature_dataset.py            # Lädt & verarbeitet 
 ├── feature_gauge_chart.py        # Gauge-Chart (Tacho-Diagramm), zeigt visuell ob dein Quartier günstig/teuer ist
-├── feature_heatmap_chart.py      # Heatmap-Karte, Quartiere werde farbig eingefärbt (günstig = grün, mittel = orange etc.)
+├── feature_heatmap_chart.py      # Heatmap-Karte, Quartiere werden farbig eingefärbt (günstig = grün, mittel = orange etc.)
 ├── feature_Koordinaten.py        # Speichert GPS-Koordinaten der Quartiere (latitude, longitude), damit Karte funktioniert
 ├── feature_layout.py             # Layout & Styling der App, macht sie schön mit Farben und Designs
 ├── feature_machine_learning.py   # KNN-Modell Training & Vorhersage, lernt aus alten Verkaufsdaten
