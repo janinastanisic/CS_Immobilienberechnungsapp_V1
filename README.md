@@ -1,4 +1,4 @@
-# 🏘️ Fairestate - Wohnungspreisschätzer der Stadt Zürich
+# Fairestate - Wohnungspreisschätzer der Stadt Zürich
 Ein interaktives Tool zur Schätzung von Immobilienpreisen in Zürich basierend auf Lage, Grösse, Zustand und Ausstattung.
 
 ---
@@ -12,7 +12,7 @@ Team: Ainhoa Eggenberger, Ella Querner, Janina Stanisic, Philippe Bloch, Marc Sc
 
 ---
 
-## 📋 Projektbeschreibung
+## Projektbeschreibung
 
 **Fairestate** ist eine Streamlit-Webanwendung, die den geschätzten Marktwert von Wohnungen in der Stadt Zürich berechnet. 
 
@@ -46,7 +46,7 @@ CS_Immobilienberechnungsapp_V1/
 
 ---
 
-### 1️⃣ Eingabeformular
+### Eingabeformular
 
 Der User gibt folgende Informationen ein:
 - Lage: Stadtquartier (Dropdown)
@@ -57,25 +57,25 @@ Der User gibt folgende Informationen ein:
 
 ---
 
-### 2️⃣ Preisberechnung
+### Preisberechnung
 - Basispreis: Machine Learning (KNN) schätzt den Durchschnittspreis pro m² im Quartier
 - Faktoren: Anpassungen basierend auf Baujahr, Stockwerk, Zustand, Ausstattung
 - Ergebnis: Geschätzter Kaufpreis (CHF) + Preis pro m²
 
 ---
 
-### 3️⃣ Visualisierungen
+### Visualisierungen
 - Wasserfalldiagramm: Zeigt, wie sich der Endpreis aus Basispreis + Faktoren zusammensetzt
 - Gauge-Chart: Vergleicht den Preis mit anderen Quartieren (günstig/mittel/teuer)
 - Heatmap: Interaktive Karte von Zürich mit farblichen Preisunterschieden
 
 ---
 
-## 🧠 Technische Details
+## Technische Details
 
 ### Machine Learning
 - Algorithmus: K-Nearest Neighbors (KNN)
-- Training: Basierend auf historischen Immobiliendaten aus `bau5156d5155.csv`
+- Training: Basierend auf historischen Wohnungsverkaufsdaten aus `bau5156d5155.csv`
 - Output: Durchschnittlicher Basispreis pro m² im gewählten Quartier
 
 ---
