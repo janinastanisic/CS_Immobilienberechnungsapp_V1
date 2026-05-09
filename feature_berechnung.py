@@ -47,17 +47,13 @@ AUSSTATTUNG_FAKTOREN = {
 # ─────────────────────────────────────────────
 
 def faktor_baujahr(baujahr):
-    alter = 2026 - baujahr #Alter der Immobilie wird berechnet
-    
-    if alter >= 25:  # Vintage-Effekt: ab 25 Jahren wird der Faktor eingefroren (Dambon et al., 2022).  
-        faktor = (80 - 25) / 80  # = 0.6875, Gutknecht-Wert bei 25 Jahren
-    else:
-        faktor = (80 - alter) / 80  # Restwert nach Gutknecht (n.d.)
-    
+    alter = 2026 - baujahr  # Alter der Immobilie in Jahren
+    abschreibung = min(alter * 0.01, 0.40)  # 1% pro Jahr, max. 40%
+    faktor = 1.0 - abschreibung
     return faktor
-    #Die gewaehlte Formel basiert auf der Berechnung der Alterswertminderung gemaess Gutknecht (n.d.). Dabei wird eine Gesamtnutzungsdauer von 80 Jahren angenommen.
-    # Vintage-Effekt: Gemaess Dambon et al. (2022) verlangsamt sich die Wertminderung von Immobilien ab einem Alter von ca. 25 Jahren und kann sich in Toplagen sogar umkehren. Da die genaue 
-    # Berechnung des Vintage-Effekts standortabhaengige Koeffizienten erfordert, die den Rahmen dieser Arbeit uebersteigen, wird der Faktor ab 25 Jahren eingefroren, anstatt weiter abzuschreiben.
+    # Quelle: Weisung Liegenschaftenneubewertung 2026, Kanton Zürich.
+    # Altersentwertung = 1% des Neubauwerts pro Jahr, höchstens 40%.
+    # (Kanton Zürich, 2026)
 
 def lift_faktor_berechnen(stockwerk):
     #Berechnet den Lift-Faktor abhängig vom Stockwerk.
