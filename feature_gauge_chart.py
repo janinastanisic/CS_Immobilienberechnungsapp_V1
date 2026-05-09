@@ -14,7 +14,7 @@
 # 4. Berechneten Preis als Zeiger und Delta zum Basispreis anzeigen
 # 5. Fertigen Chart zurückgeben für Streamlit
 
-# Bei der Entwicklung dieses Codes wurde Claud AI (Anthropic, 2026) als Hilfsmittel eingesetzt, um Lösungsansätze zu erarbeiten und Fehler zu korrigieren. 
+# Bei der Entwicklung dieses Codes wurde Claude AI (Anthropic, 2026) als Hilfsmittel eingesetzt, um Lösungsansätze zu erarbeiten und Fehler zu korrigieren. 
 # =============================================================
 
 import plotly.graph_objects as go

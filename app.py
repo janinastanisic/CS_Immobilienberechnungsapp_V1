@@ -17,7 +17,7 @@
 #    Heatmap (Preisübersicht Zürich)
 # 5. Ergebnisse bleiben via Session State sichtbar
 
-# Bei der Entwicklung dieses Codes wurde Claud aI (Anthropic, 2026) als Hilfsmittel eingesetzt, um Lösungsansätze zu erarbeiten und Fehler zu korrigieren. 
+# Bei der Entwicklung dieses Codes wurde Claude AI (Anthropic, 2026) als Hilfsmittel eingesetzt, um Lösungsansätze zu erarbeiten und Fehler zu korrigieren. 
 # =============================================================
 
 import streamlit as st #importiert das Framework Streamlit, mit der Abkürzung st

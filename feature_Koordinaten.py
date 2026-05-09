@@ -19,11 +19,11 @@
 # Quelle: https://www.stadt-zuerich.ch/geodaten/download/Statistische_Quartiere?format=10008
 # LV59 in WGS84-Koordinaten-Umrechner: https://zurzach.ag/liegenschaften/lv95-in-wgs84-koordinaten-fuer-google-maps-oder-openstreetmap-umrechnen-und-konvertieren/
 
-# Bei der Entwicklung dieses Codes wurde Claud AI (Anthropic, 2026) als Hilfsmittel eingesetzt, um Lösungsansätze zu erarbeiten und Fehler zu korrigieren. 
+# Bei der Entwicklung dieses Codes wurde Claude AI (Anthropic, 2026) als Hilfsmittel eingesetzt, um Lösungsansätze zu erarbeiten und Fehler zu korrigieren. 
 # =============================================================
 
-def get_koordinaten():
-    return {
+def get_koordinaten(): #Funktion get_koordinaten wird definiert
+    return { #Die Funktion gibt ein Dictionary zurück mit Quartiername als Schlüssel (string), Latitude und Longitude (Tupel).
         "Affoltern":            (47.42318535463998, 8.50649991576755),
         "Albisrieden":          (47.37104029612350, 8.48484913751854),
         "Altstetten":           (47.38873152342202, 8.47940156739079),

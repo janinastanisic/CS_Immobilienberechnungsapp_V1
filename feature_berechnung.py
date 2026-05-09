@@ -18,7 +18,7 @@
 # 3. Gesamtpreis = Preis pro m² × Wohnfläche
 # 4. Rückgabe: Preis/m², Gesamtpreis, Faktoren-Dictionary
 
-# Bei der Entwicklung dieses Codes wurde Claud aI (Anthropic, 2026) als Hilfsmittel eingesetzt, um Lösungsansätze zu erarbeiten und Fehler zu korrigieren. 
+# Bei der Entwicklung dieses Codes wurde Claude AI (Anthropic, 2026) als Hilfsmittel eingesetzt, um Lösungsansätze zu erarbeiten und Fehler zu korrigieren. 
 # =============================================================
 
 from feature_machine_learning import ml_basispreis_schaetzen

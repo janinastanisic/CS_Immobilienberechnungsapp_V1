@@ -16,7 +16,7 @@
 # 3. Rückgabe: DataFrame mit Spalten Jahr, Quartier,
 #    Zimmer, Preis_pro_m2
 
-# Bei der Entwicklung dieses Codes wurde Claud AI (Anthropic, 2026) als Hilfsmittel eingesetzt, um Lösungsansätze zu erarbeiten und Fehler zu korrigieren. 
+# Bei der Entwicklung dieses Codes wurde Claude AI (Anthropic, 2026) als Hilfsmittel eingesetzt, um Lösungsansätze zu erarbeiten und Fehler zu korrigieren. 
 # =============================================================
 
 # lädt das CSV Format des Datensets, umbennen der Spalten des Datensets --> erleichtert die Arbeit mit dem Set

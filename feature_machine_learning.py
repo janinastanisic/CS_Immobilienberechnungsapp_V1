@@ -1,8 +1,24 @@
-#feature_machine learning
-
+# =============================================================
 # feature_machine_learning.py – KNN-Modell für Basispreisschätzung
-# Ersetzt die einfache Durchschnittsberechnung pro Quartier durch ein
-# datengetriebenes Modell, das Quartier, Zimmerzahl und Jahr berücksichtigt.
+# =============================================================
+
+# ZUSAMMENFASSUNG
+# Dieses Feature trainiert ein K-Nearest-Neighbors-Modell (KNN),
+# das den Basispreis pro m² für ein Quartier, eine Zimmerzahl
+# und ein Jahr schätzt. Es ersetzt die einfache Durchschnitts-
+# berechnung durch ein datengetriebenes Modell.
+
+# Ablauf:
+# 1. Daten vorbereiten: Quartiernamen in Zahlen umwandeln (LabelEncoder),
+#    Zimmerzahl bereinigen und in Float umwandeln
+# 2. Optimales k ermitteln: k=2 bis k=10 mit 5-facher Cross-Validation
+#    testen und k mit kleinstem mittleren Fehler (MAE) wählen
+# 3. Finales Modell mit bestem k auf allen Daten trainieren
+# 4. ml_basispreis_schaetzen() schätzt für neue Eingaben den Preis
+#    indem Quartier, Zimmer und Jahr ins Modell eingespeist werden
+
+# Bei der Entwicklung dieses Codes wurde Claude AI (Anthropic, 2026) als Hilfsmittel eingesetzt, um Lösungsansätze zu erarbeiten und Fehler zu korrigieren. 
+# =============================================================
 
 import numpy as np
 from sklearn.neighbors import KNeighborsRegressor

@@ -18,7 +18,7 @@
 # 4. Balken grün = preiserhöhend, rot = preissenkend
 # 5. Fertigen Chart zurückgeben für Streamlit
 
-# Design und Visualisierung wurden mit Unterstützung von Claude AI (Anthropic)
+# Design und Visualisierung wurden mit Unterstützung von Claude AI (Anthropic, 2026))
 # umgesetzt, da professionelles Chart-Design unsere aktuellen
 # Fähigkeiten übersteigt.
 # ─────────────────────────────────────────────────────────────
