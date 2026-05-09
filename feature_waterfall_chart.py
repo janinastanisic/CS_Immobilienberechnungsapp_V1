@@ -1,19 +1,15 @@
-# ─────────────────────────────────────────────────────────────
-# CHART 1: WATERFALL – Zusammensetzung des Preises
-# erhöht (grün) oder senkt (rot) – mit korrektem Vorzeichen.
-# ─────────────────────────────────────────────────────────────
+# =============================================================
+# feature_waterfall_chart.py – Chart 1: Waterfall-Diagramm Preiszusammensetzung
+# =============================================================
 
-
-# ─────────────────────────────────────────────────────────────
 # ZUSAMMENFASSUNG
-
-# Diese Funktion erstellt einen interaktiven Waterfall-Chart mit Plotly.
-# Sie zeigt wie sich der Immobilienpreis (CHF/m²) aus einzelnen Faktoren
+# Dieses Feature erstellt einen interaktiven Waterfall-Chart mit Plotly,
+# der zeigt wie sich der Immobilienpreis (CHF/m²) aus einzelnen Faktoren
 # zusammensetzt – von der Lage als Startpunkt bis zum Endpreis.
 
 # Ablauf:
 # 1. Basispreis (Lage) als Startpunkt setzen
-# 2. Jeden Faktor (Zimmerzahl, Zustand, etc.) einzeln durchgehen
+# 2. Jeden Faktor (Zustand, Stockwerk, Baujahr, Ausstattung) einzeln durchgehen
 # 3. CHF-Beitrag pro Faktor berechnen (vorher vs. nachher)
 # 4. Balken grün = preiserhöhend, rot = preissenkend
 # 5. Fertigen Chart zurückgeben für Streamlit
@@ -21,7 +17,7 @@
 # Design und Visualisierung wurden mit Unterstützung von Claude AI (Anthropic, 2026))
 # umgesetzt, da professionelles Chart-Design unsere aktuellen
 # Fähigkeiten übersteigt.
-# ─────────────────────────────────────────────────────────────
+# =============================================================
 
 
 import plotly.graph_objects as go 
