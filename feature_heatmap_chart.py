@@ -43,8 +43,11 @@ def erstelle_heatmap_karte(ausgewaehltes_quartier, quartier_koordinaten, basispr
         # Wenn ratio kleiner als 0.5 ist (untere Hälfte = günstigere Quartiere)
         if ratio < 0.5:        
             # grün → gelb
+            # Berechnet den Rot-Anteil: steigt von 0 bis 255
+            # ratio * 2 macht aus 0-0.5 den Bereich 0-1
+            # Multipliziert mit 255 ergibt Werte von 0 bis 255
             r = int(255 * (ratio * 2))
-            g = 200
+            g = 200 
             b = 50
         else:
             # gelb → rot
@@ -53,26 +56,33 @@ def erstelle_heatmap_karte(ausgewaehltes_quartier, quartier_koordinaten, basispr
             b = 50
         return f"#{r:02x}{g:02x}{b:02x}"
 
+    # Durchläuft alle Quartiere im quartier_koordinaten Dictionary
+    # quartier = Name (z.B. "Zürichberg"), (lat, lon) = Koordinaten (z.B. (47.38, 8.56))
     # Kreise für jedes Quartier zeichnen
     for quartier, (lat, lon) in quartier_koordinaten.items():
+        
+        # Holt den Basispreis für dieses Quartier aus dem Dictionary
+        # Falls Quartier nicht gefunden wird, nimmt es 11000 als Standardwert
         preis = basispreis_pro_quartier.get(quartier, 11000)
+        
+        # Berechnet die Farbe für diesen Preis mit der oben definierten Funktion
         farbe = preis_zu_farbe(preis)
 
         # Ausgewähltes Quartier speziell hervorheben
         ist_ausgewaehlt = (quartier == ausgewaehltes_quartier)
-        rand_farbe  = "#1a1a2e" if ist_ausgewaehlt else "#ffffff"
-        rand_breite = 3 if ist_ausgewaehlt else 1
+        rand_farbe  = "#1a1a2e" if ist_ausgewaehlt else "#ffffff"  # Setzt die Randfarbe: dunkel (#1a1a2e) wenn ausgewählt, sonst weiss
+        rand_breite = 3 if ist_ausgewaehlt else 1                      # Setzt die Randbreite: 3 Pixel wenn ausgewählt, sonst 1 Pixel
         radius      = 600 if ist_ausgewaehlt else 450 #rausnehmen?
 
         # Kreis mit Tooltip
         folium.CircleMarker(
-            location = [lat, lon],
-            radius   = 18 if ist_ausgewaehlt else 14,
-            color    = rand_farbe,
-            weight   = rand_breite,
-            fill           = True,
-            fill_color     = farbe,
-            fill_opacity   = 0.85,
+            location = [lat, lon], # Position des Kreises auf der Karte (Breitengrad, Längengrad)
+            radius   = 18 if ist_ausgewaehlt else 14, # Grösse des Kreises: größer (18) wenn ausgewählt, sonst kleiner (14)
+            color    = rand_farbe, # setzt die Farbe des Randes
+            weight   = rand_breite, # setzt die Dicke des Randes
+            fill           = True, # aktiviert die Füllung des Kreises
+            fill_color     = farbe, # setzt die Füllfarbe basierend auf dem Preis
+            fill_opacity   = 0.85,  # Setzt die Transparenz der Füllung (0.85 = 85% sichtbar, 15% durchsichtig)
             tooltip = folium.Tooltip(
                 f"<b>{quartier}</b><br>"
                 f"Basispreis: CHF {preis:,}/m²".replace(",", "'")
