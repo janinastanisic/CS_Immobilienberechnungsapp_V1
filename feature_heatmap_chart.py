@@ -18,7 +18,6 @@
 # Bei der Entwicklung dieses Codes wurde Claud AI (Anthropic, 2026) als Hilfsmittel eingesetzt, um Lösungsansätze zu erarbeiten und Fehler zu korrigieren. 
 # =============================================================
 
->>>>>>> e72ba9350150d609248193bc5dc206b8b021d2d8
 import folium # importiert Folium Funktion für interaktive Karte
 
 # Definiert die Funktion zur Erstellung der Heatmap-Karte mit drei Parametern:
