@@ -9,11 +9,11 @@ import plotly.graph_objects as go #importiert eine Bibliothek für interaktive D
 import folium #importiert interaktive Landkarten
 from streamlit_folium import st_folium #Bindeglied, damit die Karte in Streamlit angezeigt werden kann
 from feature_dataset import get_daten #importiert get_daten vom Dataset Feature
-from feature_Koordinaten import get_koordinaten
-from feature_heatmap_chart import erstelle_heatmap_karte
-from feature_machine_learning import trainiere_knn_modell, ml_basispreis_schaetzen
-from feature_waterfall_chart import erstelle_waterfall_chart 
-from feature_gauge_chart import erstelle_gauge_chart
+from feature_Koordinaten import get_koordinaten #importiert get_koordinaten von Koordinaten Feature
+from feature_heatmap_chart import erstelle_heatmap_karte #importiert die Funktion erstelle_heatmap_karte von feature_heatmap_chart, welche die Heatmap Karte erstellt
+from feature_machine_learning import trainiere_knn_modell, ml_basispreis_schaetzen 
+from feature_waterfall_chart import erstelle_waterfall_chart #importiert die Funktion erstelle_waterfall_chart von feature_waterfall_chart, welche das Wasserfalldiagramm erstellt
+from feature_gauge_chart import erstelle_gauge_chart #importiert die Funktion erstelle_gauge_chart von feature_gauge_chart, welche das Gauge Diagramm erstellt
 from feature_berechnung import berechne_preis, FAKTOR_ZUSTAND, FAKTOR_STOCKWERK, AUSSTATTUNG_FAKTOREN
 # Seitenkonfiguration von Streamlit: Titel setzen und mittig zentrieren
 st.set_page_config(
