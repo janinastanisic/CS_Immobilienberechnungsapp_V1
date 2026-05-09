@@ -1,5 +1,5 @@
 # ─────────────────────────────────────────────────────────────
-# CHART 1b: WATERFALL – Zusammensetzung des Preises
+# CHART 1: WATERFALL – Zusammensetzung des Preises
 # erhöht (grün) oder senkt (rot) – mit korrektem Vorzeichen.
 # ─────────────────────────────────────────────────────────────
 
