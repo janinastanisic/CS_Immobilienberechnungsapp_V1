@@ -69,7 +69,7 @@ def erstelle_heatmap_karte(ausgewaehltes_quartier, quartier_koordinaten, basispr
         farbe = preis_zu_farbe(preis)
 
         # Ausgewähltes Quartier speziell hervorheben
-        ist_ausgewaehlt = (quartier == ausgewaehltes_quartier)
+        ist_ausgewaehlt = (quartier == ausgewaehltes_quartier)         # Überprüft, ob das aktuelle Quartier das ausgewählte ist (True/False)
         rand_farbe  = "#1a1a2e" if ist_ausgewaehlt else "#ffffff"  # Setzt die Randfarbe: dunkel (#1a1a2e) wenn ausgewählt, sonst weiss
         rand_breite = 3 if ist_ausgewaehlt else 1                      # Setzt die Randbreite: 3 Pixel wenn ausgewählt, sonst 1 Pixel
         
@@ -83,27 +83,29 @@ def erstelle_heatmap_karte(ausgewaehltes_quartier, quartier_koordinaten, basispr
             fill           = True, # aktiviert die Füllung des Kreises
             fill_color     = farbe, # setzt die Füllfarbe basierend auf dem Preis
             fill_opacity   = 0.85,  # Setzt die Transparenz der Füllung (0.85 = 85% sichtbar, 15% durchsichtig)
-            tooltip = folium.Tooltip(
-                f"<b>{quartier}</b><br>"
+            tooltip = folium.Tooltip(   #erstellt Infobox
+                f"<b>{quartier}</b><br>"    # zeigt den Namen des Quartiers fettgedruckt an
                 f"Basispreis: CHF {preis:,}/m²".replace(",", "'")
                 + (" ← Ihre Immobilie" if ist_ausgewaehlt else "")
             )
-        ).add_to(karte)
+        ).add_to(karte)        # Fügt den Kreis zur Karte hinzu
 
         # Quartier-Name als Label
-        folium.Marker(
-            location=[lat, lon],
-            icon=folium.DivIcon(
-                html=f'<div style="font-size:9px; font-weight:{"700" if ist_ausgewaehlt else "500"}; '
+        folium.Marker(   # Erstellt einen unsichtbaren Marker, der nur Text anzeigt
+            location=[lat, lon],  # Platziert das Label an derselben Position wie der Kreis
+            icon=folium.DivIcon(  # Erstellt ein benutzerdefiniertes Icon, das HTML enthält
+                html=f'<div style="font-size:9px; font-weight:{"700" if ist_ausgewaehlt else "500"}; ' #
                      f'color:#1a1a2e; white-space:nowrap; '
                      f'text-shadow: 1px 1px 2px white, -1px -1px 2px white;">'
-                     f'{quartier}</div>',
-                icon_size=(120, 20),
-                icon_anchor=(60, -8),
+                     f'{quartier}</div>', 
+                icon_size=(120, 20), # Grösse des Icons, damit der Text genug Platz hat
+                icon_anchor=(60, -8), # Verschiebt das Label so, dass es zentriert über dem Kreis liegt (60px nach links, 8px nach oben
             )
-        ).add_to(karte)
+        ).add_to(karte) # Fügt das Label zur Karte hinzu
 
     # Legende hinzufügen
+    # Definiert den HTML-Code für die Legende als mehrzeiliger String
+
     legende_html = """
     <div style="position: fixed; bottom: 30px; left: 30px; z-index: 1000;
                 background: white; padding: 12px 16px; border-radius: 8px;
@@ -120,6 +122,12 @@ def erstelle_heatmap_karte(ausgewaehltes_quartier, quartier_koordinaten, basispr
               vertical-align:middle;"></span>Teuer (&gt; CHF 14'000)
     </div>
     """
+    # Fügt die Legende zur Karte hinzu
+    # .get_root() holt das Wurzel-Element der Karte
+    # .html gibt Zugriff auf den HTML-Container
+    # .add_child() fügt ein neues Element hinzu
+    # folium.Element() wandelt den HTML-String in ein Folium-Element um
     karte.get_root().html.add_child(folium.Element(legende_html))
 
+    # Gibt die fertige Heatmap zurück, damit sie angezeigt werden kann
     return karte
