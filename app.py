@@ -171,19 +171,28 @@ if st.session_state.ergebnis:
     st.plotly_chart(fig_waterfall, width="stretch") # Streamlit Funktion, zeigt das Diagramm an, welches in der vorherigen Zeile erstellt wurde.
 
     # Chart 2: Gauge
-    st.markdown("### Preis im Marktvergleich")
+    st.markdown("### Preis im Marktvergleich") # Streamlit Funktion, zeigt formatierten Text an, ### definiert die größe der Überschrift
     st.caption(
         f"Der grüne Strich zeigt den Basispreis für {e['quartier']}. "
         "Die farbigen Zonen zeigen günstig (grün), mittel (gelb) und teuer (rot) im Vergleich zu allen Zürcher Quartieren."
     )
     fig_gauge = erstelle_gauge_chart(e["preis_pro_m2"], e["quartier"], e["ml_basispreis"], BASISPREIS_PRO_QUARTIER) # Python Dictionary Zugriff
-    st.plotly_chart(fig_gauge, width="stretch")
+    st.plotly_chart(fig_gauge, width="stretch") #width = stretch sorgt dafür, dass das Diagramm die gesamte Breite der Seite einnimmt.
 
     # Chart 3: Heatmap
-    st.markdown("### Preisübersicht Zürich – Heatmap")
-    st.caption(
+    st.markdown("### Preisübersicht Zürich – Heatmap") # Streamlit Funktion, zeigt formatierten Text an, ### definiert die größe der Überschrift
+    st.caption(                                        # Zeigt formatierten Text an, hier als Erklärungstext zum Chart
         "Grün = günstigere Quartiere, Rot = teurere Quartiere. "
         "Ihr Quartier ist dunkel umrandet."
     )
+    
     karte = erstelle_heatmap_karte(ausgewaehltes_quartier=e["quartier"], quartier_koordinaten=QUARTIER_KOORDINATEN, basispreis_pro_quartier=BASISPREIS_PRO_QUARTIER)
+        # Erstelle eine Heatmap-Karte, die alle Quartiere in Zürich farblich darstellt
+        # Parameter:
+        # - ausgewaehltes_quartier=e["quartier"]: Das aktuell gewählte Quartier wird hervorgehoben
+        # - quartier_koordinaten=QUARTIER_KOORDINATEN: Die GPS-Koordinaten aller Quartiere
     st_folium(karte, use_container_width=True, height=450)
+        # Zeige die Karte in der Streamlit-App an
+        # Parameter:
+        # - use_container_width=True: Die Karte nutzt die volle Breite des Containers
+        # - height=450: Die Karte wird 450 Pixel hoch dargestellt
