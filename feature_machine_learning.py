@@ -88,7 +88,7 @@ def trainiere_knn_modell(df):
 #Trainiert das Modell einmal mit dem besten k auf alle Daten
 
 #Die Quartier- und Zimmereingabe in der App werden in mit dieser Funktion in Zahlen umgewandelt und gibt den geschätzten Preis als Rückgabe:
-def ml_basispreis_schaetzen(modell, le, quartier, zimmerzahl_str, jahr=2024):
+def ml_basispreis_schaetzen(modell, le, quartier, zimmerzahl_str, jahr=2026):
     """
     Schätzt den Basispreis pro m² für ein gegebenes Quartier und eine Zimmerzahl.
 
