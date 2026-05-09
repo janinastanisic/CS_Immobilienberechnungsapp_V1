@@ -15,7 +15,7 @@
 # 5. Ausgewähltes Quartier mit dunklem Rand hervorheben
 # 6. Legende hinzufügen und fertige Karte zurückgeben
 
-# Bei der Entwicklung dieses Codes wurde Claud AI (Anthropic, 2026) als Hilfsmittel eingesetzt, um Lösungsansätze zu erarbeiten und Fehler zu korrigieren. 
+# Bei der Entwicklung dieses Codes wurde Claude AI (Anthropic, 2026) als Hilfsmittel eingesetzt, um Lösungsansätze zu erarbeiten und Fehler zu korrigieren. 
 # =============================================================
 
 import folium # importiert Folium Funktion für interaktive Karte
