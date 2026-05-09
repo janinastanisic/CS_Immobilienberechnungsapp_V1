@@ -1,8 +1,26 @@
-# Mittelpunkt-Koordinaten der Züricher Quartiere
+# =============================================================
+# feature_Koordinaten.py – GPS-Koordinaten der Zürcher Quartiere
+# =============================================================
+
+# ZUSAMMENFASSUNG
+# Dieses Feature stellt die Mittelpunkt-Koordinaten (Latitude/Longitude)
+# aller 24 Zürcher Stadtquartiere als Dictionary bereit.
+# Die Koordinaten werden von der Heatmap-Karte benötigt, um die
+# farbigen Kreise an der richtigen Stelle zu platzieren.
+
+# Ablauf:
+# 1. get_koordinaten() definieren
+# 2. Dictionary mit Quartiernamen als Schlüssel und
+#    (Latitude, Longitude)-Tupel als Wert wird zurückgegeben
+
+# Hinweis: Koordinaten sind hardcodiert, da der offizielle der CSV link nicht funktioniert da die Stadt Zürich 
+# #höchstwahrscheinlich den Zugriff blockiert hat. Wir haben probiert die Daten herunterzuladen und manuell abzuspeichern, 
+# aber die Daten haben keine Lat/Lon Spalten sondern nur geometry mit POLYGON Koordinaten.
 # Quelle: https://www.stadt-zuerich.ch/geodaten/download/Statistische_Quartiere?format=10008
-#LV59 in WGS84-Koordinaten Umrechner: https://zurzach.ag/liegenschaften/lv95-in-wgs84-koordinaten-fuer-google-maps-oder-openstreetmap-umrechnen-und-konvertieren/
-#Wir benutzen hardcodierte Daten weil der CSV link nicht funktioniert da die Stadt Zürich höchstwahrscheinlich den Zugriff blockiert hat
-#Wir haben probiert die Daten herunterzuladen und manuell abzuspeichern, aber die Daten haben keine Lat/Lon Spalten sondern nur geometry mit POLYGON Koordinaten 
+# LV59 in WGS84-Koordinaten-Umrechner: https://zurzach.ag/liegenschaften/lv95-in-wgs84-koordinaten-fuer-google-maps-oder-openstreetmap-umrechnen-und-konvertieren/
+
+# Bei der Entwicklung dieses Codes wurde Claud AI (Anthropic, 2026) als Hilfsmittel eingesetzt, um Lösungsansätze zu erarbeiten und Fehler zu korrigieren. 
+# =============================================================
 
 def get_koordinaten():
     return {
