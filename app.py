@@ -14,10 +14,10 @@ from feature_machine_learning import trainiere_knn_modell, ml_basispreis_schaetz
 from feature_waterfall_chart import erstelle_waterfall_chart #importiert die Funktion erstelle_waterfall_chart von feature_waterfall_chart, welche das Wasserfalldiagramm erstellt
 from feature_gauge_chart import erstelle_gauge_chart #importiert die Funktion erstelle_gauge_chart von feature_gauge_chart, welche das Gauge Diagramm erstellt
 from feature_berechnung import berechne_preis, FAKTOR_ZUSTAND, FAKTOR_STOCKWERK, AUSSTATTUNG_FAKTOREN
-# Seitenkonfiguration von Streamlit: Titel setzen und mittig zentrieren
+
 st.set_page_config(
-    page_title="Immobilien-Preisschätzer Zürich",
-    layout="centered"
+    page_title="Fairestate - Wohnungspreisschätzer der Stadt Zürich", #Setzt den Titel im Browser
+    layout="centered" #zentriert das layout auf streamlit mittig
 )
 
 # ─────────────────────────────────────────────
@@ -54,10 +54,10 @@ st.markdown("---") #Erstellt eine horizontale Trennlinie in Streamlit
 
 # ── 1. LAGE ──
 st.subheader("Lage") #Erstellt einen Untertitel in Streamlit
-QUARTIERE = ["— Bitte wählen —"] + sorted(BASISPREIS_PRO_QUARTIER.keys()) #Zwei Listen werden erstellt und miteinander verbunden. Die erste besteht aus dem Platzhalter: Bitte waehlen. Die zweite Liste besteht aus allen Schlüsseln (Quartiernamen) des Dictionaries, welche alphabetisch sortiert werden.
+QUARTIERE = ["— Bitte wählen —"] + sorted(BASISPREIS_PRO_QUARTIER.keys()) #Zwei Listen werden erstellt und miteinander verbunden. Die erste besteht aus dem Platzhalter: Bitte wählen. Die zweite Liste besteht aus allen Schlüsseln (Quartiernamen) des Dictionaries, welche alphabetisch sortiert werden.
 quartier  = st.selectbox("In welchem Stadtquartier liegt die Immobilie?", options=QUARTIERE) #Ein Dropdown Menü wird in Streamlit erstellt mit einem Beschriftungstext. Das Dropdown Menu beinhaltet eine Liste aller Optionen, die in der vorherigen Zeile definiert wurde. 
 
-# ── 2. GROESSE ──
+# ── 2. GRÖSSE ──
 st.subheader("Grösse") #Erstellt einen Untertitel in Streamlit
 col1, col2 = st.columns(2) #Die Seite wird in zwei gleich breite Spalten aufgeteilt. col1 links und col2 rechts.
 with col1: #Definiert, was in der linken Spalte angezeigt wird
@@ -71,7 +71,7 @@ with col2: #Definiert, was in der rechten Spalte angezeigt wird
         "Wohnfläche (m2)", min_value=10, max_value=500, value=10, step=5 #Definiert die kleinste erlaubte Zahl, die grösste erlaubte Zahl, den Standardwert und die Steps (wenn man auf + klickt, springt die Zahl um diesen Wert)
     )
 
-# ── 3. GEBAEUDE ──
+# ── 3. GEBÄUDE ──
 st.subheader("Gebäude") #Erstellt einen Untertitel in Streamlit
 col3, col4 = st.columns(2) #Die Seite wird in zwei gleich breite Spalten aufgeteilt. col3 links und col4 rechts.
 with col3: #Definiert die linke Seite
@@ -84,7 +84,7 @@ with col4: #Definiert die rechte Seite
             "3. Obergeschoss", "4. Obergeschoss",
             "5. Obergeschoss", "6. Obergeschoss",
             "7. Obergeschoss", "8. Obergeschoss",
-            "9. Obergeschoss", "10. Obergeschoss oder hoeher"
+            "9. Obergeschoss", "10. Obergeschoss oder höher"
         ]
     )
 

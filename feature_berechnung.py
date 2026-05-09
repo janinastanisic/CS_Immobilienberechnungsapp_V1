@@ -10,9 +10,9 @@ FAKTOR_ZUSTAND = {
     "Gut gepflegt":          1.075,
     "Renovationsbedürftig": 1.00,
 }
-#Gemaess Frey (2026) fuehrt ein neuwertiger Zustand zu einer Wertsteigerung von 10 bis 15 %, waehrend fuer einen guten Zustand 
-#eine Wertsteigerung von 5 bis 10 % angegeben wird. Fuer die vorliegende Bewertung wurde jeweils der Mittelwert der in der 
-#Quelle genannten Spannbreiten als Korrekturfaktor verwendet, sodass 12,5 % fuer den neuwertigen sowie 7,5 % fuer den guten Zustand gewaelt wurden.
+#Gemäss Frey (2026) führt ein neuwertiger Zustand zu einer Wertsteigerung von 10 bis 15 %, während für einen guten Zustand 
+#eine Wertsteigerung von 5 bis 10 % angegeben wird. Für die vorliegende Bewertung wurde jeweils der Mittelwert der in der 
+#Quelle genannten Spannbreiten als Korrekturfaktor verwendet, sodass 12,5 % für den neuwertigen sowie 7,5 % für den guten Zustand gewält wurden.
 
 FAKTOR_STOCKWERK = {
     "Erdgeschoss":                   1.00,
@@ -25,22 +25,22 @@ FAKTOR_STOCKWERK = {
     "7. Obergeschoss":               1.154,
     "8. Obergeschoss":               1.176,
     "9. Obergeschoss":               1.198,
-    "10. Obergeschoss oder hoeher":  1.22,
+    "10. Obergeschoss oder höher":  1.22,
 }
-#Gemaess Conroy et al. (1013, S.201) geht ein hoeheres Stockwerk mit einem Anstieg des Immobilienpreises von 2.2 Prozent einher. 
+#Gemäss Conroy et al. (1013, S.201) geht ein höheres Stockwerk mit einem Anstieg des Immobilienpreises von 2.2 Prozent einher. 
 
 AUSSTATTUNG_FAKTOREN = {
     "hat_balkon":    0.1385,
     "hat_tiefgarage": 0.10,
-    "hat_lift":      0.00,#wird nicht direkt verwendet, Faktor_Lift wird stockwerkabhaengig in berechne_preis() berechnet
+    "hat_lift":      0.00,#wird nicht direkt verwendet, Faktor_Lift wird stockwerkabhängig in berechne_preis() berechnet
     "hat_seesicht":  0.11,
     "hat_minergie":  0.491,
 } #Jede zusätzliche Ausstattung addiert einen Prozentsatz zum Preis: Bsp. Faktor 0.10 = +10%.
-#Gemaess Chau et al. (2004, S. 256) fuehrt ein grosser Balkon mit guter Aussicht zu 24 Prozent hoeherem Kaufpreis und ein kleiner Balkon ohne Aussicht 
-#zu 3.7% hoeherem Kaufpreis. Fuer den gewaehlten Korrekturfaktor hat_balkon von 13.85 Prozent haben wir daraus den Mittelwert berechnet. 
-#Gemaess Deschermeier et al. (2023, S. 46) steigert eine Tiefgarage den Immobilienwert um durchschnittlich 10 Prozent.
-#Gemaess Niklowitz (2026) erhoeht eine Seesicht den Immobilienpreis um 11 Prozent.
-#Gemaess Kempf & Syz (2022, S. 170) hat die Stadt Zuerich eine Minergie Preispraemie von 4.91 Prozent.
+#Gemäss Chau et al. (2004, S. 256) führt ein grosser Balkon mit guter Aussicht zu 24 Prozent höherem Kaufpreis und ein kleiner Balkon ohne Aussicht 
+#zu 3.7% höherem Kaufpreis. Für den gewählten Korrekturfaktor hat_balkon von 13.85 Prozent haben wir daraus den Mittelwert berechnet. 
+#Gemäss Deschermeier et al. (2023, S. 46) steigert eine Tiefgarage den Immobilienwert um durchschnittlich 10 Prozent.
+#Gemäss Niklowitz (2026) erhöht eine Seesicht den Immobilienpreis um 11 Prozent.
+#Gemäss Kempf & Syz (2022, S. 170) hat die Stadt Zürich eine Minergie Preisprämie von 4.91 Prozent.
 
 # ─────────────────────────────────────────────
 # BAUJAHR-FAKTOR: 
@@ -60,7 +60,7 @@ def lift_faktor_berechnen(stockwerk):
     #Erdgeschoss: kein Effekt (Faktor 0)
     #1.-2. OG: +1.59% 
     #3.-5. OG: +4.58% 
-    #6.-10. OG: +8.10% Gemaess Dai et al. (2026, S. 21) erhoeht ein Lift im Gebaede den Wohnungspreis bei unteren Stockwerken um 1.59 Prozent, bei mittleren um 4.58% und bei hoehern um 8.10 Prozent.
+    #6.-10. OG: +8.10% Gemäss Dai et al. (2026, S. 21) erhöht ein Lift im Gebäude den Wohnungspreis bei unteren Stockwerken um 1.59 Prozent, bei mittleren um 4.58% und bei höheren um 8.10 Prozent.
     if stockwerk == "Erdgeschoss":
         return 0.00
     elif stockwerk in ["1. Obergeschoss", "2. Obergeschoss"]:
@@ -68,7 +68,7 @@ def lift_faktor_berechnen(stockwerk):
     elif stockwerk in ["3. Obergeschoss", "4. Obergeschoss", "5. Obergeschoss"]:
         return 0.0458
     elif stockwerk in ["6. Obergeschoss", "7. Obergeschoss", "8. Obergeschoss",
-                       "9. Obergeschoss", "10. Obergeschoss oder hoeher"]:
+                       "9. Obergeschoss", "10. Obergeschoss oder höher"]:
         return 0.0810
     else:
         return 0.00 #Fallback falls unbekanntes Stockwerk

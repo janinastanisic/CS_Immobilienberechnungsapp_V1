@@ -1,7 +1,7 @@
 # Mittelpunkt-Koordinaten der Züricher Quartiere
 # Quelle: https://www.stadt-zuerich.ch/geodaten/download/Statistische_Quartiere?format=10008
 #LV59 in WGS84-Koordinaten Umrechner: https://zurzach.ag/liegenschaften/lv95-in-wgs84-koordinaten-fuer-google-maps-oder-openstreetmap-umrechnen-und-konvertieren/
-#Wir benutzen hardcodierte Daten weil der CSV link nicht funktioniert da die Stadt Zuerich hoechstwahrscheinlich den Zugriff blockiert hat
+#Wir benutzen hardcodierte Daten weil der CSV link nicht funktioniert da die Stadt Zürich höchstwahrscheinlich den Zugriff blockiert hat
 #Wir haben probiert die Daten herunterzuladen und manuell abzuspeichern, aber die Daten haben keine Lat/Lon Spalten sondern nur geometry mit POLYGON Koordinaten 
 
 def get_koordinaten():
@@ -18,7 +18,7 @@ def get_koordinaten():
         "Hirslanden":           (47.36276014977589, 8.56805810527094),
         "Hirzenbach":           (47.39839308309126, 8.58330624567168),
         "Hochschulen":          (47.36547968924089, 8.54460224375193),
-        "Hoengg":               (47.40812106396411, 8.49567358046803),
+        "Höngg":               (47.40812106396411, 8.49567358046803),
         "Hottingen":            (47.37755083630196, 8.58243239891855),
         "Langstrasse":          (47.37763850677041, 8.52812648007782),
         "Leimbach":             (47.33147426064787, 8.51072727278173),
