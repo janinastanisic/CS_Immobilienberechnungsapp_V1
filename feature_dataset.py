@@ -54,7 +54,6 @@ def daten_laden(): #Definition der Funktion daten_laden
        
     })
     #Benennt die Spaltennamen vom CSV um --> einfacher für uns um unseren code zu lesen
-    #Vorschlag von Claude - können wir auch noch ändern
 
     spalten= ["Jahr", "Quartier", "Zimmer", "Preis_pro_m2"]
     df=df[spalten]
