@@ -1,6 +1,23 @@
 # =============================================================
-# Fairestate - Wohnungspreisschätzer der Stadt Zürich
-# Gib die Eigenschaften deiner Immobilie ein - wir berechnen den geschätzten Marktwert.
+# app.py – Fairestate: Wohnungspreisschätzer der Stadt Zürich
+# Ausführen im Terminal: streamlit run app.py
+# =============================================================
+
+# ZUSAMMENFASSUNG
+# Dies ist die Hauptdatei der Streamlit-App. Sie verbindet alle
+# Features und steuert die Benutzeroberfläche.
+
+# Ablauf:
+# 1. Daten und ML-Modell werden einmalig beim Start geladen
+# 2. User gibt Eigenschaften der Immobilie ein (Lage, Grösse,
+#    Gebäude, Zustand, Ausstattung)
+# 3. Auf Knopfdruck wird berechne_preis() aufgerufen
+# 4. Ergebnis wird als Kennzahlen und drei Charts angezeigt:
+#    Waterfall (Preiszusammensetzung), Gauge (Marktvergleich),
+#    Heatmap (Preisübersicht Zürich)
+# 5. Ergebnisse bleiben via Session State sichtbar
+
+#Bei der Entwicklung dieses Codes wurde Claud aI (Anthropic, 2026) als Hilfsmittel eingesetzt, um Lösungsansätze zu erarbeiten und Fehler zu korrigieren. 
 # =============================================================
 
 import streamlit as st #importiert das Framework Streamlit, mit der Abkürzung st
@@ -10,19 +27,19 @@ from streamlit_folium import st_folium #Bindeglied, damit die Karte in Streamlit
 from feature_dataset import get_daten #importiert get_daten vom Dataset Feature
 from feature_Koordinaten import get_koordinaten #importiert get_koordinaten von Koordinaten Feature
 from feature_heatmap_chart import erstelle_heatmap_karte #importiert die Funktion erstelle_heatmap_karte von feature_heatmap_chart, welche die Heatmap Karte erstellt
-from feature_machine_learning import trainiere_knn_modell, ml_basispreis_schaetzen 
+from feature_machine_learning import trainiere_knn_modell, ml_basispreis_schaetzen #importiert die Funktion trainiere_knn_modell vom feature_achine_learning
 from feature_waterfall_chart import erstelle_waterfall_chart #importiert die Funktion erstelle_waterfall_chart von feature_waterfall_chart, welche das Wasserfalldiagramm erstellt
 from feature_gauge_chart import erstelle_gauge_chart #importiert die Funktion erstelle_gauge_chart von feature_gauge_chart, welche das Gauge Diagramm erstellt
-from feature_berechnung import berechne_preis, FAKTOR_ZUSTAND, FAKTOR_STOCKWERK, AUSSTATTUNG_FAKTOREN
+from feature_berechnung import berechne_preis, FAKTOR_ZUSTAND, FAKTOR_STOCKWERK, AUSSTATTUNG_FAKTOREN #Importiert die Funktion berechne_preis mit verschiedenen Faktoren von dem feature_berechnung
 
 st.set_page_config(
     page_title="Fairestate - Wohnungspreisschätzer der Stadt Zürich", #Setzt den Titel im Browser
     layout="centered" #zentriert das layout auf streamlit mittig
 )
 
-# ─────────────────────────────────────────────
+# =============================================
 # BASISPREISE PRO QUARTIER (CHF pro m²)
-# ─────────────────────────────────────────────
+# =============================================
 df= get_daten()
 #Daten werden einmalig geladen (aus Feature Dataset.py)
 BASISPREIS_PRO_QUARTIER = (
@@ -36,13 +53,12 @@ BASISPREIS_PRO_QUARTIER = (
 #ML-Modell wird beim start einmalig trainiert
 knn_modell, knn_le, _, _, _ = trainiere_knn_modell(df)
 
-# ─────────────────────────────────────────────
+# =============================================
 # KOORDINATEN DER QUARTIERE (Mittelpunkte)
-# ─────────────────────────────────────────────
+# =============================================
 
-QUARTIER_KOORDINATEN = get_koordinaten()
+QUARTIER_KOORDINATEN = get_koordinaten() #Die Funktion get_Koordinaten wird aufgerufen (welche die Koordinaten aller Zürcher Quartiere enthält) und in der Variabel QUARTIER_KOORDINATEN abgespeichert.
 
-# ─────────────────────────────────────────────
 
 # =============================================================
 # STREAMLIT APP
@@ -75,7 +91,7 @@ with col2: #Definiert, was in der rechten Spalte angezeigt wird
 st.subheader("Gebäude") #Erstellt einen Untertitel in Streamlit
 col3, col4 = st.columns(2) #Die Seite wird in zwei gleich breite Spalten aufgeteilt. col3 links und col4 rechts.
 with col3: #Definiert die linke Seite
-    baujahr = st.slider("Baujahr", min_value=1900, max_value=2026, value=2026) #Erstellt einen Schieberegler in Streamlit mit dem Beschriftungstext, dem Mindestwert, dem Maximalwert und dem Standardwert und speichert den Eingabewert unter baujahr
+    baujahr = st.slider("Baujahr", min_value=1900, max_value=2026, value=2026) #Erstellt einen Schieberegler in Streamlit mit dem Beschriftungstext, dem Mindestwert, dem Maximalwert und dem Standardwert und speichert den Eingabewert unter baujahr ab
 with col4: #Definiert die rechte Seite
     stockwerk = st.selectbox( #Erstellt ein Dropdown Menu und speichert den Eingabewert unter stockwerk ab
         "Stockwerk", #Definiert den Text über dem Dropdown Menü
@@ -128,7 +144,7 @@ if berechnen: #Sofern der Button Marktwert berechnen geklickt wurde, ist diese i
             "hat_minergie":  hat_minergie, #Wenn die obige if Bedingung nicht erfüllt ist, werden alle Ausstattungswerte, welche angegeben wurden, in einem Dictionary zusammengefasst
         }
 
-        preis_pro_m2, gesamtpreis, faktoren = berechne_preis( #Ruft die in Zeile 122-148 definierte Funktion ab und übergibt die Angaben des Users
+        preis_pro_m2, gesamtpreis, faktoren = berechne_preis( #Ruft die Funktion berechne_preis aus dem feature_berechnung auf und bekommt alle Inputs des Users mitgegeben. Die Funktion gibt die Werte preis_pro_m2, gesamtpreis und faktoren zürich. Diese Werte werden später für die Anzeige und die Charts verwendet.
             quartier, zimmerzahl, wohnflaeche,
             baujahr, stockwerk, zustand, ausstattung, 
             knn_modell,knn_le, BASISPREIS_PRO_QUARTIER
@@ -143,7 +159,7 @@ if berechnen: #Sofern der Button Marktwert berechnen geklickt wurde, ist diese i
             "ml_basispreis": faktoren["Basispreis (Quartier)"],
         }
 
-# Ergebnis anzeigen – bleibt sichtbar solange session_state gefüllt ist: Sofern Ergebnisse im Session state abgespeichert wurden, wird eine Kurzform für session state definiert
+# Ergebnis anzeigen – bleibt sichtbar solange session_state gefüllt ist: Sofern Ergebnisse im Session state abgespeichert wurden, wird eine Kurzform für session state definiert (e)
 if st.session_state.ergebnis:
     e = st.session_state.ergebnis
 
@@ -152,12 +168,12 @@ if st.session_state.ergebnis:
     with col_r1: #Definiert die linke Seite
         st.metric( #Formatiert die nächsten Zeilen als Kennzahlen (Kleiner Text + Grosse Zahl)
             label="Geschätzter Kaufpreis", #Kleiner Text
-            value=f"CHF {e['gesamtpreis']:,.0f}".replace(",", "'") #Grosse Zahl, die berechnet wurde. Zahl wird mit Hochkommas als Tausendertrennzeichen dargestellt
+            value=f"CHF {e['gesamtpreis']:,.0f}".replace(",", "'") #Grosse Zahl, die berechnet wurde. e['gesamtpreis'] holt den Gesamtpreis aus dem Session State Dictionary. ,.0f: Zahl wird mit Tausendertrennzeichen und ohne Nachkommastellen dargestellt. ",", "'": Tausendertrennzeichen , werden durch ' ersetzt
         )
     with col_r2: #Definiert die rechte Seite
         st.metric(#Formatiert die nächsten Zeilen als Kennzahlen (Kleiner Text + Grosse Zahl)
             label="Preis pro m2", #Kleiner Text
-            value=f"CHF {e['preis_pro_m2']:,.0f}".replace(",", "'") #Grosse Zahl, die berechnet wurde. Zahl wird mit Hochkommas als Tausendertrennzeichen dargestellt
+            value=f"CHF {e['preis_pro_m2']:,.0f}".replace(",", "'") #Grosse Zahl, die berechnet wurde. e['preis_pro_m2'] holt den preis pro m2 aus dem Session State Dictionary. ,.0f: Zahl wird mit Tausendertrennzeichen und ohne Nachkommastellen dargestellt. ",", "'": Tausendertrennzeichen , werden durch ' ersetzt
         )
 
     st.markdown("---") #Erstellt eine horizontale Trennlinie in Streamlit
