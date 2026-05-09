@@ -85,3 +85,7 @@ Kurs: FCS-BWL
 Semester: Frühling 2026
 
 Dieses Projekt ist für akademische Zwecke an der HSG entwickelt worden.
+
+Literaturverzeichnis:
+
+Statistische Quartiere - Stadt Zürich. (n.d.). https://www.stadt-zuerich.ch/geodaten/download/Statistische_Quartiere format=10008

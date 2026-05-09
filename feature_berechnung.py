@@ -1,4 +1,26 @@
-#Berechnung_feature
+# =============================================================
+# feature_berechnung.py – Preisberechnung mit Korrekturfaktoren
+# =============================================================
+
+# ZUSAMMENFASSUNG
+# Dieses Feature berechnet den geschätzten Immobilienpreis (CHF/m²
+# und Gesamtpreis) basierend auf dem ML-Basispreis und mehreren
+# Korrekturfaktoren.
+
+# Ablauf:
+# 1. ML-Modell schätzt den Basispreis pro m² (nach Quartier,
+#    Zimmerzahl und Jahr)
+# 2. Korrekturfaktoren werden multipliziert:
+#    - Zustand      (Neuwertig / Gut gepflegt / Renovationsbedürftig)
+#    - Stockwerk    (+2.2% pro Etage gemäss Conroy et al.)
+#    - Baujahr      (1% Abschreibung pro Jahr, max. 40%)
+#    - Ausstattung  (Balkon, Tiefgarage, Lift, Seesicht, Minergie)
+# 3. Gesamtpreis = Preis pro m² × Wohnfläche
+# 4. Rückgabe: Preis/m², Gesamtpreis, Faktoren-Dictionary
+
+# Bei der Entwicklung dieses Codes wurde Claud aI (Anthropic, 2026) als Hilfsmittel eingesetzt, um Lösungsansätze zu erarbeiten und Fehler zu korrigieren. 
+# =============================================================
+
 from feature_machine_learning import ml_basispreis_schaetzen
 
 # ─────────────────────────────────────────────

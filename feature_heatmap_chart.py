@@ -1,8 +1,23 @@
-#feature_heatmap_chart
+# =============================================================
+# feature_heatmap_chart.py – Chart 3: Heatmap-Karte Zürich
+# =============================================================
 
-# ─────────────────────────────────────────────
-# CHART 3: HEATMAP – Karte Zürich
-# ─────────────────────────────────────────────
+# ZUSAMMENFASSUNG
+# Dieses Feature erstellt eine interaktive Karte von Zürich mit
+# Folium, die alle Quartiere farblich nach ihrem Basispreis
+# darstellt (grün = günstig, rot = teuer).
+
+# Ablauf:
+# 1. Karte auf Zürich zentrieren
+# 2. Preisskala (min/max) über alle Quartiere berechnen
+# 3. Jeden Preis in eine Farbe auf der Skala grün→gelb→rot umwandeln
+# 4. Pro Quartier einen farbigen Kreis mit Tooltip auf die Karte setzen
+# 5. Ausgewähltes Quartier mit dunklem Rand hervorheben
+# 6. Legende hinzufügen und fertige Karte zurückgeben
+
+# Bei der Entwicklung dieses Codes wurde Claud AI (Anthropic, 2026) als Hilfsmittel eingesetzt, um Lösungsansätze zu erarbeiten und Fehler zu korrigieren. 
+# =============================================================
+
 import folium # importiert Folium Funktion für interaktive Karte
 
 # Definiert die Funktion zur Erstellung der Heatmap-Karte mit drei Parametern:

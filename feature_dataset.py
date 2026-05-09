@@ -1,3 +1,24 @@
+# =============================================================
+# feature_dataset.py – Datenladen und Datenbankanbindung
+# =============================================================
+
+# ZUSAMMENFASSUNG
+# Dieses Feature lädt die Immobilienpreisdaten der Stadt Zürich
+# und speichert sie lokal in einer SQLite-Datenbank, damit das
+# CSV nicht bei jedem Start neu geladen werden muss.
+
+# Ablauf:
+# 1. Beim ersten Start: CSV wird geladen, Spalten umbenannt,
+#    irrelevante Quartiere (Kreise, Ganze Stadt) gefiltert
+#    und in immobilien.db gespeichert
+# 2. Ab dem zweiten Start: Daten werden direkt aus der lokalen
+#    Datenbank gelesen (kein Internetzugriff nötig)
+# 3. Rückgabe: DataFrame mit Spalten Jahr, Quartier,
+#    Zimmer, Preis_pro_m2
+
+# Bei der Entwicklung dieses Codes wurde Claud AI (Anthropic, 2026) als Hilfsmittel eingesetzt, um Lösungsansätze zu erarbeiten und Fehler zu korrigieren. 
+# =============================================================
+
 # lädt das CSV Format des Datensets, umbennen der Spalten des Datensets --> erleichtert die Arbeit mit dem Set
 import pandas as pd #Werkzeugpaket für Tabellen-Daten
 import sqlite3 #dadurch kann man eine lokale Datenbank-datei erstellen

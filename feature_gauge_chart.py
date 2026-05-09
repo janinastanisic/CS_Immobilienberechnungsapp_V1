@@ -1,8 +1,24 @@
+# =============================================================
+# feature_gauge_chart.py – Chart 2: Gauge-Diagramm Marktvergleich
+# =============================================================
+
+# ZUSAMMENFASSUNG
+# Dieses Feature erstellt einen interaktiven Gauge-Chart mit Plotly,
+# der zeigt ob der geschätzte Preis für das gewählte Quartier
+# günstig, durchschnittlich oder teuer ist.
+
+# Ablauf:
+# 1. ML-Basispreis des gewählten Quartiers als Referenzlinie setzen
+# 2. Preisskala aus günstigstem und teuerstem Quartier berechnen
+# 3. Drei Zonen einfärben: grün (günstig), gelb (mittel), rot (teuer)
+# 4. Berechneten Preis als Zeiger und Delta zum Basispreis anzeigen
+# 5. Fertigen Chart zurückgeben für Streamlit
+
+# Bei der Entwicklung dieses Codes wurde Claud AI (Anthropic, 2026) als Hilfsmittel eingesetzt, um Lösungsansätze zu erarbeiten und Fehler zu korrigieren. 
+# =============================================================
+
 import plotly.graph_objects as go
 
-# ─────────────────────────────────────────────
-# CHART 2: GAUGE – Preis im Marktvergleich
-# ─────────────────────────────────────────────
 
 # Die Funktion nimmt zwei Parameter entgegen:
 # preis_pro_m2: der berechnete Preis aus unserem ML-Modell
