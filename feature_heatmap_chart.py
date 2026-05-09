@@ -3,33 +3,45 @@
 # ─────────────────────────────────────────────
 # CHART 3: HEATMAP – Karte Zürich
 # ─────────────────────────────────────────────
-import folium
+import folium # importiert Folium Funktion für interaktive Karte
 
-def erstelle_heatmap_karte(ausgewaehltes_quartier, quartier_koordinaten, basispreis_pro_quartier):
+# Definiert die Funktion zur Erstellung der Heatmap-Karte mit drei Parametern:
+def erstelle_heatmap_karte(ausgewaehltes_quartier, quartier_koordinaten, basispreis_pro_quartier): 
     """
     Erstellt eine interaktive Karte von Zürich mit
     farbigen Kreisen pro Quartier (grün = günstig, rot = teuer).
     Das ausgewählte Quartier wird speziell markiert.
     """
+
     # Karte auf Zürich zentrieren
-    karte = folium.Map(
+    karte = folium.Map( # erstellt eine neue Karte mit folgenden Einstellungen:
+        # Setzt den Mittelpunkt der Karte auf Zürich (Breitengrad, Längengrad)
         location=[47.3769, 8.5417],
+        # Definiert wie weit die Karte am Anfang reingezoomt ist (12 = Stadt-Ebene)
         zoom_start=12,
+        # Wählt den Kartenstil: "CartoDB positron" ist hell und minimalistisch
         tiles="CartoDB positron"   # helles, klares Kartenlayout
     )
 
     # Preisskala für Farbgebung berechnen
-    alle_preise = list(basispreis_pro_quartier.values())
-    min_p = min(alle_preise)
-    max_p = max(alle_preise)
+    alle_preise = list(basispreis_pro_quartier.values()) # Extrahiert alle Preiswerte aus dem Dictionary in eine Liste
+    min_p = min(alle_preise) # findet den niedrigsten Preis in der Liste
+    max_p = max(alle_preise) # findet den höchsten Preis in der Liste
 
+    # Definiert eine Funktion, die Preis in Farbe umwandelt:
     def preis_zu_farbe(preis):
         """
         Berechnet eine Farbe auf der Skala grün → gelb → rot
         basierend auf dem Preis relativ zum Min/Max.
         """
+
+        # Berechnet, wo der Preis zwischen min und max liegt
+        # ratio = 0.0 bedeutet billigstes Quartier, ratio = 1.0 bedeutet teuerstes
+        # Formel: (aktueller_preis - minimum) / (maximum - minimum)
         ratio = (preis - min_p) / (max_p - min_p)  # 0 = günstig, 1 = teuer
-        if ratio < 0.5:
+        
+        # Wenn ratio kleiner als 0.5 ist (untere Hälfte = günstigere Quartiere)
+        if ratio < 0.5:        
             # grün → gelb
             r = int(255 * (ratio * 2))
             g = 200
