@@ -1,7 +1,6 @@
 # =============================================================
-# fragebogen.py – Fairestate - Wohnungspreisschätzer der Stadt Zürich
+# Fairestate - Wohnungspreisschätzer der Stadt Zürich
 # Gib die Eigenschaften deiner Immobilie ein - wir berechnen den geschätzten Marktwert.
-# Ausführen im Terminal: streamlit run fragebogen.py
 # =============================================================
 
 import streamlit as st #importiert das Framework Streamlit, mit der Abkürzung st
