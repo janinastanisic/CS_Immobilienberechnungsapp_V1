@@ -14,7 +14,17 @@ Team: Ainhoa Eggenberger, Ella Querner, Janina Stanisic, Philippe Bloch, Marc Sc
 
 ## Projektbeschreibung
 
-**Fairestate** ist eine Streamlit-Webanwendung, die den geschätzten Marktwert von Wohnungen in der Stadt Zürich berechnet. 
+Business Case: 
+Der Immobilienmarkt ist geprägt von Informationsasymmetrien: Verkäufer und
+Makler verfügen über deutlich mehr Marktwissen als Käufer, was zu Fehlbewertungen 
+und finanziellen Verlusten führt. Fairestate begegnet diesem Problem mit einem datengetriebenen Ansatz.
+
+App: 
+**Fairestate** ist eine interaktive Streamlit-Webanwendung zur Schätzung von Immobilienpreisen in der Stadt Zürich. 
+Nutzer geben Eigenschaften ihrer Immobilie ein und erhalten eine datenbasierte Preisschätzung. 
+Ein Machine-Learning-Modell berechnet den Basispreis, Korrekturfaktoren passen ihn an die spezifischen Eigenschaften
+an. Die Ergebnisse werden in drei visuellen Charts dargestellt.
+
 
 Das Tool nutzt:
 - Machine Learning (KNN-Modell) zur Basispreisschätzung pro Quartier
