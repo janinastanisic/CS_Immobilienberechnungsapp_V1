@@ -1,5 +1,6 @@
 # =============================================================
-# fragebogen.py – Immobilien-Preisschätzer Zürich
+# fragebogen.py – Fairestate - Wohnungspreisschätzer der Stadt Zürich
+# Gib die Eigenschaften deiner Immobilie ein - wir berechnen den geschätzten Marktwert.
 # Ausführen im Terminal: streamlit run fragebogen.py
 # =============================================================
 
@@ -185,7 +186,7 @@ if st.session_state.ergebnis:
         "Grün = günstigere Quartiere, Rot = teurere Quartiere. "
         "Ihr Quartier ist dunkel umrandet."
     )
-    
+
     karte = erstelle_heatmap_karte(ausgewaehltes_quartier=e["quartier"], quartier_koordinaten=QUARTIER_KOORDINATEN, basispreis_pro_quartier=BASISPREIS_PRO_QUARTIER)
         # Erstelle eine Heatmap-Karte, die alle Quartiere in Zürich farblich darstellt
         # Parameter:
