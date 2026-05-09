@@ -189,7 +189,7 @@ if st.session_state.ergebnis:
     # Chart 2: Gauge
     st.markdown("### Preis im Marktvergleich") # Streamlit Funktion, zeigt formatierten Text an, ### definiert die größe der Überschrift
     st.caption(
-        f"Der grüne Strich zeigt den Basispreis für {e['quartier']}. Der blaue Balken zeigt den berechneten Endpreis pro m2 der eingegebenen Immobilie."
+        f"Der grüne Strich zeigt den Basispreis für {e['quartier']}. Der blaue Balken zeigt den berechneten Endpreis pro m2 der eingegebenen Immobilie. "
         "Die farbigen Zonen zeigen günstig (grün), mittel (gelb) und teuer (rot) im Vergleich zu allen Zürcher Quartieren."
     )
     fig_gauge = erstelle_gauge_chart(e["preis_pro_m2"], e["quartier"], e["ml_basispreis"], BASISPREIS_PRO_QUARTIER) # Python Dictionary Zugriff
