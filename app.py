@@ -165,10 +165,10 @@ if st.session_state.ergebnis:
  
 
     # Chart 1: Waterfall
-    st.markdown("### Preiszusammensetzung – Schritt für Schritt")
-    st.caption("Wie sich der Endpreis aus dem Basispreis und den einzelnen Faktoren aufbaut.")
-    fig_waterfall = erstelle_waterfall_chart(e["faktoren"], e["preis_pro_m2"])
-    st.plotly_chart(fig_waterfall, width="stretch")
+    st.markdown("### Preiszusammensetzung – Schritt für Schritt") # Streamlit Funktion, zeigt formatierten Text an, ### definiert die größe der Überschrift
+    st.caption("Wie sich der Endpreis aus dem Basispreis und den einzelnen Faktoren aufbaut.") #Streamlit Funktion, zeigt formatierten Text an, hier als Erklärungstext zum Chart
+    fig_waterfall = erstelle_waterfall_chart(e["faktoren"], e["preis_pro_m2"]) # Python Funktionsaufruf
+    st.plotly_chart(fig_waterfall, width="stretch") # Streamlit Funktion, zeigt das Diagramm an, welches in der vorherigen Zeile erstellt wurde.
 
     # Chart 2: Gauge
     st.markdown("### Preis im Marktvergleich")
@@ -176,7 +176,7 @@ if st.session_state.ergebnis:
         f"Der grüne Strich zeigt den Basispreis für {e['quartier']}. "
         "Die farbigen Zonen zeigen günstig (grün), mittel (gelb) und teuer (rot) im Vergleich zu allen Zürcher Quartieren."
     )
-    fig_gauge = erstelle_gauge_chart(e["preis_pro_m2"], e["quartier"], e["ml_basispreis"], BASISPREIS_PRO_QUARTIER)
+    fig_gauge = erstelle_gauge_chart(e["preis_pro_m2"], e["quartier"], e["ml_basispreis"], BASISPREIS_PRO_QUARTIER) # Python Dictionary Zugriff
     st.plotly_chart(fig_gauge, width="stretch")
 
     # Chart 3: Heatmap
