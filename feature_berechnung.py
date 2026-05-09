@@ -48,10 +48,15 @@ AUSSTATTUNG_FAKTOREN = {
 
 def faktor_baujahr(baujahr):
     alter = 2026 - baujahr #Alter der Immobilie wird berechnet
-    faktor = (80 - alter) / 80  # Restwert nach Gutknecht
-    faktor = max(0.01, min(faktor, 1.0))  # begrenzt auf 0.01 bis 1.0
+    
+    if alter >= 25:  # Vintage-Effekt: ab 25 Jahren wird der Faktor eingefroren (Dambon et al., 2022)
+        faktor = (80 - 25) / 80  # = 0.6875, Gutknecht-Wert bei 25 Jahren
+    else:
+        faktor = (80 - alter) / 80  # Restwert nach Gutknecht (n.d.)
+    
     return faktor
-    #Die gewaehlte Formel basiert auf der Berechnung der Alterswertminderung gemaess Gutknecht (n.d.). Dabei wird eine Gesamtnutzungsdauer von 80 Jahren angenommen. 
+    #Die gewaehlte Formel basiert auf der Berechnung der Alterswertminderung gemaess Gutknecht (n.d.). Dabei wird eine Gesamtnutzungsdauer von 80 Jahren angenommen.
+    #Ab einem Alter von 25 Jahren wird der Faktor eingefroren, da gemaess Dambon et al. (2022) ab diesem Alter ein Vintage-Effekt eintreten kann.
 
 def lift_faktor_berechnen(stockwerk):
     #Berechnet den Lift-Faktor abhängig vom Stockwerk.
@@ -108,11 +113,12 @@ def berechne_preis(quartier, zimmerzahl, wohnflaeche, baujahr,
 #Literaturverzeichnis
 #=====================
 
-#Niklowitz, M. (2026, April 18). Seesicht bei Immobilien: Wieviel zahlt man drauf? cash.ch. Retrieved May 7, 2026, from https://www.cash.ch/news/top-news/seesicht-bei-immobilien-wieviel-zahlt-man-drauf-927267
 #Chau, K. W., Wong, S. K., & Yiu, C. Y. (2004). The value of the provision of a balcony in apartments in Hong Kong. Property Management, 22(3), 250–264. https://doi.org/10.1108/02637470410545020
 #Conroy, S., Narwold, A., & Sandy, J. (2013). The value of a floor: valuing floor level in high‐rise condominiums in San Diego. International Journal of Housing Markets and Analysis, 6(2), 197–208. https://doi.org/10.1108/ijhma-01-2012-0003
 #Dai, X., Yu, X., Ma, L., & Zheng, P. (2026). The Economic Benefit Evaluation of Elevator Retrofitting: An Empirical Analysis of Second-Hand Housing Price Premiums in Hangzhou’s Older Residential Compounds. Buildings, 16(1), 220. https://doi.org/10.3390/buildings16010220
+#Dambon, J. A., Fahrländer, S. S., Karlen, S., Lehner, M., Schlesinger, J., Sigrist, F., & Zimmermann, A. (2022). Examining the vintage effect in hedonic pricing using spatially varying coefficients models: a case study of single-family houses in the Canton of Zurich. Zeitschrift Für Schweizerische Statistik Und Volkswirtschaft/Schweizerische Zeitschrift Für Volkswirtschaft Und Statistik/Swiss Journal of Economics and Statistics, 158(1). https://doi.org/10.1186/s41937-021-00080-2
 #Deschermeier, P., Henger, R., Oberst, C., & Institut der deutschen Wirtschaft Köln e. V. (2023). Bedarfe und Preise. In BPD Immobilienentwicklung GmbH, Institut Der Deutschen Wirtschaft Köln E. V.
 #Frey, S. (2026, February 4). The impact of property condition on sale price and time on market - Seb Frey, Silicon Valley + Bay Area REALTOR. Seb Frey, Silicon Valley + Bay Area REALTOR. https://sebfrey.com/the-impact-of-property-condition-on-sale-price-and-time-on-market/
 #Gutknecht, L. (n.d.). Altersabschlag beim Haus: Alterswertminderung von Immobilien berechnen. Wohnglück.de. https://wohnglueck.de/artikel/altersabschlag
 #Kempf, C., & Syz, J. (2022). Why pay for sustainable housing? Decomposing the green premium of the residential property market in the Canton of Zurich, Switzerland. SN Business & Economics, 2(11). https://doi.org/10.1007/s43546-022-00346-8
+#Niklowitz, M. (2026, April 18). Seesicht bei Immobilien: Wieviel zahlt man drauf? cash.ch. Retrieved May 7, 2026, from https://www.cash.ch/news/top-news/seesicht-bei-immobilien-wieviel-zahlt-man-drauf-927267
