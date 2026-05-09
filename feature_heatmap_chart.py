@@ -72,7 +72,7 @@ def erstelle_heatmap_karte(ausgewaehltes_quartier, quartier_koordinaten, basispr
         ist_ausgewaehlt = (quartier == ausgewaehltes_quartier)
         rand_farbe  = "#1a1a2e" if ist_ausgewaehlt else "#ffffff"  # Setzt die Randfarbe: dunkel (#1a1a2e) wenn ausgewählt, sonst weiss
         rand_breite = 3 if ist_ausgewaehlt else 1                      # Setzt die Randbreite: 3 Pixel wenn ausgewählt, sonst 1 Pixel
-        radius      = 600 if ist_ausgewaehlt else 450 #rausnehmen?
+        
 
         # Kreis mit Tooltip
         folium.CircleMarker(
