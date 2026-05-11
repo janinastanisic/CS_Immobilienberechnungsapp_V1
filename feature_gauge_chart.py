@@ -33,42 +33,42 @@ def erstelle_gauge_chart(preis_pro_m2, quartier, ml_basispreis, BASISPREIS_PRO_Q
     min_preis   = min(BASISPREIS_PRO_QUARTIER.values())   # Günstigstes Quartier im Dictionary suchen
     max_preis   = max(BASISPREIS_PRO_QUARTIER.values())   # Teuerstes Quartier im dictionary suchen
 
-    fig = go.Figure(go.Indicator(
-        mode  = "gauge+number+delta",
-        value = preis_pro_m2,
+    fig = go.Figure(go.Indicator( #Erstellt einen Plotly-Chart vom Typ Indicator
+        mode  = "gauge+number+delta", #Zeigt drei Elemente: Den Halbkreis, die grosse Zahl in der Mitte und die Differenz zum Basispreis
+        value = preis_pro_m2, #Der berechnete Endpreis der Wohnung
         delta = {
-            "reference": basispreis,
-            "increasing": {"color": "#16a34a"},
-            "decreasing": {"color": "#dc2626"},
+            "reference": basispreis, #Vergleichswert: ML-Basispreis
+            "increasing": {"color": "#16a34a"}, #Grün, wenn teurer als Basispreis
+            "decreasing": {"color": "#dc2626"}, #Rot, wenn günstiger als Basispreis
             "suffix": " CHF/m2"
         },
-        number = {"suffix": " CHF/m²", "font": {"size": 28}},
-        title = {"text": f"{quartier}: Preis im Vergleich zum Zürcher Markt",
+        number = {"suffix": " CHF/m²", "font": {"size": 28}}, #Formatiert Zahl mit Einheit und Schriftgrösse
+        title = {"text": f"{quartier}: Preis im Vergleich zum Zürcher Markt", #Definiert den Titel mit dynamischem Quartiernamen
                   "font": {"size": 14}},
         gauge  = {
             "axis": {
-                "range":     [min_preis * 0.8, max_preis * 1.1],
-                "ticksuffix": " CHF",
-                "tickfont":   {"size": 11},
+                "range":     [min_preis * 0.8, max_preis * 1.1], #Definiert die Range des Gauge Chart: 20% unter günstigstem und 10% über teuerstem Quartier
+                "ticksuffix": " CHF", #Einheiten auf der Skala
+                "tickfont":   {"size": 11}, #Schriftgrösse der Skala
             },
-            "bar":       {"color": "#2563eb"},
-            "steps": [
-                {"range": [min_preis * 0.8, min_preis * 1.1], "color": "#dcfce7"},
-                {"range": [min_preis * 1.1, max_preis * 0.9], "color": "#fef9c3"},
-                {"range": [max_preis * 0.9, max_preis * 1.1], "color": "#fee2e2"},
+            "bar":       {"color": "#2563eb"}, #Definiert den blauen Balken
+            "steps": [ #Definiert die ranges der Färbung
+                {"range": [min_preis * 0.8, min_preis * 1.1], "color": "#dcfce7"}, #grün = günstig
+                {"range": [min_preis * 1.1, max_preis * 0.9], "color": "#fef9c3"}, #gelb = mittel
+                {"range": [max_preis * 0.9, max_preis * 1.1], "color": "#fee2e2"}, #rot = teuer
             ],
             "threshold": {
-                "line":  {"color": "#1D9E75", "width": 3},
-                "value": basispreis,
+                "line":  {"color": "#1D9E75", "width": 3}, #Definiert die grüne Linie, 3px breit
+                "value": basispreis, #Die grüne Linie zeigt den Basispreis
             },
         }
     ))
 
     fig.update_layout(
-        plot_bgcolor  = "white",
-        paper_bgcolor = "white",
-        height        = 300,
-        margin        = dict(t=80, b=20, l=40, r=40),
+        plot_bgcolor  = "white", #Weisser Hintergrund des Charts
+        paper_bgcolor = "white", #Weisser Hintergrund der ganzen Figur
+        height        = 300, #Pixel
+        margin        = dict(t=80, b=20, l=40, r=40), #Abstände zu den Seiten
     )
     return fig
 
