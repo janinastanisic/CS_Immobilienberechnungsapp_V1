@@ -34,14 +34,14 @@ def erstelle_gauge_chart(preis_pro_m2, quartier, ml_basispreis, BASISPREIS_PRO_Q
     max_preis   = max(BASISPREIS_PRO_QUARTIER.values())   # Teuerstes Quartier im dictionary suchen
 
     # Range dynamisch anpassen falls Endpreis die Range überschreitet
-    gauge_min = min_preis * 0.8
-    gauge_max = max(max_preis * 1.1, preis_pro_m2 * 1.1)  # Endpreis wird berücksichtigt
+    gauge_min = float(min_preis * 0.8)
+    gauge_max = float(max(max_preis * 1.1, preis_pro_m2 * 1.1))  # Endpreis wird berücksichtigt
 
     fig = go.Figure(go.Indicator( #Erstellt einen Plotly-Chart vom Typ Indicator
         mode  = "gauge+number+delta", #Zeigt drei Elemente: Den Halbkreis, die grosse Zahl in der Mitte und die Differenz zum Basispreis
-        value = preis_pro_m2, #Der berechnete Endpreis der Wohnung
+        value = float(preis_pro_m2), #Der berechnete Endpreis der Wohnung, explizit als float
         delta = {
-            "reference": basispreis, #Vergleichswert: ML-Basispreis
+            "reference": float(basispreis), #Vergleichswert: ML-Basispreis
             "increasing": {"color": "#666666"}, #grau wenn teurer als Basispreis
             "decreasing": {"color": "#666666"}, #grau wenn günstiger als Basispreis
             "suffix": " CHF/m2"
@@ -57,13 +57,13 @@ def erstelle_gauge_chart(preis_pro_m2, quartier, ml_basispreis, BASISPREIS_PRO_Q
             },
             "bar":       {"color": "#2563eb"}, #Definiert den blauen Balken
             "steps": [ #Definiert die ranges der Färbung
-                {"range": [gauge_min, min_preis * 1.1], "color": "#dcfce7"}, #grün = günstig
-                {"range": [min_preis * 1.1, max_preis * 0.9], "color": "#fef9c3"}, #gelb = mittel
-                {"range": [max_preis * 0.9, gauge_max], "color": "#fee2e2"}, #rot = teuer
+                {"range": [gauge_min, float(min_preis * 1.1)], "color": "#dcfce7"}, #grün = günstig
+                {"range": [float(min_preis * 1.1), float(max_preis * 0.9)], "color": "#fef9c3"}, #gelb = mittel
+                {"range": [float(max_preis * 0.9), gauge_max], "color": "#fee2e2"}, #rot = teuer
             ],
             "threshold": {
                 "line":  {"color": "#1D9E75", "width": 3}, #Definiert die grüne Linie, 3px breit
-                "value": basispreis, #Die grüne Linie zeigt den Basispreis
+                "value": float(basispreis), #Die grüne Linie zeigt den Basispreis
             },
         }
     ))
