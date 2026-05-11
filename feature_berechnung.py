@@ -24,7 +24,7 @@
 from feature_machine_learning import ml_basispreis_schaetzen
 
 # ─────────────────────────────────────────────
-# KORREKTURFAKTOREN:Der Faktor wird mit dem Basispreis mulitpliziert und passt den Preis prozentual an. Bsp. Faktor 0.92 = Preis wird um 8% reduziert.
+# KORREKTURFAKTOREN:Der Faktor wird mit dem Basispreis mulitpliziert und passt den Preis prozentual an. Bsp. Faktor 1.1 = Preis wird um 10% erhöht.
 # ─────────────────────────────────────────────
 
 FAKTOR_ZUSTAND = { 
@@ -32,9 +32,9 @@ FAKTOR_ZUSTAND = {
     "Gut gepflegt":          1.075,
     "Renovationsbedürftig": 1.00,
 }
-#Gemäss Frey (2026) führt ein neuwertiger Zustand zu einer Wertsteigerung von 10 bis 15 %, während für einen guten Zustand 
-#eine Wertsteigerung von 5 bis 10 % angegeben wird. Für die vorliegende Bewertung wurde jeweils der Mittelwert der in der 
-#Quelle genannten Spannbreiten als Korrekturfaktor verwendet, sodass 12,5 % für den neuwertigen sowie 7,5 % für den guten Zustand gewält wurden.
+#Gemäss Frey (2026) führt ein neuwertiger Zustand zu einer Wertsteigerung von 10-15%, während für einen guten Zustand 
+#eine Wertsteigerung von 5-10% angegeben wird. Für die vorliegende Bewertung wurde jeweils der Mittelwert der in der 
+#Quelle genannten Spannbreiten als Korrekturfaktor verwendet, sodass 12,5% für den neuwertigen sowie 7,5% für den guten Zustand gewält wurden
 
 FAKTOR_STOCKWERK = {
     "Erdgeschoss":                   1.00,
@@ -49,7 +49,7 @@ FAKTOR_STOCKWERK = {
     "9. Obergeschoss":               1.198,
     "10. Obergeschoss oder höher":  1.22,
 }
-#Gemäss Conroy et al. (1013, S.201) geht ein höheres Stockwerk mit einem Anstieg des Immobilienpreises von 2.2 Prozent einher. 
+#Gemäss Conroy et al. (1013, S.201) geht ein höheres Stockwerk mit einem Anstieg des Immobilienpreises von 2.2 Prozent einher 
 
 AUSSTATTUNG_FAKTOREN = {
     "hat_balkon":    0.1385,
@@ -57,12 +57,12 @@ AUSSTATTUNG_FAKTOREN = {
     "hat_lift":      0.00,#wird nicht direkt verwendet, Faktor_Lift wird stockwerkabhängig in berechne_preis() berechnet
     "hat_seesicht":  0.11,
     "hat_minergie":  0.491,
-} #Jede zusätzliche Ausstattung addiert einen Prozentsatz zum Preis: Bsp. Faktor 0.10 = +10%.
+} #Jede zusätzliche Ausstattung addiert einen Prozentsatz zum Preis: Bsp. Faktor 0.10 = +10%
 #Gemäss Chau et al. (2004, S. 256) führt ein grosser Balkon mit guter Aussicht zu 24 Prozent höherem Kaufpreis und ein kleiner Balkon ohne Aussicht 
-#zu 3.7% höherem Kaufpreis. Für den gewählten Korrekturfaktor hat_balkon von 13.85 Prozent haben wir daraus den Mittelwert berechnet. 
-#Gemäss Deschermeier et al. (2023, S. 46) steigert eine Tiefgarage den Immobilienwert um durchschnittlich 10 Prozent.
-#Gemäss Niklowitz (2026) erhöht eine Seesicht den Immobilienpreis um 11 Prozent.
-#Gemäss Kempf & Syz (2022, S. 170) hat die Stadt Zürich eine Minergie Preisprämie von 4.91 Prozent.
+#zu 3.7 Prozent höherem Kaufpreis. Für den gewählten Korrekturfaktor hat_balkon von 13.85 Prozent haben wir daraus den Mittelwert berechnet
+#Gemäss Deschermeier et al. (2023, S. 46) steigert eine Tiefgarage den Immobilienwert um durchschnittlich 10 Prozent
+#Gemäss Niklowitz (2026) erhöht eine Seesicht den Immobilienpreis um 11 Prozent
+#Gemäss Kempf & Syz (2022, S. 170) hat die Stadt Zürich eine Minergie Preisprämie von 4.91 Prozent
 
 # ─────────────────────────────────────────────
 # BAUJAHR-FAKTOR: 
@@ -73,16 +73,16 @@ def faktor_baujahr(baujahr):
     abschreibung = min(alter * 0.01, 0.40)  # 1% pro Jahr, max. 40% wird abgeschrieben
     faktor = 1.0 - abschreibung
     return faktor
-    # Quelle: Weisung Liegenschaftenneubewertung 2026, Kanton Zürich.
-    # Altersentwertung = 1% des Neubauwerts pro Jahr, höchstens 40%.
+    # Quelle: Weisung Liegenschaftenneubewertung 2026, Kanton Zürich
+    # Altersentwertung = 1% des Neubauwerts pro Jahr, höchstens 40%
     # (Kanton Zürich, 2026)
 
 def lift_faktor_berechnen(stockwerk):
-    #Berechnet den Lift-Faktor abhängig vom Stockwerk.
+    #Berechnet den Lift-Faktor abhängig vom Stockwerk
     #Erdgeschoss: kein Effekt (Faktor 0)
     #1.-2. OG: +1.59% 
     #3.-5. OG: +4.58% 
-    #6.-10. OG: +8.10% Gemäss Dai et al. (2026, S. 21) erhöht ein Lift im Gebäude den Wohnungspreis bei unteren Stockwerken um 1.59 Prozent, bei mittleren um 4.58% und bei höheren um 8.10 Prozent.
+    #6.-10. OG: +8.10% Gemäss Dai et al. (2026, S. 21) erhöht ein Lift im Gebäude den Wohnungspreis bei unteren Stockwerken um 1.59 Prozent, bei mittleren um 4.58 Prozent und bei höheren um 8.10 Prozent
     if stockwerk == "Erdgeschoss":
         return 0.00
     elif stockwerk in ["1. Obergeschoss", "2. Obergeschoss"]:
@@ -100,11 +100,11 @@ def lift_faktor_berechnen(stockwerk):
 # ─────────────────────────────────────────────
 def berechne_preis(quartier, zimmerzahl, wohnflaeche, baujahr,
                    stockwerk, zustand, ausstattung,knn_modell, knn_le, BASISPREIS_PRO_QUARTIER): #Definition einer Funktion mit Eingabewerten
-    ml_preis = ml_basispreis_schaetzen(knn_modell, knn_le, quartier, zimmerzahl, jahr=2026) #berechnet den Basispreis: Jahr wird als 2026 gesetzt, da die Schätzung für den heutigen Preis ist
+    ml_preis = ml_basispreis_schaetzen(knn_modell, knn_le, quartier, zimmerzahl, jahr=2026) #Berechnet den Basispreis: Jahr wird als 2026 gesetzt, da die Schätzung für den heutigen Preis ist
     basispreis = ml_preis if ml_preis is not None else BASISPREIS_PRO_QUARTIER.get(quartier, 11000) #zb. 11k/m^2 und sonst den berechneten durchschnitt unserer Daten als Basispreis
     f_zustand   = FAKTOR_ZUSTAND.get(zustand, 1.00) #holt den Wert, der bei zustand als Input angegeben wurde und nimmt den Korrekturfaktor. Falls der Wert nicht gefunden wurde, wird 1.00 als Standardwert verwendet.
     f_stockwerk = FAKTOR_STOCKWERK.get(stockwerk, 1.00) #holt den Wert, der bei stockwerk als Input angegeben wurde und nimmt den Korrekturfaktor. Falls der Wert nicht gefunden wurde, wird 1.00 als Standardwert verwendet.
-    f_baujahr   = faktor_baujahr(baujahr) #holt den Wert, der bei baujahr als Input angegeben wurde und nimmt den Korrekturfaktor.
+    f_baujahr   = faktor_baujahr(baujahr) #holt den Wert, der bei baujahr als Input angegeben wurde und nimmt den Korrekturfaktor
 
     f_ausstattung = 1.00 #Startet bei 1.00. 
     for merkmal, wert in ausstattung.items(): #Iteriert mit einer for Schleife durch alle Ausstattungsmerkmale durch
@@ -115,10 +115,10 @@ def berechne_preis(quartier, zimmerzahl, wohnflaeche, baujahr,
                 f_ausstattung += AUSSTATTUNG_FAKTOREN.get(merkmal, 0) #Holt den Faktor für das Ausstattungsmerkmal aus dem obigen Dictionary und addiert ihn zu 1.00
     
     preis_pro_m2 = (basispreis * f_zustand
-                    * f_stockwerk * f_baujahr * f_ausstattung) #Berechnet den Preis pro Quadratmeter, indem es unser durch das ML-modell kalulierter Basispreis mit allen Korrekturfaktoren multipliziert
-    gesamtpreis  = preis_pro_m2 * wohnflaeche #Berechnet den Gesamtpreis indem der Preis pro Quadratmeter mit der wohnflaeche als Input Multipliziert wird
+                    * f_stockwerk * f_baujahr * f_ausstattung) #Berechnet den Preis pro Quadratmeter, indem es unseren durch das ML-modell kalulierten Basispreis mit allen Korrekturfaktoren multipliziert
+    gesamtpreis  = preis_pro_m2 * wohnflaeche #Berechnet den Gesamtpreis indem der Preis pro Quadratmeter mit der wohnflaeche als Input multipliziert wird
 
-    faktoren = { #speichert die berechneten Faktoren als Dictionary ab
+    faktoren = { #Speichert die berechneten Faktoren als Dictionary ab
         "Basispreis (Quartier)": basispreis,
         "Zustand":               f_zustand,
         "Stockwerk":             f_stockwerk,
