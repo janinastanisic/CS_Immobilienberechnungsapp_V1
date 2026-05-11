@@ -33,13 +33,17 @@ def erstelle_gauge_chart(preis_pro_m2, quartier, ml_basispreis, BASISPREIS_PRO_Q
     min_preis   = min(BASISPREIS_PRO_QUARTIER.values())   # Günstigstes Quartier im Dictionary suchen
     max_preis   = max(BASISPREIS_PRO_QUARTIER.values())   # Teuerstes Quartier im dictionary suchen
 
+    # Range dynamisch anpassen falls Endpreis die Range überschreitet
+    gauge_min = min_preis * 0.8
+    gauge_max = max(max_preis * 1.1, preis_pro_m2 * 1.1)  # Endpreis wird berücksichtigt
+
     fig = go.Figure(go.Indicator( #Erstellt einen Plotly-Chart vom Typ Indicator
         mode  = "gauge+number+delta", #Zeigt drei Elemente: Den Halbkreis, die grosse Zahl in der Mitte und die Differenz zum Basispreis
         value = preis_pro_m2, #Der berechnete Endpreis der Wohnung
         delta = {
             "reference": basispreis, #Vergleichswert: ML-Basispreis
-            "increasing": {"color": "#16a34a"}, #Grün, wenn teurer als Basispreis
-            "decreasing": {"color": "#dc2626"}, #Rot, wenn günstiger als Basispreis
+            "increasing": {"color": "#666666"}, #grau wenn teurer als Basispreis
+            "decreasing": {"color": "#666666"}, #grau wenn günstiger als Basispreis
             "suffix": " CHF/m2"
         },
         number = {"suffix": " CHF/m²", "font": {"size": 28}}, #Formatiert Zahl mit Einheit und Schriftgrösse
@@ -47,15 +51,15 @@ def erstelle_gauge_chart(preis_pro_m2, quartier, ml_basispreis, BASISPREIS_PRO_Q
                   "font": {"size": 14}},
         gauge  = {
             "axis": {
-                "range":     [min_preis * 0.8, max_preis * 1.1], #Definiert die Range des Gauge Chart: 20% unter günstigstem und 10% über teuerstem Quartier
+                "range":     [gauge_min, gauge_max], #Definiert die Range des Gauge Chart: dynamisch angepasst
                 "ticksuffix": " CHF", #Einheiten auf der Skala
                 "tickfont":   {"size": 11}, #Schriftgrösse der Skala
             },
             "bar":       {"color": "#2563eb"}, #Definiert den blauen Balken
             "steps": [ #Definiert die ranges der Färbung
-                {"range": [min_preis * 0.8, min_preis * 1.1], "color": "#dcfce7"}, #grün = günstig
+                {"range": [gauge_min, min_preis * 1.1], "color": "#dcfce7"}, #grün = günstig
                 {"range": [min_preis * 1.1, max_preis * 0.9], "color": "#fef9c3"}, #gelb = mittel
-                {"range": [max_preis * 0.9, max_preis * 1.1], "color": "#fee2e2"}, #rot = teuer
+                {"range": [max_preis * 0.9, gauge_max], "color": "#fee2e2"}, #rot = teuer
             ],
             "threshold": {
                 "line":  {"color": "#1D9E75", "width": 3}, #Definiert die grüne Linie, 3px breit
@@ -71,4 +75,3 @@ def erstelle_gauge_chart(preis_pro_m2, quartier, ml_basispreis, BASISPREIS_PRO_Q
         margin        = dict(t=80, b=20, l=40, r=40), #Abstände zu den Seiten
     )
     return fig
-
