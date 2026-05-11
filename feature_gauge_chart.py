@@ -30,8 +30,8 @@ def erstelle_gauge_chart(preis_pro_m2, quartier, ml_basispreis, BASISPREIS_PRO_Q
     Quartier günstig, durchschnittlich oder teuer ist.
     """
     basispreis  = ml_basispreis                           # ML-Basispreis als Referenzlinie verwenden
-    min_preis   = min(BASISPREIS_PRO_QUARTIER.values())   # günstigstes Quartier im Dictionary suchen
-    max_preis   = max(BASISPREIS_PRO_QUARTIER.values())   # teuerstes Quartier im dictionary suchen
+    min_preis   = min(BASISPREIS_PRO_QUARTIER.values())   # Günstigstes Quartier im Dictionary suchen
+    max_preis   = max(BASISPREIS_PRO_QUARTIER.values())   # Teuerstes Quartier im dictionary suchen
 
     fig = go.Figure(go.Indicator(
         mode  = "gauge+number+delta",
