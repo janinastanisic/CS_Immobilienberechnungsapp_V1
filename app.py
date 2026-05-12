@@ -33,7 +33,7 @@ from feature_gauge_chart import erstelle_gauge_chart #importiert die Funktion er
 from feature_berechnung import berechne_preis, FAKTOR_ZUSTAND, FAKTOR_STOCKWERK, AUSSTATTUNG_FAKTOREN #Importiert die Funktion berechne_preis mit verschiedenen Faktoren von dem feature_berechnung
 
 st.set_page_config(
-    page_title="Fairestate - Wohnungspreisschätzer der Stadt Zürich", #Setzt den Titel im Browser
+    page_title="FairEstate - Wohnungspreisschätzer der Stadt Zürich", #Setzt den Titel im Browser
     layout="centered" #zentriert das layout auf Streamlit mittig
 )
 
@@ -65,7 +65,7 @@ QUARTIER_KOORDINATEN = get_koordinaten() #Die Funktion get_Koordinaten wird aufg
 # =============================================================
 
 st.title("Fairestate - Wohnungspreisschätzer der Stadt Zürich") #Erstellt den Titel in Streamlit
-st.write("Gib die Eigenschaften deiner Immobilie ein - wir berechnen den geschätzten Marktwert.") #Erstellt den Beschreibungstext in Streamlit
+st.write("Gib die Eigenschaften deiner Wohnung ein - wir berechnen den geschätzten Marktwert.") #Erstellt den Beschreibungstext in Streamlit
 st.markdown("---") #Erstellt eine horizontale Trennlinie in Streamlit
 
 # ── 1. LAGE ──
