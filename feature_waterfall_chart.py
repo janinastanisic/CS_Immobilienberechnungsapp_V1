@@ -31,8 +31,7 @@ import plotly.graph_objects as go
 
 def erstelle_waterfall_chart(faktoren, preis_pro_m2):       
     
-    # Docstring unten beschreibt die Funktion, ihre Parameter und was sie tut. 
-    # Es ist eine gute Praxis, Funktionen mit einem Docstring zu dokumentieren, damit andere Coder verstehen, was die Funktion macht und wie man sie verwenden soll.
+    # Docstring unten beschreibt die Funktion, ihre Parameter und was sie tut 
     """                                                                    
     Zeigt den Aufbau des Preises als Wasserfall-Diagramm.
     Jeder Balken zeigt den CHF-Beitrag eines Faktors.
@@ -46,11 +45,11 @@ def erstelle_waterfall_chart(faktoren, preis_pro_m2):
 
     basispreis = faktoren["Basispreis (Quartier)"]  
     # Der Basispreis repräsentiert CHF/m2 des Quartiers
-    # Es wird auf das dictionary "faktoren" zugegriffen und den Wert zum Key "Basispreis (Quartier)" rausgeholt. 
-    # Dieser Wert hängt nur von der Lage ab – noch ohne Korrekturen wie Zimmerzahl oder Zustand.
+    # Es wird auf das dictionary "faktoren" zugegriffen und den Wert zum Key "Basispreis (Quartier)" rausgeholt 
+    # Dieser Wert hängt nur von der Lage ab – noch ohne Korrekturen wie Zimmerzahl oder Zustand
     
-    # 5 Faktoren, aus dem grossen dictionary rausgenommen und in ein kleineres dictionary namens faktor_map gepackt.
-    # Kurz gesagt, faktoren = alles, und faktor_map = nur die 5 Multiplikatoren, die den Preis beeinflussen.
+    # 5 Faktoren, aus dem grossen dictionary rausgenommen und in ein kleineres dictionary namens faktor_map gepackt
+    # Kurz gesagt, faktoren = alles, und faktor_map = nur die 5 Multiplikatoren, die den Preis beeinflussen
     faktor_map = {
         "Zustand":     faktoren["Zustand"],
         "Stockwerk":   faktoren["Stockwerk"],
@@ -61,8 +60,8 @@ def erstelle_waterfall_chart(faktoren, preis_pro_m2):
 
     # --> CHF-Beitrag jedes Faktors berechnen
     # Logik: Wie viel CHF/m2 kommt durch diesen Faktor dazu oder weg?
-    # Basispreis wird schrittweise mit jedem Faktor multipliziert.
-    # Der Unterschied zum vorherigen Schritt = Beitrag dieses Faktors.
+    # Basispreis wird schrittweise mit jedem Faktor multipliziert
+    # Der Unterschied zum vorherigen Schritt = Beitrag dieses Faktors
 
     # zum Beispiel:
     #   Basispreis:          12'000.-
@@ -71,18 +70,18 @@ def erstelle_waterfall_chart(faktoren, preis_pro_m2):
     #   × Baujahr (0.95):    12'791.-  --> -673 CHF/m2
 
 
-    # leere Listen für die Daten des Diagramms vorbereiten bevor Loop beginnt
+    # Leere Listen für die Daten des Diagramms vorbereiten bevor Loop beginnt
     namen  = []   # x-Achse: Bezeichnungen
     werte  = []   # y-Achse: CHF-Beitrag pro Faktor
     farben = []   # grün = positiv, rot = negativ
 
 
-    laufender_preis = basispreis  # startet beim Basispreis
+    laufender_preis = basispreis  # Startet beim Basispreis
     # laufender_preis ändert sich durch alle Multiplikatoren
 
 
     for name, faktor in faktor_map.items():     # Loop-Header, dieser startet die Iteration
-        # alles drinn wird wiederholt für jeden Faktor (Zimmerzahl, Zustand, Stockwerk,Baujahr, Ausstattung)
+        # Alles drinn wird wiederholt für jeden Faktor (Zimmerzahl, Zustand, Stockwerk,Baujahr, Ausstattung)
         
         neuer_preis = laufender_preis * faktor          # Preis nach diesem Faktor: laufender Preis x Multiplikator
         beitrag = round(neuer_preis - laufender_preis)  # Differenz zwischen vorher/nacher = Einfluss in CHF/m2
@@ -97,11 +96,11 @@ def erstelle_waterfall_chart(faktoren, preis_pro_m2):
             # Grün wenn Faktor Preis erhöht, Rot wenn er ihn senkt
             farben.append("#1D9E75" if beitrag >= 0 else "#D85A30")
         
-        laufender_preis = neuer_preis  # nächster Faktor startet vom neuen Preis
+        laufender_preis = neuer_preis  # Nächster Faktor startet vom neuen Preis
             # Wichtig: ausserhalb des if --> wird immer aktualisiert, nicht nur wenn Beitrag > 10
 
 
-    # Basispreis und Endpreis als Rahmen hinzufügen, damit der Chart von Anfang bis Ende die Preisveränderungen zeigt.
+    # Basispreis und Endpreis als Rahmen hinzufügen, damit der Chart von Anfang bis Ende die Preisveränderungen zeigt
     # "inside" = Balken im Waterfall-Chart (relative Änderung)
     # "total"  = absoluter Wert (Basispreis und Endpreis)
     alle_namen  = ["Lage (Quartier)"] + namen           + ["Endpreis"]
