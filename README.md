@@ -97,8 +97,9 @@ Semester: Frühling 2026
 
 Dieses Projekt ist für akademische Zwecke an der HSG entwickelt worden.
 
-### Literaturverzeichnis:
+### Quellenverzeichnis:
 
+Anthropic. (2026). Claude (Version claude-sonnet-4-5) [Large language model]. https://www.anthropic.com
 Chau, K. W., Wong, S. K., & Yiu, C. Y. (2004). The value of the provision of a balcony in apartments in Hong Kong. Property Management, 22(3), 250–264. https://doi.org/10.1108/02637470410545020
 Conroy, S., Narwold, A., & Sandy, J. (2013). The value of a floor: Valuing floor level in high-rise condominiums in San Diego. International Journal of Housing Markets and Analysis, 6(2), 197–208. https://doi.org/10.1108/ijhma-01-2012-0003
 Dai, X., Yu, X., Ma, L., & Zheng, P. (2026). The economic benefit evaluation of elevator retrofitting: An empirical analysis of second-hand housing price premiums in Hangzhou's older residential compounds. Buildings, 16(1), 220. https://doi.org/10.3390/buildings16010220
