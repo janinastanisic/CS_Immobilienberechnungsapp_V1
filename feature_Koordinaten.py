@@ -4,7 +4,7 @@
 
 # ZUSAMMENFASSUNG
 # Dieses Feature stellt die Mittelpunkt-Koordinaten (Latitude/Longitude)
-# aller 24 Zürcher Stadtquartiere als Dictionary bereit.
+# aller Zürcher Stadtquartiere als Dictionary bereit.
 # Die Koordinaten werden von der Heatmap-Karte benötigt, um die
 # farbigen Kreise an der richtigen Stelle zu platzieren.
 
@@ -14,7 +14,7 @@
 #    (Latitude, Longitude)-Tupel als Wert wird zurückgegeben
 
 # Hinweis: Koordinaten sind hardcodiert, da der offizielle der CSV link nicht funktioniert da die Stadt Zürich 
-# #höchstwahrscheinlich den Zugriff blockiert hat. Wir haben probiert die Daten herunterzuladen und manuell abzuspeichern, 
+# höchstwahrscheinlich den Zugriff blockiert hat. Wir haben probiert die Daten herunterzuladen und manuell abzuspeichern, 
 # aber die Daten haben keine Lat/Lon Spalten sondern nur geometry mit POLYGON Koordinaten.
 # Quelle: https://www.stadt-zuerich.ch/geodaten/download/Statistische_Quartiere?format=10008
 # LV59 in WGS84-Koordinaten-Umrechner: https://zurzach.ag/liegenschaften/lv95-in-wgs84-koordinaten-fuer-google-maps-oder-openstreetmap-umrechnen-und-konvertieren/
@@ -26,11 +26,13 @@ def get_koordinaten(): #Funktion get_koordinaten wird definiert
     return { #Die Funktion gibt ein Dictionary zurück mit Quartiername als Schlüssel (string), Latitude und Longitude (Tupel).
         "Affoltern":            (47.42318535463998, 8.50649991576755),
         "Albisrieden":          (47.37104029612350, 8.48484913751854),
+        "Alt-Wiedikon":         (47.36216329491238, 8.51661312335753), 
         "Altstetten":           (47.38873152342202, 8.47940156739079),
         "City":                 (47.37138258712049, 8.53495017435000),
         "Enge":                 (47.36037645429785, 8.53272762685208),
         "Escher Wyss":          (47.38971927358194, 8.51484575510926),
         "Fluntern":             (47.38212345159577, 8.56213514753654),
+        "Friesenberg":          (47.35444396750115, 8.50133817345913), 
         "Gewerbeschule":        (47.38388463813886, 8.53061421052996),
         "Hard":                 (47.38186639358355, 8.51254179635553),
         "Hirslanden":           (47.36276014977589, 8.56805810527094),
@@ -41,11 +43,19 @@ def get_koordinaten(): #Funktion get_koordinaten wird definiert
         "Langstrasse":          (47.37763850677041, 8.52812648007782),
         "Leimbach":             (47.33147426064787, 8.51072727278173),
         "Lindenhof":            (47.37305924026484, 8.53987336628224),
+        "Mühlebach":            (47.35954153427079, 8.55493056926478), 
+        "Oberstrass":           (47.39081405814454, 8.55308594713427), 
         "Oerlikon":             (47.40838124870649, 8.54572050197929),
         "Rathaus":              (47.37192975529810, 8.54445530400766),
+        "Saatlen":              (47.41184580163440, 8.56448047381798), 
         "Schwamendingen-Mitte": (47.40263884635722, 8.56664825075389),
         "Seebach":              (47.42389591762455, 8.53959877753388),
-        "Wollishofen":          (47.33991307303191, 8.53207644593323),
+        "Seefeld":              (47.35312109750810, 8.55078953054409), 
+        "Sihlfeld":             (47.37327902147930, 8.51086596300272), 
+        "Unterstrass":          (47.39750841539176, 8.53926835972377), 
+        "Weinegg":              (47.35269032348425, 8.57105076328844), 
+        "Werd":                 (47.37157960749605, 8.52752866727059), 
         "Wipkingen":            (47.39722151402933, 8.52337352770674),
         "Witikon":              (47.35928810284236, 8.59639087269490),
+        "Wollishofen":          (47.33991307303191, 8.53207644593323),
     }
