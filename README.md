@@ -1,4 +1,4 @@
-# Fairestate - Wohnungspreisschätzer der Stadt Zürich
+# FairEstate - Wohnungspreisschätzer der Stadt Zürich
 Ein interaktives Tool zur Schätzung von Immobilienpreisen in Zürich basierend auf Lage, Grösse, Zustand und Ausstattung.
 
 ---
@@ -17,10 +17,10 @@ Team: Ainhoa Eggenberger, Ella Querner, Janina Stanisic, Philippe Bloch, Marc Sc
 Business Case: 
 Der Immobilienmarkt ist geprägt von Informationsasymmetrien: Verkäufer und
 Makler verfügen über deutlich mehr Marktwissen als Käufer, was zu Fehlbewertungen 
-und finanziellen Verlusten führt. Fairestate begegnet diesem Problem mit einem datengetriebenen Ansatz.
+und finanziellen Verlusten führt. FairEstate begegnet diesem Problem mit einem datengetriebenen Ansatz.
 
 App: 
-**Fairestate** ist eine interaktive Streamlit-Webanwendung zur Schätzung von Immobilienpreisen in der Stadt Zürich. 
+**FairEstate** ist eine interaktive Streamlit-Webanwendung zur Schätzung von Immobilienpreisen in der Stadt Zürich. 
 Nutzer geben Eigenschaften ihrer Immobilie ein und erhalten eine datenbasierte Preisschätzung. 
 Ein Machine-Learning-Modell berechnet den Basispreis, Korrekturfaktoren passen ihn an die spezifischen Eigenschaften
 an. Die Ergebnisse werden in drei visuellen Charts dargestellt.

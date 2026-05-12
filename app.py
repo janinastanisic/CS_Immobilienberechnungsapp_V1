@@ -1,5 +1,5 @@
 # =============================================================
-# app.py – Fairestate: Wohnungspreisschätzer der Stadt Zürich
+# app.py – FairEstate: Wohnungspreisschätzer der Stadt Zürich
 # Ausführen im Terminal: streamlit run app.py
 # =============================================================
 
@@ -64,7 +64,7 @@ QUARTIER_KOORDINATEN = get_koordinaten() #Die Funktion get_Koordinaten wird aufg
 # STREAMLIT APP
 # =============================================================
 
-st.title("Fairestate - Wohnungspreisschätzer der Stadt Zürich") #Erstellt den Titel in Streamlit
+st.title("FairEstate - Wohnungspreisschätzer der Stadt Zürich") #Erstellt den Titel in Streamlit
 st.write("Gib die Eigenschaften deiner Wohnung ein - wir berechnen den geschätzten Marktwert.") #Erstellt den Beschreibungstext in Streamlit
 st.markdown("---") #Erstellt eine horizontale Trennlinie in Streamlit
 
