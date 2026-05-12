@@ -49,7 +49,7 @@ FAKTOR_STOCKWERK = {
     "9. Obergeschoss":               1.198,
     "10. Obergeschoss oder höher":  1.22,
 }
-#Gemäss Conroy et al. (1013, S.201) geht ein höheres Stockwerk mit einem Anstieg des Immobilienpreises von 2.2 Prozent einher 
+#Gemäss Conroy et al. (2013, S.201) geht ein höheres Stockwerk mit einem Anstieg des Immobilienpreises von 2.2 Prozent einher 
 
 AUSSTATTUNG_FAKTOREN = {
     "hat_balkon":    0.1385,
