@@ -56,7 +56,7 @@ AUSSTATTUNG_FAKTOREN = {
     "hat_tiefgarage": 0.10,
     "hat_lift":      0.00,#wird nicht direkt verwendet, Faktor_Lift wird stockwerkabhängig in berechne_preis() berechnet
     "hat_seesicht":  0.11,
-    "hat_minergie":  0.491,
+    "hat_minergie":  0.0491,
 } #Jede zusätzliche Ausstattung addiert einen Prozentsatz zum Preis: Bsp. Faktor 0.10 = +10%
 #Gemäss Chau et al. (2004, S. 256) führt ein grosser Balkon mit guter Aussicht zu 24 Prozent höherem Kaufpreis und ein kleiner Balkon ohne Aussicht 
 #zu 3.7 Prozent höherem Kaufpreis. Für den gewählten Korrekturfaktor hat_balkon von 13.85 Prozent haben wir daraus den Mittelwert berechnet
