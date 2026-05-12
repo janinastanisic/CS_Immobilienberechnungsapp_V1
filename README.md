@@ -99,16 +99,17 @@ Dieses Projekt ist für akademische Zwecke an der HSG entwickelt worden.
 
 ### Literaturverzeichnis:
 
-Chau, K. W., Wong, S. K., & Yiu, C. Y. (2004). The value of the provision of a balcony in apartments in Hong Kong. Property     Management, 22(3), 250–264. https://doi.org/10.1108/02637470410545020 
-Conroy, S., Narwold, A., & Sandy, J. (2013). The value of a floor: valuing floor level in high‐rise condominiums in San Diego. International Journal of Housing Markets and Analysis, 6(2), 197–208. https://doi.org/10.1108/ijhma-01-2012-0003 
-Dai, X., Yu, X., Ma, L., & Zheng, P. (2026). The Economic Benefit Evaluation of Elevator Retrofitting: An Empirical Analysis of Second-Hand Housing Price Premiums in Hangzhou’s Older Residential Compounds. Buildings, 16(1), 220. https://doi.org/10.3390/buildings16010220 
-Deschermeier, P., Henger, R., Oberst, C., & Institut der deutschen Wirtschaft Köln e. V. (2023). Bedarfe und Preise. In BPD Immobilienentwicklung GmbH, Institut Der Deutschen Wirtschaft Köln E. V. 
-Frey, S. (2026, February 4). The impact of property condition on sale price and time on market - Seb Frey, Silicon Valley + Bay Area REALTOR. Seb Frey, Silicon Valley + Bay Area REALTOR. https://sebfrey.com/the-impact-of-property-condition-on-sale-price-and-time-on-market/ 
-Kempf, C., & Syz, J. (2022). Why pay for sustainable housing? Decomposing the green premium of the residential property market in the Canton of Zurich, Switzerland. SN Business & Economics, 2(11). https://doi.org/10.1007/s43546-022-00346-8 
-Liegenschaftenbewertung 2026. (2026). Kanton Zürich. https://www.zh.ch/de/steuern-finanzen/steuern/steuern-natuerliche-personen/liegenschaftenneubewertung-2026.html 
-LV95 in WGS84-Koordinaten umrechnen für Google Maps, OpenStreetMap etc. (2026). zurzach.ag. https://zurzach.ag/liegenschaften/lv95-in-wgs84-koordinaten-fuer-google-maps-oder-openstreetmap-umrechnen-und-konvertieren/ 
-Niklowitz, M. (2026, April 18). Seesicht bei Immobilien: Wieviel zahlt man drauf? cash.ch. Retrieved May 7, 2026, from https://www.cash.ch/news/top-news/seesicht-bei-immobilien-wieviel-zahlt-man-drauf-927267 
-Open Data Zürich - Stadt Zürich. (n.d.). https://data.stadt-zuerich.ch/dataset/bau_hae_preis_stockwerkeigentum_zimmerzahl_stadtquartier_od5155/resource/72ed5051-4552-4c2e-b761-78ce1d99d094
-Statistische Quartiere - Stadt Zürich. (2026, May 8). Stadt Zürich. Retrieved May 9, 2026, from https://www.stadt-zuerich.ch/geodaten/download/Statistische_Quartiere?format=10008
+Chau, K. W., Wong, S. K., & Yiu, C. Y. (2004). The value of the provision of a balcony in apartments in Hong Kong. Property Management, 22(3), 250–264. https://doi.org/10.1108/02637470410545020
+Conroy, S., Narwold, A., & Sandy, J. (2013). The value of a floor: Valuing floor level in high-rise condominiums in San Diego. International Journal of Housing Markets and Analysis, 6(2), 197–208. https://doi.org/10.1108/ijhma-01-2012-0003
+Dai, X., Yu, X., Ma, L., & Zheng, P. (2026). The economic benefit evaluation of elevator retrofitting: An empirical analysis of second-hand housing price premiums in Hangzhou's older residential compounds. Buildings, 16(1), 220. https://doi.org/10.3390/buildings16010220
+Deschermeier, P., Henger, R., Oberst, C., & Institut der deutschen Wirtschaft Köln e. V. (2023). Bedarfe und Preise. In BPD Immobilienentwicklung GmbH, Institut der deutschen Wirtschaft Köln e. V.
+Frey, S. (2024, December 11). The impact of property condition on sale price and time on market. Seb Frey, Silicon Valley + Bay Area REALTOR. https://sebfrey.com/the-impact-of-property-condition-on-sale-price-and-time-on-market/
+Kempf, C., & Syz, J. (2022). Why pay for sustainable housing? Decomposing the green premium of the residential property market in the Canton of Zurich, Switzerland. SN Business & Economics, 2(11). https://doi.org/10.1007/s43546-022-00346-8
+Kanton Zürich. (2026). Liegenschaftenbewertung 2026. https://www.zh.ch/de/steuern-finanzen/steuern/steuern-natuerliche-personen/liegenschaftenneubewertung-2026.html
+Gemeinde Zurzach. (2026, January 21). LV95 in WGS84-Koordinaten umrechnen für Google Maps, OpenStreetMap etc. https://zurzach.ag/liegenschaften/lv95-in-wgs84-koordinaten-fuer-google-maps-oder-openstreetmap-umrechnen-und-konvertieren/
+Niklowitz, M. (2026, April 18). Seesicht bei Immobilien: Wieviel zahlt man drauf? cash.ch. https://www.cash.ch/news/top-news/seesicht-bei-immobilien-wieviel-zahlt-man-drauf-927267
+Open Data Zürich – Stadt Zürich. (o. J.). Statistik der Handänderungen – Preise von Stockwerkeigentum nach Zimmerzahl und Stadtquartier. Stadt Zürich. https://data.stadt-zuerich.ch/dataset/bau_hae_preis_stockwerkeigentum_zimmerzahl_stadtquartier_od5155/resource/72ed5051-4552-4c2e-b761-78ce1d99d094
+Stadt Zürich. (2026, May 8). Statistische Quartiere. https://www.stadt-zuerich.ch/geodaten/download/Statistische_Quartiere?format=10008
+
 
 

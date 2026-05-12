@@ -15,9 +15,8 @@
 
 # Hinweis: Koordinaten sind hardcodiert, da der offizielle der CSV link nicht funktioniert da die Stadt Zürich 
 # höchstwahrscheinlich den Zugriff blockiert hat. Wir haben probiert die Daten herunterzuladen und manuell abzuspeichern, 
-# aber die Daten haben keine Lat/Lon Spalten sondern nur geometry mit POLYGON Koordinaten.
-# Quelle: https://www.stadt-zuerich.ch/geodaten/download/Statistische_Quartiere?format=10008
-# LV59 in WGS84-Koordinaten-Umrechner: https://zurzach.ag/liegenschaften/lv95-in-wgs84-koordinaten-fuer-google-maps-oder-openstreetmap-umrechnen-und-konvertieren/
+# aber die Daten haben keine Lat/Lon Spalten sondern nur geometry mit POLYGON Koordinaten. 
+# Die LV59 Koordinaten wurden von der Stadt Zürich (2026) bezogen und mit einem Koordinaten-Umrechner zu WGS84 umgewandelt (Gemeinde Zurzach, 2026)
 
 # Bei der Entwicklung dieses Codes wurde Claude AI (Anthropic, 2026) als Hilfsmittel eingesetzt, um Lösungsansätze zu erarbeiten und Fehler zu korrigieren. 
 # =============================================================
