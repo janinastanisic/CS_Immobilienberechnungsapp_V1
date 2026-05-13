@@ -38,7 +38,7 @@ Das Tool nutzt:
 CS_Immobilienberechnungsapp_V1/
 │
 ├── app.py                        # Hauptdatei: Eingabeformular, sammelt User-Daten, ruft Features auf & zeigt Ergebnisse
-├── bau5156d5155.csv              # Rohdaten von echten Wohnungsverkäufen in Zürich (Quartier, Preis, Grösse, Baujahr etc.)
+├── bau5156d5155.csv              # Rohdaten von echten Wohnungsverkäufen in Zürich (Quartier, Preis, Grösse etc.)
 │
 ├── feature_berechnung.py         # Preisberechnung  
 ├── feature_dataset.py            # Lädt & verarbeitet 
