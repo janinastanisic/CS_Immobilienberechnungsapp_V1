@@ -43,10 +43,10 @@ def daten_laden(): #Definition der Funktion daten_laden
     #Diese Tabelle wird in df (für Dataframe) gespeichert
 
     
-    print(list(df.columns))  # ← NEU: zeigt die echten Spaltennamen im Log
+    print(list(df.columns))  # NEU: zeigt die echten Spaltennamen im Log
 
-    df = df.rename(columns={
-        "Stichtagdatjahr":     "Jahr",
+    df = df.rename(columns={        # NEU: Umbenennen der Spaltennamen, damit sie einfacher zu handhaben sind
+        "Stichtagdatjahr":     "Jahr",      
         "RaumLang":            "Quartier",
         "AnzZimmerLevel2Lang_noDM":  "Zimmer",
         "HAPreisWohnflaeche":  "Preis_pro_m2",
