@@ -10,10 +10,11 @@
 # Ablauf:
 # 1. Daten und ML-Modell werden einmalig beim Start geladen
 # 2. User gibt Eigenschaften der Immobilie ein (Lage, Grösse,
-#    Gebäude, Zustand, Ausstattung)
+#    Gebäude, Zustand, Ausstattung etc.)
 # 3. Auf Knopfdruck wird berechne_preis() aufgerufen
 # 4. Ergebnis wird als Kennzahlen und drei Charts angezeigt:
-#    Waterfall (Preiszusammensetzung), Gauge (Marktvergleich),
+#    Waterfall (Preiszusammensetzung), 
+#    Gauge (Marktvergleich),
 #    Heatmap (Preisübersicht Zürich)
 # 5. Ergebnisse bleiben via Session State sichtbar
 
@@ -41,7 +42,7 @@ st.set_page_config(
 # BASISPREISE PRO QUARTIER (CHF pro m²)
 # =============================================
 df= get_daten()
-#Daten werden einmalig geladen (aus Feature Dataset.py)
+#Daten werden einmalig geladen (aus feature_dataset.py)
 BASISPREIS_PRO_QUARTIER = ( #Dient als Fallback, wenn das ML-Modell none zurückgibt, dann wird der Durchschnitsspreis des Quartiers verwendet
     df.groupby("Quartier")["Preis_pro_m2"]
     .mean()
@@ -128,7 +129,7 @@ with col6: #Definiert die rechte Seite
 st.markdown("---") #Erstellt eine horizontale Trennlinie in Streamlit
 berechnen = st.button("Marktwert berechnen") #Erstellt einen Button mit dem Text Marktwert berechnen, wenn der Button angeglickt wird, wird der Wert True in der Variable berechnen gespeichert. Ansonsten False
 
-# Session State initialisieren – speichert Ergebnisse über Neuladen hinweg. Erstellt leeren Platz für Ergebnis beim Start der App. Wird päter mit dem berechneten Preis überschrieben, sobald User auf Marktwert berechnen klickt
+# Session State initialisieren – speichert Ergebnisse über Neuladen hinweg. Erstellt leeren Platz für Ergebnis beim Start der App. Wird später mit dem berechneten Preis überschrieben, sobald User auf Marktwert berechnen klickt
 if "ergebnis" not in st.session_state:
     st.session_state.ergebnis = None
 
