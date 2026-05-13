@@ -49,7 +49,6 @@ CS_Immobilienberechnungsapp_V1/
 ├── feature_machine_learning.py   # KNN-Modell Training & Vorhersage, lernt aus alten Verkaufsdaten
 ├── feature_waterfall_chart.py    # Wasserfalldiagramm (Plotly)
 │
-├── Immobilienpreisberechner.py   # 
 │
 ├── README.md                     # Diese Datei
 └── requirements.txt              # Liste aller Python-Abhängigkeiten
