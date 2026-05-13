@@ -5,7 +5,7 @@
 # ZUSAMMENFASSUNG
 # Dieses Feature trainiert ein K-Nearest-Neighbors-Modell (KNN),
 # das den Basispreis pro m² für ein Quartier, eine Zimmerzahl
-# und ein Jahr schätzt. Es ersetzt die einfache Durchschnitts-
+# und ein Jahr (wir definieren immer 2026) schätzt. Es ersetzt die einfache Durchschnitts-
 # berechnung durch ein datengetriebenes Modell.
 
 # Ablauf:
@@ -72,18 +72,18 @@ def trainiere_knn_modell(df):
     cv_ergebnisse = {} #Leeres Dictionary, wird später mit allen k-Werten und ihren Fehlern gefüllt 
 
     # k von 2 bis 10 testen (aber nie mehr als Datenpunkte / 5 erlauben)
-    k_max = min(11, len(daten) // 5) #Berechnet das maximale k. Es darf nie mehr als 11 sein oder mehr als die Anzahl Datenpunkte geteilt durch 5, so bleiben genügen Daten zur Überprüfung übrig
+    k_max = min(11, len(daten) // 5) #Berechnet das maximale k. Es darf nie mehr als 10 sein oder mehr als die Anzahl Datenpunkte geteilt durch 5, weil wir ja CV=5 gesetzt haben (würde sonst nicht aufgehen)
     for k in range(2, k_max): #diese for clause testet k=2, k=3 etc. bis k_max
         modell = Pipeline([
             ("scaler", StandardScaler()),
             ("knn", KNeighborsRegressor(n_neighbors=k)),
         ])
-        #Erstellt ein Modell mit zwei Schritten: StandartScaler skaliert zuerst alle Zahlen auf gleiche Grössenordnung, dann KNN mit dem aktuellen k
+        #Erstellt ein Modell mit zwei Schritten: StandartScaler skaliert zuerst alle Zahlen auf gleiche Grössenordnung (also alle inputs sind gleich gewichtet), dann KNN mit dem aktuellen k
         
         
         scores = cross_val_score(
             modell, X, y, cv=5, scoring="neg_mean_absolute_error"
-        )#Testet das Modell 5 mal. Jedes Mal wird mit anderen Daten getestet fürs Lernen und Testen
+        )#Testet das Modell 5 mal. Jedes Mal wird mit anderen Daten getestet fürs lernen und Testen
         #neg_mean_absolut_error ist der negative Fehler und wird deshalb unten umgekehrt
         mae = -scores.mean() #Macht den negativen Fehler positiv und berechnet dann den Durchschnitt dieser 5 Tests von oben
         cv_ergebnisse[k] = round(mae) #Fehler dieses k's wird in unserern Dictionary cv_ergebnisse gespeichert
@@ -93,8 +93,6 @@ def trainiere_knn_modell(df):
             bestes_k = k
         #Diese if clause untersucht ob der aktuelle k-Wert einen kleineren Fehler hatte als der vorherige und wenn ja wird er als bestes k gespeichert
 
-    #Die Formel test k bis zu k_max. Für jedes K wird das Modell 5 mal getestet (Cross-Validation) und der durchschnittliche Fehler (mae) berechnet 
-    #Das beste k (also das k mit dem kleinsten Fehler) wird dann gespeichert
 
     #Finales Modell mit optimalem k auf allen Daten trainieren:
     final = Pipeline([

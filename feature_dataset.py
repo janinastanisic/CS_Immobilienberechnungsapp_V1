@@ -8,11 +8,11 @@
 # CSV nicht bei jedem Start neu geladen werden muss.
 
 # Ablauf:
-# 1. Beim ersten Start: CSV wird geladen, Spalten umbenannt,
-#    irrelevante Quartiere (Kreise, Ganze Stadt) gefiltert
+# 1. Beim ersten Start: Datenset wird geladen, Spalten umbenannt,
+#    irrelevante und Quartiere (kreise, "Ganze Stadt") gefiltert --> wollen uns nicht auf kKreise fokusieren sondern nur auf Bezirk, weil die bezirke innerhalb der Kreise sich preislich unterscheidne --> wäre weniger präzise
 #    und in immobilien.db gespeichert
 # 2. Ab dem zweiten Start: Daten werden direkt aus der lokalen
-#    Datenbank gelesen (kein Internetzugriff nötig)
+#    Datenbank gelesen nicht mehr von bau515od5155.csv
 # 3. Rückgabe: DataFrame mit Spalten Jahr, Quartier,
 #    Zimmer, Preis_pro_m2
 
@@ -27,33 +27,29 @@ import os #Um zu prüfen ob eine Datei bereits existiert
 
 CSV_URL = "bau515od5155.csv"
 #Diese Variable speichert den Link zu unserem Datenset
-DB_PATH = "immobilien.db" #Erster Durchlauf: ins internet, CSV laden und in immobilien.db speichern
+DB_PATH = "immobilien.db" #Erster Durchlauf: bau515od5155.csv laden und in immobilien.db speichern
 #Zweiter Durchlauf: immobilien.db wird direkt gelesen
 #immobilien.db = Dateiname unserer lokalen Datenbank
 #Erstellt beim ersten Durchlauf des Codes die datei automatisch --> speichert Daten aus dem CSV
-#Ohne unsere Datenbank müsste die App jedes Mal das CSV neu vom Internet laden
 # --> so wird es gespeichert
-#Das ist die Idee von dem code in diesem feature, siehe Funktion 4:  get_daten()
+
 
 
 #Funktion 1#:
 def daten_laden(): #Definition der Funktion daten_laden
     df=pd.read_csv(CSV_URL) 
-    #Unsere CSV Datei wird vom Link geladen und in einen Dataframe (Tabelle) verwandelt. 
+    #Unser datenset wird eingelesen und in einen Dataframe (Tabelle) verwandelt. 
     #Diese Tabelle wird in df (für Dataframe) gespeichert
 
-    
-    print(list(df.columns))  # NEU: zeigt die echten Spaltennamen im Log
+    print(list(df.columns))  # zeigt die spaltennamen im Log 
 
     df = df.rename(columns={        # NEU: Umbenennen der Spaltennamen, damit sie einfacher zu handhaben sind
         "Stichtagdatjahr":     "Jahr",      
         "RaumLang":            "Quartier",
         "AnzZimmerLevel2Lang_noDM":  "Zimmer",
-        "HAPreisWohnflaeche":  "Preis_pro_m2",
-   
-       
+        "HAPreisWohnflaeche":  "Preis_pro_m2",   
     })
-    #Benennt die Spaltennamen vom CSV um --> einfacher für uns um unseren code zu lesen
+    #Benennt die Spaltennamen von unserem datenset um --> einfacher für uns um unseren code zu lesen und verstehen
 
     spalten= ["Jahr", "Quartier", "Zimmer", "Preis_pro_m2"]
     df=df[spalten]
@@ -61,7 +57,7 @@ def daten_laden(): #Definition der Funktion daten_laden
     #So werden nur diese Spalten in unserem DataFrame übernommen
   
     df = df[~df["Quartier"].str.contains("Kreis|Ganze Stadt", na=False)]
-    # Kreise und "Ganze Stadt" herausfiltern, nur Bezirke behalten --> Nur Bezirke ist präziser als Kreise weil z.B. Kreis 2 aus Leimbach, Wollishofen und Enge bestehen, welche sich alle preislich sehr unterscheiden
+    # Kreise und "Ganze Stadt" herausfiltern, nur Bezirke behalten --> Nur Bezirke ist präziser als Kreise weil z.B. Kreis 2 aus Leimbach, Wollishofen und Enge bestehen, welche sich alle preislich unterscheiden
 
     df["Jahr"]=df["Jahr"].astype(int)
     df["Preis_pro_m2"] = df["Preis_pro_m2"].astype(float)
@@ -89,7 +85,7 @@ def speichere_in_datenbank(df): #Defintion der neuen Funktion, df als Parameter
     #Schliesst die Verbinsung zur Datenbank --> wichtig falls mehrere Teile darauf zugreifen wollen
 
 #Funktion 3: 
-def lade_aus_datenbank(): #Liest die Daten aus der lokalen Datenbank --> so muss CVS nicht immer neu vom Internet geladen werden
+def lade_aus_datenbank(): #Liest die Daten aus der lokalen Datenbank --> so muss CVS nicht immer neu vob bau515od5155.csv eingelesen werden
     conn = sqlite3.connect(DB_PATH)
     #Öffnet Verbindung zur Datenbank
     df = pd.read_sql("SELECT * FROM immobilienpreise", conn)
@@ -107,5 +103,5 @@ def get_daten():
         return daten_laden()
     # os.path.exists(DB_PATH) gibt True zurück wenn die Datei immobilien.db bereits existiert, 
     #Sonst False. Die Logik: beim allerersten Start existiert die Datenbank noch nicht
-    #--> wir laden das CSV und speichern es. Ab dem zweiten Start existiert die Datei 
-    #--> wir lesen einfach lokal. So wird das Internet nur einmal verwendet
+    #wir laden das CSV und speichern es. Ab dem zweiten Start existiert die Datei 
+    #wir lesen einfach lokal. So wird bau515od5155.csv nur einmal verwendet
