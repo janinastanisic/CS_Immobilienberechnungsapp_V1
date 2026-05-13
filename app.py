@@ -21,21 +21,21 @@
 # Bei der Entwicklung dieses Codes wurde Claude AI (Anthropic, 2026) als Hilfsmittel eingesetzt, um Lösungsansätze zu erarbeiten und Fehler zu korrigieren. 
 # =============================================================
 
-import streamlit as st #importiert das Framework Streamlit, mit der Abkürzung st
-import plotly.graph_objects as go #importiert eine Bibliothek für interaktive Diagramme mit der low-level Variante go
-import folium #importiert interaktive Landkarten
+import streamlit as st #Importiert das Framework Streamlit, mit der Abkürzung st
+import plotly.graph_objects as go #Importiert eine Bibliothek für interaktive Diagramme mit der low-level Variante go
+import folium #Importiert interaktive Landkarten
 from streamlit_folium import st_folium #Bindeglied, damit die Karte in Streamlit angezeigt werden kann
-from feature_dataset import get_daten #importiert get_daten vom Dataset Feature
-from feature_Koordinaten import get_koordinaten #importiert get_koordinaten von Koordinaten Feature
-from feature_heatmap_chart import erstelle_heatmap_karte #importiert die Funktion erstelle_heatmap_karte von feature_heatmap_chart, welche die Heatmap Karte erstellt
-from feature_machine_learning import trainiere_knn_modell, ml_basispreis_schaetzen #importiert die Funktion trainiere_knn_modell vom feature_machine_learning
-from feature_waterfall_chart import erstelle_waterfall_chart #importiert die Funktion erstelle_waterfall_chart von feature_waterfall_chart, welche das Wasserfalldiagramm erstellt
-from feature_gauge_chart import erstelle_gauge_chart #importiert die Funktion erstelle_gauge_chart von feature_gauge_chart, welche das Gauge Diagramm erstellt
+from feature_dataset import get_daten #Importiert get_daten vom Dataset Feature
+from feature_Koordinaten import get_koordinaten #Importiert get_koordinaten von Koordinaten Feature
+from feature_heatmap_chart import erstelle_heatmap_karte #Importiert die Funktion erstelle_heatmap_karte von feature_heatmap_chart, welche die Heatmap Karte erstellt
+from feature_machine_learning import trainiere_knn_modell, ml_basispreis_schaetzen #Importiert die Funktion trainiere_knn_modell vom feature_machine_learning
+from feature_waterfall_chart import erstelle_waterfall_chart #Importiert die Funktion erstelle_waterfall_chart von feature_waterfall_chart, welche das Wasserfalldiagramm erstellt
+from feature_gauge_chart import erstelle_gauge_chart #Importiert die Funktion erstelle_gauge_chart von feature_gauge_chart, welche das Gauge Diagramm erstellt
 from feature_berechnung import berechne_preis, FAKTOR_ZUSTAND, FAKTOR_STOCKWERK, AUSSTATTUNG_FAKTOREN #Importiert die Funktion berechne_preis mit verschiedenen Faktoren von dem feature_berechnung
 
 st.set_page_config(
     page_title="FairEstate - Wohnungspreisschätzer der Stadt Zürich", #Setzt den Titel im Browser
-    layout="centered" #zentriert das layout auf Streamlit mittig
+    layout="centered" #Zentriert das layout auf Streamlit mittig
 )
 
 # =============================================
@@ -51,7 +51,7 @@ BASISPREIS_PRO_QUARTIER = ( #Dient als Fallback, wenn das ML-Modell none zurück
     .to_dict()
 )
 
-#ML-Modell wird beim start einmalig trainiert
+#ML-Modell wird beim Start einmalig trainiert
 knn_modell, knn_le, _, _, _ = trainiere_knn_modell(df)
 
 # =============================================
@@ -69,12 +69,12 @@ st.title("FairEstate - Wohnungspreisschätzer der Stadt Zürich") #Erstellt den 
 st.write("Gib die Eigenschaften deiner Wohnung ein - wir berechnen den geschätzten Marktwert.") #Erstellt den Beschreibungstext in Streamlit
 st.markdown("---") #Erstellt eine horizontale Trennlinie in Streamlit
 
-# ── 1. LAGE ──
+# 1. LAGE
 st.subheader("Lage") #Erstellt einen Untertitel in Streamlit
 QUARTIERE = ["— Bitte wählen —"] + sorted(BASISPREIS_PRO_QUARTIER.keys()) #Zwei Listen werden erstellt und miteinander verbunden. Die erste besteht aus dem Platzhalter: Bitte wählen. Die zweite Liste besteht aus allen Schlüsseln (Quartiernamen) des Dictionaries, welche alphabetisch sortiert werden
 quartier  = st.selectbox("In welchem Stadtquartier liegt die Immobilie?", options=QUARTIERE) #Ein Dropdown Menü wird in Streamlit erstellt mit einem Beschriftungstext. Das Dropdown Menu beinhaltet eine Liste aller Optionen, die in der vorherigen Zeile definiert wurde
 
-# ── 2. GRÖSSE ──
+# 2. GRÖSSE
 st.subheader("Grösse") #Erstellt einen Untertitel in Streamlit
 col1, col2 = st.columns(2) #Die Seite wird in zwei gleich breite Spalten aufgeteilt. col1 links und col2 rechts
 with col1: #Definiert, was in der linken Spalte angezeigt wird
@@ -88,7 +88,7 @@ with col2: #Definiert, was in der rechten Spalte angezeigt wird
         "Wohnfläche (m2)", min_value=10, max_value=500, value=10, step=5 #Definiert die kleinste erlaubte Zahl, die grösste erlaubte Zahl, den Standardwert und die Steps (wenn man auf + klickt, springt die Zahl um diesen Wert)
     )
 
-# ── 3. GEBÄUDE ──
+# 3. GEBÄUDE
 st.subheader("Gebäude") #Erstellt einen Untertitel in Streamlit
 col3, col4 = st.columns(2) #Die Seite wird in zwei gleich breite Spalten aufgeteilt. col3 links und col4 rechts
 with col3: #Definiert die linke Seite
@@ -96,7 +96,7 @@ with col3: #Definiert die linke Seite
 with col4: #Definiert die rechte Seite
     stockwerk = st.selectbox( #Erstellt ein Dropdown Menu und speichert den Eingabewert unter stockwerk ab
         "Stockwerk", #Definiert den Text über dem Dropdown Menü
-        options=[ #Beschreibt die Liste aller auswählbaren Optionen, Erdgeschoss wird mit index 0 als Stadardwert gezeigt
+        options=[ #Beschreibt die Liste aller auswählbaren Optionen, Erdgeschoss wird mit Index 0 als Stadardwert gezeigt
             "Erdgeschoss", "1. Obergeschoss", "2. Obergeschoss",
             "3. Obergeschoss", "4. Obergeschoss",
             "5. Obergeschoss", "6. Obergeschoss",
@@ -105,7 +105,7 @@ with col4: #Definiert die rechte Seite
         ]
     )
 
-# ── 4. ZUSTAND ──
+# 4. ZUSTAND
 st.subheader("Zustand") #Erstellt einen Untertitel in Streamlit
 zustand = st.radio( #Erstellt buttons, von denen der User eine Option wählen kann
     "Wie ist der aktuelle Renovationsstand?", #Definiert den Text über den Buttons
@@ -114,7 +114,7 @@ zustand = st.radio( #Erstellt buttons, von denen der User eine Option wählen ka
     horizontal=True #Formatiert die Buttons horizontal, also nebeneinander
 )
 
-# ── 5. AUSSTATTUNG ──
+# 5. AUSSTATTUNG
 st.subheader("Ausstattung") #Erstellt einen Untertitel in Streamlit
 col5, col6 = st.columns(2) #Die Seite wird in zwei gleich breite Spalten aufgeteilt. col5 links und col6 rechts
 with col5: #Definiert die linke Seite
@@ -125,9 +125,9 @@ with col6: #Definiert die rechte Seite
     hat_seesicht = st.checkbox("Seesicht / Aussicht")
     hat_minergie = st.checkbox("Minergie-Standard") #Erstellt Checkboxen, welche jeweils den Wert als True speichern, wenn die Checkbox aktiviert wurde und als False, wenn sie nicht aktiviert wurde. Die Standardwerte sind False
 
-# ── 6. BERECHNUNG & ERGEBNIS ──
+# 6. BERECHNUNG & ERGEBNIS
 st.markdown("---") #Erstellt eine horizontale Trennlinie in Streamlit
-berechnen = st.button("Marktwert berechnen") #Erstellt einen Button mit dem Text Marktwert berechnen, wenn der Button angeglickt wird, wird der Wert True in der Variable berechnen gespeichert. Ansonsten False
+berechnen = st.button("Marktwert berechnen") #Erstellt einen Button mit dem Text Marktwert berechnen, wenn der Button angeklickt wird, wird der Wert True in der Variable berechnen gespeichert. Ansonsten False
 
 # Session State initialisieren – speichert Ergebnisse über Neuladen hinweg. Erstellt leeren Platz für Ergebnis beim Start der App. Wird später mit dem berechneten Preis überschrieben, sobald User auf Marktwert berechnen klickt
 if "ergebnis" not in st.session_state:
