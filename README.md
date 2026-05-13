@@ -111,6 +111,6 @@ Gemeinde Zurzach. (2026, January 21). LV95 in WGS84-Koordinaten umrechnen für G
 Niklowitz, M. (2026, April 18). Seesicht bei Immobilien: Wieviel zahlt man drauf? cash.ch. https://www.cash.ch/news/top-news/seesicht-bei-immobilien-wieviel-zahlt-man-drauf-927267
 Open Data Zürich – Stadt Zürich. (o. J.). Statistik der Handänderungen – Preise von Stockwerkeigentum nach Zimmerzahl und Stadtquartier. Stadt Zürich. https://data.stadt-zuerich.ch/dataset/bau_hae_preis_stockwerkeigentum_zimmerzahl_stadtquartier_od5155/resource/72ed5051-4552-4c2e-b761-78ce1d99d094
 Stadt Zürich. (2026, May 8). Statistische Quartiere. https://www.stadt-zuerich.ch/geodaten/download/Statistische_Quartiere?format=10008
-
-
+Streamlit Dokumentation: https://docs.streamlit.io
+Streamlit cheat sheet: https://docs.streamlit.io/library/cheatsheet
 
