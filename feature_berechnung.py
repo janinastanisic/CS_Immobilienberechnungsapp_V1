@@ -36,6 +36,7 @@ FAKTOR_ZUSTAND = {
 #eine Wertsteigerung von 5-10% angegeben wird. Für die vorliegende Bewertung wurde jeweils der Mittelwert der in der 
 #Quelle genannten Spannbreiten als Korrekturfaktor verwendet, sodass 12,5% für den neuwertigen sowie 7,5% für den guten Zustand gewält wurden
 
+
 FAKTOR_STOCKWERK = {
     "Erdgeschoss":                   1.00,
     "1. Obergeschoss":               1.022,
@@ -78,6 +79,7 @@ def faktor_baujahr(baujahr):
     # Altersentwertung = 1% des Neubauwerts pro Jahr, höchstens 40%
     # (Kanton Zürich, 2026)
 
+
 def lift_faktor_berechnen(stockwerk):
     #Berechnet den Lift-Faktor abhängig vom Stockwerk
     #Erdgeschoss: kein Effekt (Faktor 0)
@@ -96,14 +98,17 @@ def lift_faktor_berechnen(stockwerk):
     else:
         return 0.00 #Fallback falls unbekanntes Stockwerk
 
+
+
 # ─────────────────────────────────────────────
 # BERECHNUNGSFUNKTION: Die Funktion berechne_preis wird definiert
 # ─────────────────────────────────────────────
 
+
 def berechne_preis(quartier, zimmerzahl, wohnflaeche, baujahr,
                    stockwerk, zustand, ausstattung,knn_modell, knn_le, BASISPREIS_PRO_QUARTIER): #Definition einer Funktion mit Eingabewerten
-    ml_preis = ml_basispreis_schaetzen(knn_modell, knn_le, quartier, zimmerzahl, jahr=2026) #Berechnet den Basispreis: Jahr wird als 2026 gesetzt, da die Schätzung für den heutigen Preis ist
-    basispreis = ml_preis if ml_preis is not None else BASISPREIS_PRO_QUARTIER.get(quartier, 11000) #zb. 11k/m^2 und sonst den berechneten durchschnitt unserer Daten als Basispreis
+    ml_preis = ml_basispreis_schaetzen(knn_modell, knn_le, quartier, zimmerzahl, jahr=2026) #Berechnet den Basispreis: Jahr wird als 2026 gesetzt, da die schätzung für den heutigen Preis ist
+    basispreis = ml_preis if ml_preis is not None else BASISPREIS_PRO_QUARTIER.get(quartier, 11000) #zb. 11k/m^2 vom machine learning feature und sonst den berechneten durchschnitt unserer Daten als Basispreis
     f_zustand   = FAKTOR_ZUSTAND.get(zustand, 1.00) #holt den Wert, der bei zustand als Input angegeben wurde und nimmt den Korrekturfaktor. Falls der Wert nicht gefunden wurde, wird 1.00 als Standardwert verwendet.
     f_stockwerk = FAKTOR_STOCKWERK.get(stockwerk, 1.00) #holt den Wert, der bei stockwerk als Input angegeben wurde und nimmt den Korrekturfaktor. Falls der Wert nicht gefunden wurde, wird 1.00 als Standardwert verwendet.
     f_baujahr   = faktor_baujahr(baujahr) #holt den Wert, der bei baujahr als Input angegeben wurde und nimmt den Korrekturfaktor
