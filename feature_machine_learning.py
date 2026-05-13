@@ -29,7 +29,7 @@ from sklearn.pipeline import Pipeline
 def _zimmer_zu_zahl(zimmer_str): #Definition einer Funktion. Input ist ein Zimmer-Wert als String. Die Idee der Funktion ist es, eine Zahl zurückzubekommen
     s = str(zimmer_str).strip() #Wandelt den Iinput in einen String um und entfernt alle Leerzeichen vorher und nacher " 3-Zimmer " --> "3-Zimmer"
     if "6" in s:        #In unserem Datenset haben wir manchmal als Zimmeranzahl "6-Zimmer und mehr". Wegen dem "und mehr" können wir diesen Wert nicht normal umwandeln:
-        return 6.0      #Deshalb wird diese Eingabe als erstes abgefangen und direkt in ein 6.0 umgewandelt --> aufgrund des "und mehr" müssen wir hier einen Sonderfall machen
+        return 6.0      #Deshalb wird diese Eingabe als errstes abgefangen und direkt in ein 6.0 umgewandelt --> aufgrund des "und mehr" müssen wir hier einen Sonderfall machen
     s = s.replace("-Zimmer", "").replace(" Zimmer", "") #Entfernt -Zimmer und Zimmer aus dem Text des Datensets. "3-Zimmer", "3 Zimmer" --> "3"
     if "+" in s: #Falls ein plus vorkommt, wie z.B: 5+ aus der Auswahl in unserer App, wird 5.0 zurückgegeben
         return 5.0
@@ -79,6 +79,8 @@ def trainiere_knn_modell(df):
             ("knn", KNeighborsRegressor(n_neighbors=k)),
         ])
         #Erstellt ein Modell mit zwei Schritten: StandartScaler skaliert zuerst alle Zahlen auf gleiche Grössenordnung, dann KNN mit dem aktuellen k
+        
+        
         scores = cross_val_score(
             modell, X, y, cv=5, scoring="neg_mean_absolute_error"
         )#Testet das Modell 5 mal. Jedes Mal wird mit anderen Daten getestet fürs Lernen und Testen
@@ -105,11 +107,11 @@ def trainiere_knn_modell(df):
 
 #Diese Funktion nimmt Quartier, Zimmerzahl und Jahr als Eingabe und gibt den geschätzten Basispreis pro m2 als Rückgabe:
 def ml_basispreis_schaetzen(modell, le, quartier, zimmerzahl_str, jahr=2026):
-    """
-    Schätzt den Basispreis pro m² für ein gegebenes Quartier und eine Zimmerzahl.
+    
+    #Schätzt den Basispreis pro m² für ein gegebenes Quartier und eine Zimmerzahl.
 
-    Rückgabe: geschätzter Preis als int (CHF/m²), oder None falls Quartier unbekannt
-    """
+    #Rückgabe: geschätzter Preis als int (CHF/m²), oder None falls Quartier unbekannt
+    
     try:
         q_enc = le.transform([quartier])[0] #Wandelt Quartiername in Zahl um
     except ValueError:
