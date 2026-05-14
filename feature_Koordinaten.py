@@ -13,7 +13,7 @@
 # 2. Dictionary mit Quartiernamen als Schlüssel und
 #    (Latitude, Longitude)-Tupel als Wert wird zurückgegeben
 
-# Hinweis: Koordinaten sind hardcodiert, da der offizielle der CSV link nicht funktioniert da die Stadt Zürich 
+# Hinweis: Koordinaten sind hardcodiert, da der offizielle der CSV link nicht funktioniert, da die Stadt Zürich 
 # höchstwahrscheinlich den Zugriff blockiert hat. Wir haben probiert die Daten herunterzuladen und manuell abzuspeichern, 
 # aber die Daten haben keine Lat/Lon Spalten sondern nur geometry mit POLYGON Koordinaten. 
 # Die LV59 Koordinaten wurden von der Stadt Zürich (2026) bezogen und mit einem Koordinaten-Umrechner zu WGS84 umgewandelt (Gemeinde Zurzach, 2026)
