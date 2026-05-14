@@ -39,7 +39,7 @@ st.set_page_config(
 )
 
 # =============================================
-# BASISPREISE PRO QUARTIER (CHF pro m²)
+# Basispreis pro Quartier (CHF pro m²)
 # =============================================
 df= get_daten()
 #Daten werden einmalig geladen (aus feature_dataset.py)
@@ -55,26 +55,26 @@ BASISPREIS_PRO_QUARTIER = ( #Dient als Fallback, wenn das ML-Modell none zurück
 knn_modell, knn_le, _, _, _ = trainiere_knn_modell(df)
 
 # =============================================
-# KOORDINATEN DER QUARTIERE (Mittelpunkte)
+# Koordinaten der Quartiere (Mittelpunkte)
 # =============================================
 
 QUARTIER_KOORDINATEN = get_koordinaten() #Die Funktion get_Koordinaten wird aufgerufen (welche die Koordinaten aller Zürcher Quartiere enthält) und in der Variabel QUARTIER_KOORDINATEN abgespeichert
 
 
 # =============================================================
-# STREAMLIT APP
+# Streamlit App
 # =============================================================
 
 st.title("FairEstate - Wohnungspreisschätzer der Stadt Zürich") #Erstellt den Titel in Streamlit
 st.write("Gib die Eigenschaften deiner Wohnung ein - wir berechnen den geschätzten Marktwert.") #Erstellt den Beschreibungstext in Streamlit
 st.markdown("---") #Erstellt eine horizontale Trennlinie in Streamlit
 
-# 1. LAGE
+# 1. Lage
 st.subheader("Lage") #Erstellt einen Untertitel in Streamlit
 QUARTIERE = ["— Bitte wählen —"] + sorted(BASISPREIS_PRO_QUARTIER.keys()) #Zwei Listen werden erstellt und miteinander verbunden. Die erste besteht aus dem Platzhalter: Bitte wählen. Die zweite Liste besteht aus allen Schlüsseln (Quartiernamen) des Dictionaries, welche alphabetisch sortiert werden
 quartier  = st.selectbox("In welchem Stadtquartier liegt die Immobilie?", options=QUARTIERE) #Ein Dropdown Menü wird in Streamlit erstellt mit einem Beschriftungstext. Das Dropdown Menu beinhaltet eine Liste aller Optionen, die in der vorherigen Zeile definiert wurde
 
-# 2. GRÖSSE
+# 2. Grösse
 st.subheader("Grösse") #Erstellt einen Untertitel in Streamlit
 col1, col2 = st.columns(2) #Die Seite wird in zwei gleich breite Spalten aufgeteilt. col1 links und col2 rechts
 with col1: #Definiert, was in der linken Spalte angezeigt wird
@@ -88,7 +88,7 @@ with col2: #Definiert, was in der rechten Spalte angezeigt wird
         "Wohnfläche (m2)", min_value=10, max_value=500, value=10, step=5 #Definiert die kleinste erlaubte Zahl, die grösste erlaubte Zahl, den Standardwert und die Steps (wenn man auf + klickt, springt die Zahl um diesen Wert)
     )
 
-# 3. GEBÄUDE
+# 3. Gebäude
 st.subheader("Gebäude") #Erstellt einen Untertitel in Streamlit
 col3, col4 = st.columns(2) #Die Seite wird in zwei gleich breite Spalten aufgeteilt. col3 links und col4 rechts
 with col3: #Definiert die linke Seite
@@ -105,16 +105,16 @@ with col4: #Definiert die rechte Seite
         ]
     )
 
-# 4. ZUSTAND
+# 4. Zustand
 st.subheader("Zustand") #Erstellt einen Untertitel in Streamlit
-zustand = st.radio( #Erstellt buttons, von denen der User eine Option wählen kann
+zustand = st.radio( #Erstellt Buttons, von denen der User eine Option wählen kann
     "Wie ist der aktuelle Renovationsstand?", #Definiert den Text über den Buttons
     options=["Neuwertig / Neubau", "Gut gepflegt", "Renovationsbedürftig"], #Definiert die Liste aller auswählbaren Optionen
     index=1, #Setzt Gut gepflegt als Standardwert
     horizontal=True #Formatiert die Buttons horizontal, also nebeneinander
 )
 
-# 5. AUSSTATTUNG
+# 5. Ausstattung
 st.subheader("Ausstattung") #Erstellt einen Untertitel in Streamlit
 col5, col6 = st.columns(2) #Die Seite wird in zwei gleich breite Spalten aufgeteilt. col5 links und col6 rechts
 with col5: #Definiert die linke Seite
@@ -125,11 +125,11 @@ with col6: #Definiert die rechte Seite
     hat_seesicht = st.checkbox("Seesicht / Aussicht")
     hat_minergie = st.checkbox("Minergie-Standard") #Erstellt Checkboxen, welche jeweils den Wert als True speichern, wenn die Checkbox aktiviert wurde und als False, wenn sie nicht aktiviert wurde. Die Standardwerte sind False
 
-# 6. BERECHNUNG & ERGEBNIS
+# 6. Berechnungs und Ergebnis
 st.markdown("---") #Erstellt eine horizontale Trennlinie in Streamlit
 berechnen = st.button("Marktwert berechnen") #Erstellt einen Button mit dem Text Marktwert berechnen, wenn der Button angeklickt wird, wird der Wert True in der Variable berechnen gespeichert. Ansonsten False
 
-# Session State initialisieren – speichert Ergebnisse über Neuladen hinweg. Erstellt leeren Platz für Ergebnis beim Start der App. Wird später mit dem berechneten Preis überschrieben, sobald User auf Marktwert berechnen klickt
+# Session State initialisieren, speichert Ergebnisse über Neuladen hinweg. Erstellt leeren Platz für Ergebnis beim Start der App. Wird später mit dem berechneten Preis überschrieben, sobald User auf Marktwert berechnen klickt
 if "ergebnis" not in st.session_state:
     st.session_state.ergebnis = None
 
@@ -160,7 +160,7 @@ if berechnen: #Sofern der Button Marktwert berechnen geklickt wurde, ist diese i
             "ml_basispreis": faktoren["Basispreis (Quartier)"],
         }
 
-# Ergebnis anzeigen – bleibt sichtbar solange session_state gefüllt ist: Sofern Ergebnisse im Session state abgespeichert wurden, wird eine Kurzform für session state definiert (e)
+# Ergebnis anzeigen, bleibt sichtbar solange session_state gefüllt ist: Sofern Ergebnisse im session state abgespeichert wurden, wird eine Kurzform für session state definiert (e)
 if st.session_state.ergebnis:
     e = st.session_state.ergebnis
 
@@ -188,7 +188,7 @@ if st.session_state.ergebnis:
     st.plotly_chart(fig_waterfall, width="stretch") # Streamlit Funktion, zeigt das Diagramm an, welches in der vorherigen Zeile erstellt wurde
 
     # Chart 2: Gauge
-    st.markdown("### Preis im Marktvergleich") # Streamlit Funktion, zeigt formatierten Text an, ### definiert die größe der Überschrift
+    st.markdown("### Preis im Marktvergleich") # Streamlit Funktion, zeigt formatierten Text an, ### definiert die Größe der Überschrift
     st.caption(
         f"Der grüne Strich zeigt den Basispreis für {e['quartier']}. Der blaue Balken zeigt den berechneten Endpreis pro m2 der eingegebenen Immobilie. "
         "Die farbigen Zonen zeigen günstig (grün), mittel (gelb) und teuer (rot) im Vergleich zu allen Zürcher Quartieren."
@@ -209,7 +209,7 @@ if st.session_state.ergebnis:
         # - ausgewaehltes_quartier=e["quartier"]: Das aktuell gewählte Quartier wird hervorgehoben
         # - quartier_koordinaten=QUARTIER_KOORDINATEN: Die GPS-Koordinaten aller Quartiere
     st_folium(karte, use_container_width=True, height=450)
-        # Zeige die Karte in der Streamlit-App an
+        # Zeigt die Karte in der Streamlit-App an
         # Parameter:
         # - use_container_width=True: Die Karte nutzt die volle Breite des Containers
         # - height=450: Die Karte wird 450 Pixel hoch dargestellt
