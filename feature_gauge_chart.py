@@ -31,7 +31,7 @@ def erstelle_gauge_chart(preis_pro_m2, quartier, ml_basispreis, BASISPREIS_PRO_Q
     """
     basispreis  = ml_basispreis                           # ML-Basispreis als Referenzlinie verwenden
     min_preis   = min(BASISPREIS_PRO_QUARTIER.values())   # Günstigstes Quartier im Dictionary suchen
-    max_preis   = max(BASISPREIS_PRO_QUARTIER.values())   # Teuerstes Quartier im dictionary suchen
+    max_preis   = max(BASISPREIS_PRO_QUARTIER.values())   # Teuerstes Quartier im Dictionary suchen
 
     # Range dynamisch anpassen falls Endpreis die Range überschreitet
     gauge_min = float(min_preis * 0.8)
@@ -56,7 +56,7 @@ def erstelle_gauge_chart(preis_pro_m2, quartier, ml_basispreis, BASISPREIS_PRO_Q
                 "tickfont":   {"size": 11}, #Schriftgrösse der Skala
             },
             "bar":       {"color": "#2563eb"}, #Definiert den blauen Balken
-            "steps": [ #Definiert die ranges der Färbung
+            "steps": [ #Definiert die Ranges der Färbung
                 {"range": [gauge_min, float(min_preis * 1.1)], "color": "#dcfce7"}, #grün = günstig
                 {"range": [float(min_preis * 1.1), float(max_preis * 0.9)], "color": "#fef9c3"}, #gelb = mittel
                 {"range": [float(max_preis * 0.9), gauge_max], "color": "#fee2e2"}, #rot = teuer
