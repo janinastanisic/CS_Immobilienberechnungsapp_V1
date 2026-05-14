@@ -40,8 +40,8 @@ def erstelle_heatmap_karte(ausgewaehltes_quartier, quartier_koordinaten, basispr
 
     # Preisskala für Farbgebung berechnen
     alle_preise = list(basispreis_pro_quartier.values()) # Extrahiert alle Preiswerte aus dem Dictionary in eine Liste
-    min_p = min(alle_preise) # findet den niedrigsten Preis in der Liste
-    max_p = max(alle_preise) # findet den höchsten Preis in der Liste
+    min_p = min(alle_preise) # Findet den niedrigsten Preis in der Liste
+    max_p = max(alle_preise) # Findet den höchsten Preis in der Liste
 
     # Definiert eine Funktion, die Preis in Farbe umwandelt:
     def preis_zu_farbe(preis):
@@ -93,13 +93,13 @@ def erstelle_heatmap_karte(ausgewaehltes_quartier, quartier_koordinaten, basispr
         folium.CircleMarker(
             location = [lat, lon], # Position des Kreises auf der Karte (Breitengrad, Längengrad)
             radius   = 18 if ist_ausgewaehlt else 14, # Grösse des Kreises: größer (18) wenn ausgewählt, sonst kleiner (14)
-            color    = rand_farbe, # setzt die Farbe des Randes
-            weight   = rand_breite, # setzt die Dicke des Randes
-            fill           = True, # aktiviert die Füllung des Kreises
-            fill_color     = farbe, # setzt die Füllfarbe basierend auf dem Preis
+            color    = rand_farbe, # Setzt die Farbe des Randes
+            weight   = rand_breite, # Setzt die Dicke des Randes
+            fill           = True, # Aktiviert die Füllung des Kreises
+            fill_color     = farbe, # Setzt die Füllfarbe basierend auf dem Preis
             fill_opacity   = 0.85,  # Setzt die Transparenz der Füllung (0.85 = 85% sichtbar, 15% durchsichtig)
-            tooltip = folium.Tooltip(   #erstellt Infobox
-                f"<b>{quartier}</b><br>"    # zeigt den Namen des Quartiers fettgedruckt an
+            tooltip = folium.Tooltip(   #Erstellt Infobox
+                f"<b>{quartier}</b><br>"    # Zeigt den Namen des Quartiers fettgedruckt an
                 f"Basispreis: CHF {preis:,}/m²".replace(",", "'")
                 + (" ← Ihre Immobilie" if ist_ausgewaehlt else "")
             )
