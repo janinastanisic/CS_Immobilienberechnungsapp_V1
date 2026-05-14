@@ -67,7 +67,7 @@ Der User gibt folgende Informationen ein:
 ---
 
 ### Preisberechnung
-- Basispreis: Machine Learning (KNN) schätzt den Basispreis pro Quartier basierend auf Quartier, Zimmer und Verkaufsjahr
+- Basispreis: Machine Learning (KNN) schätzt den Basispreis pro Quartier basierend auf Quartier, Zimmer und Verkaufsjahr. Das optimale k wird mit einer 5-fachen Cross-Validation ermittelt
 - Faktoren: Anpassungen basierend auf Baujahr, Stockwerk, Zustand, Ausstattung
 - Ergebnis: Geschätzter Kaufpreis (CHF) und Preis pro m²
 
@@ -84,9 +84,9 @@ Der User gibt folgende Informationen ein:
 
 ### Machine Learning
 - Algorithmus: K-Nearest Neighbors (KNN)
+- Optimierung: Bestes k wird mit einer 5-fachen Cross-Validation ermittelt
 - Training: Basierend auf historischen Wohnungsverkaufsdaten aus `bau515od5155.csv`
-- Output: Basispreis pro m² für das Quartier durch die die k ähnlichsten 
-  Einträge (nach Quartier, Zimmerzahl und Verkaufsjahr(2026)) 
+- Output: Basispreis pro m² für das Quartier durch die k ähnlichsten Einträge (nach Quartier, Zimmerzahl und Verkaufsjahr(2026)) 
 
 ---
 
