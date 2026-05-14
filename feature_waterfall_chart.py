@@ -122,9 +122,9 @@ def erstelle_waterfall_chart(faktoren, preis_pro_m2):
             for v in alle_werte
         ],  # Wert direkt auf jedem Balken anzeigen, mit Vorzeichen
         textposition = "outside",             # Text oberhalb/unterhalb des Balkens
-        increasing   = {"marker": {"color": "#1D9E75"}},  # grün für positive Balken
-        decreasing   = {"marker": {"color": "#D85A30"}},  # rot für negative Balken
-        totals       = {"marker": {"color": "#378ADD"}},  # blau für Lage und Endpreis
+        increasing   = {"marker": {"color": "#1D9E75"}},  # Grün für positive Balken
+        decreasing   = {"marker": {"color": "#D85A30"}},  # Rot für negative Balken
+        totals       = {"marker": {"color": "#378ADD"}},  # Blau für Lage und Endpreis
     ))
 
     fig.update_layout(
