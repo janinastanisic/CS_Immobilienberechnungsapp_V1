@@ -38,9 +38,9 @@ st.set_page_config(
     layout="centered" #Zentriert das layout auf Streamlit mittig
 )
 
-# =============================================
+# ============================================
 # Basispreis pro Quartier (CHF pro m²)
-# =============================================
+# ============================================
 df= get_daten()
 #Daten werden einmalig geladen (aus feature_dataset.py)
 BASISPREIS_PRO_QUARTIER = ( #Dient als Fallback, wenn das ML-Modell none zurückgibt, dann wird der Durchschnitsspreis des Quartiers verwendet
@@ -61,9 +61,9 @@ knn_modell, knn_le, _, _, _ = trainiere_knn_modell(df)
 QUARTIER_KOORDINATEN = get_koordinaten() #Die Funktion get_Koordinaten wird aufgerufen (welche die Koordinaten aller Zürcher Quartiere enthält) und in der Variabel QUARTIER_KOORDINATEN abgespeichert
 
 
-# =============================================================
+# =============================================
 # Streamlit App
-# =============================================================
+# =============================================
 
 st.title("FairEstate - Wohnungspreisschätzer der Stadt Zürich") #Erstellt den Titel in Streamlit
 st.write("Gib die Eigenschaften deiner Wohnung ein - wir berechnen den geschätzten Marktwert.") #Erstellt den Beschreibungstext in Streamlit
