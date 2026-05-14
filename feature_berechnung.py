@@ -23,9 +23,9 @@
 
 from feature_machine_learning import ml_basispreis_schaetzen
 
-# ─────────────────────────────────────────────
+# ============================================
 # KORREKTURFAKTOREN:Der Faktor wird mit dem Basispreis mulitpliziert und passt den Preis prozentual an. Bsp. Faktor 1.1 = Preis wird um 10% erhöht.
-# ─────────────────────────────────────────────
+# ============================================
 
 FAKTOR_ZUSTAND = { 
     "Neuwertig / Neubau":    1.125, 
@@ -66,18 +66,18 @@ AUSSTATTUNG_FAKTOREN = {
 #Gemäss Niklowitz (2026) erhöht eine Seesicht den Immobilienpreis um 11 Prozent
 #Gemäss Kempf & Syz (2022, S. 170) hat die Stadt Zürich eine Minergie Preisprämie von 4.91 Prozent
 
-# ─────────────────────────────────────────────
+# =============================================
 # BAUJAHR-FAKTOR: 
-# ─────────────────────────────────────────────
+# =============================================
 
 def faktor_baujahr(baujahr):
-    alter = 2026 - baujahr  # Alter der Immobilie in Jahren
-    abschreibung = min(alter * 0.01, 0.40)  # 1% pro Jahr, max. 40% wird abgeschrieben
+    alter = 2026 - baujahr  #Alter der Immobilie in Jahren
+    abschreibung = min(alter * 0.01, 0.40)  #1% pro Jahr, max. 40% wird abgeschrieben
     faktor = 1.0 - abschreibung
     return faktor
-    # Quelle: Weisung Liegenschaftenneubewertung 2026, Kanton Zürich
-    # Altersentwertung = 1% des Neubauwerts pro Jahr, höchstens 40%
-    # (Kanton Zürich, 2026)
+    #Quelle: Weisung Liegenschaftenneubewertung 2026, Kanton Zürich
+    #Altersentwertung = 1% des Neubauwerts pro Jahr, höchstens 40%
+    #(Kanton Zürich, 2026)
 
 
 def lift_faktor_berechnen(stockwerk):
@@ -100,18 +100,18 @@ def lift_faktor_berechnen(stockwerk):
 
 
 
-# ─────────────────────────────────────────────
+# =============================================
 # BERECHNUNGSFUNKTION: Die Funktion berechne_preis wird definiert
-# ─────────────────────────────────────────────
+# =============================================
 
 
 def berechne_preis(quartier, zimmerzahl, wohnflaeche, baujahr,
                    stockwerk, zustand, ausstattung,knn_modell, knn_le, BASISPREIS_PRO_QUARTIER): #Definition einer Funktion mit Eingabewerten
-    ml_preis = ml_basispreis_schaetzen(knn_modell, knn_le, quartier, zimmerzahl, jahr=2026) #Berechnet den Basispreis: Jahr wird als 2026 gesetzt, da die schätzung für den heutigen Preis ist
-    basispreis = ml_preis if ml_preis is not None else BASISPREIS_PRO_QUARTIER.get(quartier, 11000) #zb. 11k/m^2 vom machine learning feature und sonst den berechneten durchschnitt unserer Daten als Basispreis
-    f_zustand   = FAKTOR_ZUSTAND.get(zustand, 1.00) #holt den Wert, der bei zustand als Input angegeben wurde und nimmt den Korrekturfaktor. Falls der Wert nicht gefunden wurde, wird 1.00 als Standardwert verwendet.
-    f_stockwerk = FAKTOR_STOCKWERK.get(stockwerk, 1.00) #holt den Wert, der bei stockwerk als Input angegeben wurde und nimmt den Korrekturfaktor. Falls der Wert nicht gefunden wurde, wird 1.00 als Standardwert verwendet.
-    f_baujahr   = faktor_baujahr(baujahr) #holt den Wert, der bei baujahr als Input angegeben wurde und nimmt den Korrekturfaktor
+    ml_preis = ml_basispreis_schaetzen(knn_modell, knn_le, quartier, zimmerzahl, jahr=2026) #Berechnet den Basispreis: Jahr wird als 2026 gesetzt, da die Schätzung für den heutigen Preis ist
+    basispreis = ml_preis if ml_preis is not None else BASISPREIS_PRO_QUARTIER.get(quartier, 11000) #zb. 11k/m^2 vom machine learning feature und sonst den berechneten Durchschnitt unserer Daten als Basispreis
+    f_zustand   = FAKTOR_ZUSTAND.get(zustand, 1.00) #Holt den Wert, der bei zustand als Input angegeben wurde und nimmt den Korrekturfaktor. Falls der Wert nicht gefunden wurde, wird 1.00 als Standardwert verwendet
+    f_stockwerk = FAKTOR_STOCKWERK.get(stockwerk, 1.00) #Holt den Wert, der bei stockwerk als Input angegeben wurde und nimmt den Korrekturfaktor. Falls der Wert nicht gefunden wurde, wird 1.00 als Standardwert verwendet
+    f_baujahr   = faktor_baujahr(baujahr) #Holt den Wert, der bei baujahr als Input angegeben wurde und nimmt den Korrekturfaktor
 
     f_ausstattung = 1.00 #Startet bei 1.00. 
     for merkmal, wert in ausstattung.items(): #Iteriert mit einer for Schleife durch alle Ausstattungsmerkmale durch
@@ -133,4 +133,4 @@ def berechne_preis(quartier, zimmerzahl, wohnflaeche, baujahr,
         "Ausstattung":           f_ausstattung,
     }
 
-    return round(preis_pro_m2), round(gesamtpreis), faktoren #gibt den gerundeten Preis pro m2, den gerundeten Gesamtpreis und das Dictionary der Faktoren zurück
+    return round(preis_pro_m2), round(gesamtpreis), faktoren #Gibt den gerundeten Preis pro m2, den gerundeten Gesamtpreis und das Dictionary der Faktoren zurück
