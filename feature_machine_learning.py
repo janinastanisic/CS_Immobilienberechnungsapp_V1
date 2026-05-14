@@ -27,11 +27,11 @@ from sklearn.preprocessing import LabelEncoder, StandardScaler
 from sklearn.pipeline import Pipeline
 
 def _zimmer_zu_zahl(zimmer_str): #Definition einer Funktion. Input ist ein Zimmer-Wert als String. Die Idee der Funktion ist es, eine Zahl zurückzubekommen
-    s = str(zimmer_str).strip() #Wandelt den Iinput in einen String um und entfernt alle Leerzeichen vorher und nacher " 3-Zimmer " --> "3-Zimmer"
+    s = str(zimmer_str).strip() #Wandelt den Input in einen String um und entfernt alle Leerzeichen vorher und nacher " 3-Zimmer " --> "3-Zimmer"
     if "6" in s:        #In unserem Datenset haben wir manchmal als Zimmeranzahl "6-Zimmer und mehr". Wegen dem "und mehr" können wir diesen Wert nicht normal umwandeln:
         return 6.0      #Deshalb wird diese Eingabe als errstes abgefangen und direkt in ein 6.0 umgewandelt --> aufgrund des "und mehr" müssen wir hier einen Sonderfall machen
     s = s.replace("-Zimmer", "").replace(" Zimmer", "") #Entfernt -Zimmer und Zimmer aus dem Text des Datensets. "3-Zimmer", "3 Zimmer" --> "3"
-    if "+" in s: #Falls ein plus vorkommt, wie z.B: 5+ aus der Auswahl in unserer App, wird 5.0 zurückgegeben
+    if "+" in s: #Falls ein Plus vorkommt, wie z.B: 5+ aus der Auswahl in unserer App, wird 5.0 zurückgegeben
         return 5.0
     try:
         return float(s) #Der oben "gereinigte" Text wird in einen float umgewandelt
@@ -78,12 +78,12 @@ def trainiere_knn_modell(df):
             ("scaler", StandardScaler()),
             ("knn", KNeighborsRegressor(n_neighbors=k)),
         ])
-        #Erstellt ein Modell mit zwei Schritten: StandartScaler skaliert zuerst alle Zahlen auf gleiche Grössenordnung (also alle inputs sind gleich gewichtet), dann KNN mit dem aktuellen k
+        #Erstellt ein Modell mit zwei Schritten: StandartScaler skaliert zuerst alle Zahlen auf gleiche Grössenordnung (also alle Inputs sind gleich gewichtet), dann KNN mit dem aktuellen k
         
         
         scores = cross_val_score(
             modell, X, y, cv=5, scoring="neg_mean_absolute_error"
-        )#Testet das Modell 5 mal. Jedes Mal wird mit anderen Daten getestet fürs lernen und Testen
+        )#Testet das Modell 5 mal. Jedes Mal wird mit anderen Daten getestet für das Lernen und Testen
         #neg_mean_absolut_error ist der negative Fehler und wird deshalb unten umgekehrt
         mae = -scores.mean() #Macht den negativen Fehler positiv und berechnet dann den Durchschnitt dieser 5 Tests von oben
         cv_ergebnisse[k] = round(mae) #Fehler dieses k's wird in unserern Dictionary cv_ergebnisse gespeichert
@@ -118,6 +118,6 @@ def ml_basispreis_schaetzen(modell, le, quartier, zimmerzahl_str, jahr=2026):
     X = np.array([[q_enc, zimmer, jahr]]) #Steckt unsere drei Werte die wir benutzen in einen Array, welches das Format ist, welches das Modell erwartet
     return int(round(float(modell.predict(X)[0]))) #Berechnet den Preis und gibt ihn als integer zurück
 
-#Verständnis notiz zur Cross-validation: Die Daten werden aufgeteilt: ein Teil zum Lernen und einen Teil zum Testen
+#Verständnis-Notiz zur Cross-validation: Die Daten werden aufgeteilt: ein Teil zum Lernen und einen Teil zum Testen
 #Es vergleicht dann den echten Preis aus der Datenbank mit dem vorhergesagten Wert und berechnet den Fehler
 #Dann wird der Durchschnitt der Fehler aller Tests berechnet und das k mit dem kleinsten Fehlerdurchschnitt für die Preisberechnung verwendet
