@@ -9,7 +9,7 @@
 
 # Ablauf:
 # 1. Beim ersten Start: Datenset wird geladen, Spalten umbenannt,
-#    irrelevante und Quartiere (kreise, "Ganze Stadt") gefiltert --> wollen uns nicht auf kKreise fokusieren sondern nur auf Bezirk, weil die bezirke innerhalb der Kreise sich preislich unterscheidne --> wäre weniger präzise
+#    irrelevante und Quartiere (kreise, "Ganze Stadt") gefiltert --> wollen uns nicht auf Kreise fokusieren sondern nur auf Bezirk, weil die bezirke innerhalb der Kreise sich preislich unterscheiden --> wäre weniger präzise
 #    und in immobilien.db gespeichert
 # 2. Ab dem zweiten Start: Daten werden direkt aus der lokalen
 #    Datenbank gelesen nicht mehr von bau515od5155.csv
@@ -22,7 +22,7 @@
 # Lädt das CSV Format des Datensets, umbennen der Spalten des Datensets --> erleichtert die Arbeit mit dem Set
 import pandas as pd #Werkzeugpaket für Tabellen-Daten
 import sqlite3 #Dadurch kann man eine lokale Datenbank-Datei erstellen
-import os #Um zu prüfen ob eine Datei bereits existiert
+import os #Um zu prüfen, ob eine Datei bereits existiert
 
 
 CSV_URL = "bau515od5155.csv"
@@ -30,7 +30,7 @@ CSV_URL = "bau515od5155.csv"
 DB_PATH = "immobilien.db" #Erster Durchlauf: bau515od5155.csv laden und in immobilien.db speichern
 #Zweiter Durchlauf: immobilien.db wird direkt gelesen
 #immobilien.db = Dateiname unserer lokalen Datenbank
-#Erstellt beim ersten Durchlauf des Codes die datei automatisch --> speichert Daten aus dem CSV
+#Erstellt beim ersten Durchlauf des Codes die Datei automatisch --> speichert Daten aus dem CSV
 # --> so wird es gespeichert
 
 
@@ -38,7 +38,7 @@ DB_PATH = "immobilien.db" #Erster Durchlauf: bau515od5155.csv laden und in immob
 #Funktion 1#:
 def daten_laden(): #Definition der Funktion daten_laden
     df=pd.read_csv(CSV_URL) 
-    #Unser datenset wird eingelesen und in einen Dataframe (Tabelle) verwandelt. 
+    #Unser Datenset wird eingelesen und in einen Dataframe (Tabelle) verwandelt. 
     #Diese Tabelle wird in df (für Dataframe) gespeichert
 
     print(list(df.columns))  # zeigt die spaltennamen im Log 
@@ -49,7 +49,7 @@ def daten_laden(): #Definition der Funktion daten_laden
         "AnzZimmerLevel2Lang_noDM":  "Zimmer",
         "HAPreisWohnflaeche":  "Preis_pro_m2",   
     })
-    #Benennt die Spaltennamen von unserem datenset um --> einfacher für uns um unseren code zu lesen und verstehen
+    #Benennt die Spaltennamen von unserem Datenset um --> einfacher für uns, um unseren Code zu lesen und verstehen
 
     spalten= ["Jahr", "Quartier", "Zimmer", "Preis_pro_m2"]
     df=df[spalten]
@@ -79,10 +79,10 @@ def speichere_in_datenbank(df): #Defintion der neuen Funktion, df als Parameter
     df.to_sql("immobilienpreise", conn, if_exists="replace", index=False)
     #Schreibt kompletten DataFrame als Tabelle in die Datenbank
     #"immobilienpreise" ist der name dieser Tabelle
-    #if_exits="replace" bedeutet: Falls die tabelle schon existiert, überschrieben
+    #if_exits="replace" bedeutet: Falls die Tabelle schon existiert, überschrieben
     #index=false verhindert dass panda eine unnötige Nummerierungsspalte mitspeichert
     conn.close()
-    #Schliesst die Verbinsung zur Datenbank --> wichtig falls mehrere Teile darauf zugreifen wollen
+    #Schliesst die Verbindung zur Datenbank --> wichtig falls mehrere Teile darauf zugreifen wollen
 
 #Funktion 3: 
 def lade_aus_datenbank(): #Liest die Daten aus der lokalen Datenbank --> so muss CVS nicht immer neu vob bau515od5155.csv eingelesen werden
